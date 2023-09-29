@@ -1,0 +1,12 @@
+namespace GEPEngine
+{
+	
+	struct Core
+	{
+		void temp();
+		
+	private:
+		int m_dummy;
+	};
+	
+}
