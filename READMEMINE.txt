@@ -4,3 +4,9 @@ Every time directory changes
 
 
 - Dont add header files using visual studio
+
+
+git add (keep something)
+git restore (remove something)
+git commit -m "initial commit"
+git push
