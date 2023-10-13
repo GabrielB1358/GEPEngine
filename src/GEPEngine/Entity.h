@@ -28,6 +28,8 @@ namespace GEPEngine
 		bool getAlive();
 
 	private:
+		friend struct Core;
+
 		void tick();
 		void display();
 

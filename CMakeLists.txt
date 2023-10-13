@@ -3,7 +3,32 @@ project(GEPENGINE)
 
 include_directories(
 	src
+	contrib/windows-cl-amd64/include
 )
+
+link_directories(
+	${PROJECT_SOURCE_DIR}/contrib/windows-cl-amd64/lib
+	
+)
+
+add_library(Graphics
+	src/Graphics/RenderTexture.cpp
+	src/Graphics/RenderTexture.h
+	src/Graphics/Shader.cpp
+	src/Graphics/Shader.h
+	src/Graphics/Texture.cpp
+	src/Graphics/Texture.h
+	src/Graphics/Vao.cpp
+	src/Graphics/Vao.h
+	src/Graphics/Vbo.cpp
+	src/Graphics/Vbo.h
+	src/Graphics/WavefrontMesh.cpp
+	src/Graphics/WavefrontMesh.h
+	src/Graphics/Rend.h
+	src/Graphics/stb_image.h
+)
+
+target_link_libraries(Graphics glew32 opengl32)
 
 add_library(GEPEngine
 	src/GEPEngine/Core.h
@@ -23,3 +48,4 @@ add_executable(demo
 )
 
 target_link_libraries(demo GEPEngine)
+

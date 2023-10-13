@@ -10,7 +10,10 @@ namespace GEPEngine
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
 		rtn->m_self = rtn;
-		//rtn->m_nativeWindow = SDL_CreateWindow()
+		rtn->m_running = false;
+
+		//if (SDL_Init(SDL_INIT_VIDEO) < 0)
+			//throw std::runtime_error("Failed to initializ SDL");
 
 		return rtn;
 	}
@@ -18,6 +21,7 @@ namespace GEPEngine
 	std::shared_ptr<Entity> Core::addEntity()
 	{
 		std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
+		
 
 		//rtn->m_core = m_self;
 		//rtn->m_self = rtn;
@@ -26,6 +30,8 @@ namespace GEPEngine
 
 		return rtn;
 	}
+
+
 
 	void Core::start()
 	{
@@ -54,6 +60,8 @@ namespace GEPEngine
 			}
 		}
 	}
+
+	
 
 	void Core::stop()
 	{

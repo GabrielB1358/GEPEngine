@@ -7,13 +7,8 @@ namespace GEPEngine
 	{
 		for (size_t ci = 0; ci < m_components.size(); ci++)
 		{
-			m_components.at(ci)->onTick();
+			m_components.at(ci)->tick();
 		}
-	}
-
-	void Entity::kill()
-	{
-		m_alive = false;
 	}
 
 	void Entity::kill()
