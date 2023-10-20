@@ -12,6 +12,8 @@ link_directories(
 )
 
 add_library(Graphics
+	src/Graphics/Camera.cpp
+	src/Graphics/Camera.h
 	src/Graphics/RenderTexture.cpp
 	src/Graphics/RenderTexture.h
 	src/Graphics/Shader.cpp
@@ -31,6 +33,10 @@ add_library(Graphics
 target_link_libraries(Graphics glew32 opengl32)
 
 add_library(GEPEngine
+	src/GEPEngine/TriangleRenderer.cpp
+	src/GEPEngine/TriangleRenderer.h
+	src/GEPEngine/NativeWindow.cpp
+	src/GEPEngine/NativeWindow.h
 	src/GEPEngine/Core.h
 	src/GEPEngine/Component.h
 	src/GEPEngine/Environment.h
@@ -41,6 +47,11 @@ add_library(GEPEngine
 	src/GEPEngine/Keyboard.cpp
 	src/GEPEngine/Environment.cpp
 	src/GEPEngine/Entity.cpp
+)
+
+target_link_libraries(GEPEngine
+ Graphics
+ SDL2
 )
 
 add_executable(demo

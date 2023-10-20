@@ -3,19 +3,109 @@
 
 namespace GEPEngine
 {
+	Core::Core()
+	{
+
+	}
+
+	Core::~Core()
+	{
+		SDL_GL_DeleteContext(m_window->context);
+		SDL_DestroyWindow(m_window->window);
+		SDL_Quit();
+	}
+
 	//GETTER FUNCTIONS
 
 	std::shared_ptr<Core> Core::initialize()
 	{
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
+		rtn->m_window = std::make_shared<NativeWindow>();
+
 		rtn->m_self = rtn;
 		rtn->m_running = false;
 
-		//if (SDL_Init(SDL_INIT_VIDEO) < 0)
-			//throw std::runtime_error("Failed to initializ SDL");
+		if (SDL_Init(SDL_INIT_VIDEO) < 0)
+		{
+			throw std::runtime_error("Failed to initialize SDL");
+		}
+
+		if (!(rtn->m_window->window = SDL_CreateWindow("SDL2 Platform", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)))
+		{
+			SDL_Quit();
+			throw std::runtime_error("Failed to create window");
+		}
+
+		if (!(rtn->m_window->context = SDL_GL_CreateContext(rtn->m_window->window)))
+		{
+			SDL_DestroyWindow(rtn->m_window->window);
+			SDL_Quit();
+			throw std::runtime_error("Failed to create OpenGL context");
+		}
+
+		glewInit();
 
 		return rtn;
+	}
+
+
+
+
+	void Core::start()
+	{
+		m_running = true;
+		SDL_Event event = { 0 };
+
+		while (m_running)
+		{
+			while (SDL_PollEvent(&event))
+			{
+				if (event.type == SDL_QUIT)
+				{
+					m_running = false;
+				}
+			}
+
+
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			glClearColor(1, 0, 1, 1);
+
+			for (int i = 0; i < m_entities.size();i++)
+			{
+				
+				m_entities[i]->tick();
+				
+			}
+
+			for (int i = 0; i < m_entities.size(); i++)
+			{
+
+				m_entities[i]->display();
+
+			}
+
+			SDL_GL_SwapWindow(m_window->window);
+
+			////TICK EVERYTHING
+
+			////cycles through and applies Tick() to each enemy
+			//for (size_t ei = 0; ei < m_entities.size(); ++ei)
+			//{
+			//	//m_entities.at(ei).tick();
+			//}
+			//
+			////Kills any entities that are no longer alive
+			//for (size_t ei = 0; ei < m_entities.size(); ++ei)
+			//{
+			//	if (!m_entities[ei]->getAlive())
+			//	{
+			//		m_entities.erase(m_entities.begin() + ei);
+			//		--ei;
+			//	}
+			//}
+		}
 	}
 
 	std::shared_ptr<Entity> Core::addEntity()
@@ -29,36 +119,6 @@ namespace GEPEngine
 		m_entities.push_back(rtn);
 
 		return rtn;
-	}
-
-
-
-	void Core::start()
-	{
-		m_running = true;
-
-		while (m_running)
-		{
-			//SDL stuff
-			//Call tick on all entities
-			//Call display on all entities
-			//Remove "killed" entities
-
-
-			for (size_t ei = 0; ei < m_entities.size(); ++ei)
-			{
-				//m_entities.at(ei).tick();
-			}
-
-			for (size_t ei = 0; ei < m_entities.size(); ++ei)
-			{
-				if (!m_entities[ei]->getAlive())
-				{
-					m_entities.erase(m_entities.begin() + ei);
-					--ei;
-				}
-			}
-		}
 	}
 
 	

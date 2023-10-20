@@ -1,6 +1,6 @@
+#pragma once
 #include <iostream>
-#include <memory>
-#include <vector>
+#include <GEPEngine/NativeWindow.h>
 
 namespace GEPEngine
 {
@@ -12,6 +12,9 @@ namespace GEPEngine
 
 	struct Core
 	{
+		Core();
+		~Core();
+
 		static std::shared_ptr<Core> initialize();
 
 		void start();
@@ -24,6 +27,7 @@ namespace GEPEngine
 
 
 	private:
+		std::shared_ptr<NativeWindow> m_window;
 		friend struct entity;
 		std::vector<std::shared_ptr<Entity> > m_entities;
 		std::shared_ptr<Environment> environment;

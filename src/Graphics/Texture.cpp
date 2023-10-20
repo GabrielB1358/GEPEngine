@@ -1,5 +1,6 @@
 #include "Texture.h"
-
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 Texture::Texture(const std::string& _path) : m_size{ 0 }
 {
@@ -9,6 +10,10 @@ Texture::Texture(const std::string& _path) : m_size{ 0 }
 }
 
 Texture::Texture(GLuint _texID) : m_Id(_texID)
+{
+}
+
+Texture::Texture()
 {
 }
 

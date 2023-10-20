@@ -3,13 +3,13 @@
 #include <vector>
 #include <iostream>
 
-#include "stb_image.h"
 
 
 struct Texture
 {
 	Texture(const std::string& _path);
 	Texture(GLuint _texId);
+	Texture();
 	~Texture();
 
 	void UploadToGPU();

@@ -1,3 +1,4 @@
+#pragma once
 #include <memory>
 
 
@@ -21,14 +22,16 @@ namespace GEPEngine
 		void tick();
 		void display();
 		//void kill();
+		virtual void initialise();
 
 	private:
 		friend struct Entity;
 
-		std::weak_ptr<Entity> entity;
+		std::weak_ptr<Entity> m_entity;
 
 		virtual void onTick();
 		virtual void onDisplay();
+		
 
 	};
 }

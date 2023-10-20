@@ -3,9 +3,8 @@
 #include <vector>
 #include <string>
 #include <memory>
-#include "Vbo.h"
 
-
+struct Vbo;
 struct Vao
 {
 	Vao();

@@ -1,13 +1,28 @@
 #include <GEPEngine/Core.h>
 #include "Entity.h"
+#include "Component.h"
 
 namespace GEPEngine
 {
+	Entity::Entity()
+	{
+		///hate
+
+	}
+
 	void Entity::tick()
 	{
 		for (size_t ci = 0; ci < m_components.size(); ci++)
 		{
 			m_components.at(ci)->tick();
+		}
+	}
+
+	void Entity::display()
+	{
+		for (size_t ci = 0; ci < m_components.size(); ci++)
+		{
+			m_components.at(ci)->onDisplay();
 		}
 	}
 

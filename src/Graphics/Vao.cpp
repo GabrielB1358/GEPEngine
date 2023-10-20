@@ -1,4 +1,5 @@
 #include "Vao.h"
+#include "Vbo.h"
 #include <stdexcept>
 
 Vao::Vao() : m_Id(0), m_dirty(false) {}

@@ -1,6 +1,5 @@
 #include <memory>
 #include <vector>
-#include "Component.h"
 
 namespace GEPEngine
 {
@@ -9,6 +8,8 @@ namespace GEPEngine
 
 	struct Entity
 	{
+		Entity();
+
 		template <typename T>
 		std::shared_ptr<T> addComponent()
 		{
@@ -16,7 +17,7 @@ namespace GEPEngine
 
 			rtn->m_entity = m_self;
 
-			rtn->intialize();
+			rtn->initialise();
 			m_components.push_back(rtn);
 
 			return rtn;
