@@ -43,6 +43,7 @@ namespace GEPEngine
 
 	void GEPEngine::TriangleRenderer::onDisplay()
 	{
+		//call shader bind function, passing values from transform
 		myShader->Render(vao, mytex);
 		std::cout << "SDGFHSFGHSF" << std::endl;
 	}

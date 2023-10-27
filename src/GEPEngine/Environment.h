@@ -6,9 +6,14 @@ namespace GEPEngine
 
 	struct Environment
 	{
-		float getDeltaTime();
+		void Init();
+
+		void Tick();
+
+		float getDT();
 
 	private:
-		float deltaTime;
+		float deltaTime = 0;
+		float last = 0;
 	};
 }

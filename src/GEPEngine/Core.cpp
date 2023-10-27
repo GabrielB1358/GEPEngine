@@ -57,8 +57,15 @@ namespace GEPEngine
 		m_running = true;
 		SDL_Event event = { 0 };
 
+		environment = std::make_shared<Environment>();
+		environment->Init();
+
 		while (m_running)
 		{
+			//Tick Environment, updating deltatime
+			environment->Tick();
+			std::cout << environment->getDT() << std::endl;
+
 			while (SDL_PollEvent(&event))
 			{
 				if (event.type == SDL_QUIT)
@@ -72,18 +79,15 @@ namespace GEPEngine
 
 			glClearColor(1, 0, 1, 1);
 
+
+			//Tick and display all entities
 			for (int i = 0; i < m_entities.size();i++)
 			{
-				
 				m_entities[i]->tick();
-				
 			}
-
 			for (int i = 0; i < m_entities.size(); i++)
 			{
-
 				m_entities[i]->display();
-
 			}
 
 			SDL_GL_SwapWindow(m_window->window);

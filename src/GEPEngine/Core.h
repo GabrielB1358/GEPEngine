@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <GEPEngine/NativeWindow.h>
+#include <GEPEngine/Environment.h>
 
 namespace GEPEngine
 {

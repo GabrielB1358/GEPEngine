@@ -47,6 +47,8 @@ add_library(GEPEngine
 	src/GEPEngine/Keyboard.cpp
 	src/GEPEngine/Environment.cpp
 	src/GEPEngine/Entity.cpp
+	src/GEPEngine/Transform.h
+	src/GEPEngine/Transform.cpp
 )
 
 target_link_libraries(GEPEngine
