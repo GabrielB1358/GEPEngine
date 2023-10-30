@@ -26,17 +26,20 @@ namespace GEPEngine
 		rtn->m_self = rtn;
 		rtn->m_running = false;
 
+		//Initialise SDL
 		if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		{
 			throw std::runtime_error("Failed to initialize SDL");
 		}
 
+		//Create a window and assign to window variable
 		if (!(rtn->m_window->window = SDL_CreateWindow("SDL2 Platform", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)))
 		{
 			SDL_Quit();
 			throw std::runtime_error("Failed to create window");
 		}
 
+		//Create GL context for the window
 		if (!(rtn->m_window->context = SDL_GL_CreateContext(rtn->m_window->window)))
 		{
 			SDL_DestroyWindow(rtn->m_window->window);
@@ -57,6 +60,7 @@ namespace GEPEngine
 		m_running = true;
 		SDL_Event event = { 0 };
 
+		//Setup the environment to access DeltaTime
 		environment = std::make_shared<Environment>();
 		environment->Init();
 
@@ -66,6 +70,7 @@ namespace GEPEngine
 			environment->Tick();
 			std::cout << environment->getDT() << std::endl;
 
+			//Check any inputs
 			while (SDL_PollEvent(&event))
 			{
 				if (event.type == SDL_QUIT)
@@ -89,28 +94,25 @@ namespace GEPEngine
 			{
 				m_entities[i]->display();
 			}
+			//Kills any entities that are no longer alive
+			for (size_t ei = 0; ei < m_entities.size(); ++ei)
+			{
+				if (!m_entities[ei]->getAlive())
+				{
+					m_entities.erase(m_entities.begin() + ei);
+					--ei;
+				}
+			}
 
 			SDL_GL_SwapWindow(m_window->window);
-
-			////TICK EVERYTHING
-
-			////cycles through and applies Tick() to each enemy
-			//for (size_t ei = 0; ei < m_entities.size(); ++ei)
-			//{
-			//	//m_entities.at(ei).tick();
-			//}
-			//
-			////Kills any entities that are no longer alive
-			//for (size_t ei = 0; ei < m_entities.size(); ++ei)
-			//{
-			//	if (!m_entities[ei]->getAlive())
-			//	{
-			//		m_entities.erase(m_entities.begin() + ei);
-			//		--ei;
-			//	}
-			//}
 		}
 	}
+
+	void Core::stop()
+	{
+		m_running = false;
+	}
+
 
 	std::shared_ptr<Entity> Core::addEntity()
 	{
@@ -123,12 +125,5 @@ namespace GEPEngine
 		m_entities.push_back(rtn);
 
 		return rtn;
-	}
-
-	
-
-	void Core::stop()
-	{
-		m_running = false;
 	}
 }
