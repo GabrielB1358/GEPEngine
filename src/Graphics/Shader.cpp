@@ -76,7 +76,7 @@ void Shader::Render(std::shared_ptr<WavefrontMesh> _mesh, std::shared_ptr<Textur
 
 }
 
-void Shader::Render(std::shared_ptr<Vao> _Vao, std::shared_ptr<Texture> _texture)
+void Shader::Render(std::shared_ptr<Vao> _Vao, std::shared_ptr<Texture> _texture, glm::mat4 _modelMatrix, glm::mat4 _projectionMatrix)
 {
 	//Select program to use
 	glUseProgram(programId);
@@ -89,7 +89,7 @@ void Shader::Render(std::shared_ptr<Vao> _Vao, std::shared_ptr<Texture> _texture
 
 	//Bind this shader
 	//BindShader("u_Projection", _camera->GetProjMat());
-	//BindShader("u_Model",_modelMatrix);
+	BindShader("u_Model",_modelMatrix);
 
 	//draw the 3 triangle vertices
 	glDrawArrays(GL_TRIANGLES, 0, 6);

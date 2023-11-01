@@ -6,8 +6,6 @@ namespace GEPEngine
 {
 	Entity::Entity()
 	{
-		///hate
-
 	}
 
 	void Entity::tick()
@@ -22,7 +20,7 @@ namespace GEPEngine
 	{
 		for (size_t ci = 0; ci < m_components.size(); ci++)
 		{
-			m_components.at(ci)->onDisplay();
+			m_components.at(ci)->display();
 		}
 	}
 
@@ -41,5 +39,10 @@ namespace GEPEngine
 	bool Entity::getAlive()
 	{
 		return m_alive;
+	}
+
+	std::shared_ptr<Core> Entity::getCore()
+	{
+		return m_core.lock();
 	}
 }

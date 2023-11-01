@@ -29,6 +29,10 @@ namespace GEPEngine
 		myShader = std::make_shared<Shader>("../Shaders/GUIFragment.txt", "../Shaders/GUIVertex.txt");
 
 		mytex = std::make_shared<Texture>();
+
+		rotation = 0.0f;
+		_projectionMatrix = glm::perspective(glm::radians(45.0f), 1.0f, 0.01f, 100.0f);
+		_modelMatrix = glm::translate(glm::mat4(1), glm::vec3(0.0f, 0.0f, -10.0f));
 	}
 
 	GEPEngine::TriangleRenderer::~TriangleRenderer()
@@ -41,10 +45,18 @@ namespace GEPEngine
 
 	}
 
+	void GEPEngine::TriangleRenderer::onTick()
+	{
+		rotation += 0.5f;
+		_modelMatrix = glm::rotate(_modelMatrix, glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+		myShader->BindShader("u_Projection", _projectionMatrix);
+		myShader->BindShader("u_Model", _modelMatrix);
+	}
+
 	void GEPEngine::TriangleRenderer::onDisplay()
 	{
 		//call shader bind function, passing values from transform
-		myShader->Render(vao, mytex);
+		myShader->Render(vao, mytex, _modelMatrix, _projectionMatrix);
 		std::cout << "SDGFHSFGHSF" << std::endl;
 	}
 }

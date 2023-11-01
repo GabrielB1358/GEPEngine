@@ -1,15 +1,21 @@
 #include "Component.h"
+#include "Entity.h"
 
 
 namespace GEPEngine
 {
+	void Component::initialise()
+	{
+
+	}
+
+	void Component::onInit()
+	{
+	}
+
 	std::shared_ptr<Entity> Component::getEntity()
 	{
-		//TODO
-		//THESE WILL RETURN NULL POINTERS
-		//RETURN m_Entity
-
-		return std::shared_ptr<Entity>();
+		return m_entity.lock();
 	}
 	std::shared_ptr<Core> Component::getCore()
 	{
@@ -23,9 +29,6 @@ namespace GEPEngine
 	{
 		return std::shared_ptr<Environment>();
 	}
-	void Component::onInit()
-	{
-	}
 	void Component::onBegin()
 	{
 	}
@@ -35,14 +38,12 @@ namespace GEPEngine
 	}
 	void Component::display()
 	{
+		onDisplay();
 	}
 	void Component::onTick()
 	{
 	}
 	void Component::onDisplay()
-	{
-	}
-	void Component::initialise()
 	{
 	}
 }

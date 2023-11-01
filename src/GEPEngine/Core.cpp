@@ -64,11 +64,11 @@ namespace GEPEngine
 		environment = std::make_shared<Environment>();
 		environment->Init();
 
+
 		while (m_running)
 		{
 			//Tick Environment, updating deltatime
 			environment->Tick();
-			std::cout << environment->getDT() << std::endl;
 
 			//Check any inputs
 			while (SDL_PollEvent(&event))
@@ -85,6 +85,7 @@ namespace GEPEngine
 			glClearColor(1, 0, 1, 1);
 
 
+
 			//Tick and display all entities
 			for (int i = 0; i < m_entities.size();i++)
 			{
@@ -92,7 +93,7 @@ namespace GEPEngine
 			}
 			for (int i = 0; i < m_entities.size(); i++)
 			{
-				m_entities[i]->display();
+				//m_entities[i]->display();
 			}
 			//Kills any entities that are no longer alive
 			for (size_t ei = 0; ei < m_entities.size(); ++ei)
@@ -119,8 +120,8 @@ namespace GEPEngine
 		std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
 		
 
-		//rtn->m_core = m_self;
-		//rtn->m_self = rtn;
+		rtn->m_core = m_self;
+		rtn->m_self = rtn;
 
 		m_entities.push_back(rtn);
 

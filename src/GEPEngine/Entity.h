@@ -36,7 +36,7 @@ namespace GEPEngine
 
 		bool m_alive;
 		std::vector<std::shared_ptr<Component> > m_components;
-		std::weak_ptr<Core> core;
+		std::weak_ptr<Core> m_core;
 		std::weak_ptr<Entity> m_self;
 	};
 }

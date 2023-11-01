@@ -1,9 +1,5 @@
 #include <iostream>
-#include <GEPEngine/TriangleRenderer.h>
-#include <GEPEngine/Core.h>
-//make mega header
-#include <GEPEngine/TriangleRenderer.h>
-#include <GEPEngine/Entity.h>
+#include <GEPEngine/MyEngine.h>
 
 #undef main
 

@@ -21,19 +21,17 @@ namespace GEPEngine
 		void onInit();
 		void onBegin();
 
-		void tick();
-		void display();
+		virtual void onTick();
+		virtual void onDisplay();
 		//void kill();
 		virtual void initialise();
 
 	private:
+		void tick();
+		void display();
+
 		friend struct Entity;
-
 		std::weak_ptr<Entity> m_entity;
-
-		virtual void onTick();
-		virtual void onDisplay();
-		
 
 	};
 }

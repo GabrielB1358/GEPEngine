@@ -49,6 +49,7 @@ add_library(GEPEngine
 	src/GEPEngine/Entity.cpp
 	src/GEPEngine/Transform.h
 	src/GEPEngine/Transform.cpp
+	src/GEPEngine/MyEngine.h
 )
 
 target_link_libraries(GEPEngine
