@@ -82,7 +82,7 @@ namespace GEPEngine
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			glClearColor(1, 0, 1, 1);
+			glClearColor(0.5, 0, 1, 1);
 
 
 

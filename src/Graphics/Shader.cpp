@@ -89,6 +89,7 @@ void Shader::Render(std::shared_ptr<Vao> _Vao, std::shared_ptr<Texture> _texture
 
 	//Bind this shader
 	//BindShader("u_Projection", _camera->GetProjMat());
+	BindShader("u_Projection", _projectionMatrix);
 	BindShader("u_Model",_modelMatrix);
 
 	//draw the 3 triangle vertices
