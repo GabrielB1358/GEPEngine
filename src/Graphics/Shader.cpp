@@ -20,6 +20,11 @@ Shader::~Shader()
 	glDeleteShader(vertexShader);
 }
 
+void Shader::onLoad()
+{
+	
+}
+
 GLuint Shader::CreateShader(std::string _shaderPath, GLuint _type)
 {
 	//Creates shader and attaches to program or throws an accurate error on why it couldn't

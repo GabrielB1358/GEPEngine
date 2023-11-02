@@ -32,7 +32,7 @@ namespace GEPEngine
 
 		myShader = std::make_shared<Shader>("../Shaders/GUIFragment.txt", "../Shaders/GUIVertex.txt");
 
-		mytex = std::make_shared<Texture>();
+		mytex = std::make_shared<Texture>("../image.png");
 	}
 
 	TriangleRenderer::~TriangleRenderer()

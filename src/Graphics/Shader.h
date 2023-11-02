@@ -2,15 +2,18 @@
 #include <string>
 #include <GL/glew.h>
 #include <memory>
+#include <Graphics/Resource.h>
 
 struct Vao;
 struct Camera;
 struct Texture;
 struct WavefrontMesh;
-struct Shader
+struct Shader : Resource
 {
 	Shader(std::string _fragPath, std::string _vertPath);
 	~Shader();
+
+	void onLoad();
 
 	GLuint CreateShader(const std::string _shaderPath, GLuint _type);
 	GLuint GetProgramId();
@@ -23,6 +26,7 @@ struct Shader
 	std::string ReadFile(std::string _path);
 
 private:
+	std::shared_ptr<Shader> m_shader;
 	std::string fileString;
 	GLuint fragmentShader;
 	GLuint vertexShader;

@@ -28,6 +28,10 @@ add_library(Graphics
 	src/Graphics/WavefrontMesh.h
 	src/Graphics/Rend.h
 	src/Graphics/stb_image.h
+	src/Graphics/Resource.h
+	src/Graphics/Resource.cpp
+	src/Graphics/Resources.h
+	src/Graphics/Resources.cpp
 )
 
 target_link_libraries(Graphics glew32 opengl32)

@@ -22,6 +22,11 @@ Texture::~Texture()
 	glDeleteTextures(1, &m_Id);
 }
 
+void Texture::onLoad()
+{
+
+}
+
 
 void Texture::UploadToGPU()
 {
