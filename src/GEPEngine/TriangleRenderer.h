@@ -20,13 +20,10 @@ namespace GEPEngine
 		std::shared_ptr<Shader> myShader;
 		std::shared_ptr<Texture> mytex;
 
+		float angle;
 
 	private:
 		void onDisplay() override;
 		void onTick() override;
-
-		glm::mat4 _modelMatrix;
-		glm::mat4 _projectionMatrix;
-		float rotation;
 	};
 }

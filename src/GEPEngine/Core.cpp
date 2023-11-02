@@ -61,14 +61,14 @@ namespace GEPEngine
 		SDL_Event event = { 0 };
 
 		//Setup the environment to access DeltaTime
-		environment = std::make_shared<Environment>();
-		environment->Init();
+		m_environment = std::make_shared<Environment>();
+		m_environment->Init();
 
 
 		while (m_running)
 		{
 			//Tick Environment, updating deltatime
-			environment->Tick();
+			m_environment->Tick();
 
 			//Check any inputs
 			while (SDL_PollEvent(&event))

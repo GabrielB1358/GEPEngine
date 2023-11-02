@@ -26,12 +26,13 @@ namespace GEPEngine
 		template <typename T>
 		std::shared_ptr<T> addComponent() { }
 
+		std::shared_ptr<Environment> m_environment;
 
 	private:
 		std::shared_ptr<NativeWindow> m_window;
 		friend struct entity;
 		std::vector<std::shared_ptr<Entity> > m_entities;
-		std::shared_ptr<Environment> environment;
+		//std::shared_ptr<Environment> environment;
 		std::shared_ptr<Keyboard> keyboard;
 		std::weak_ptr<Core> m_self;
 

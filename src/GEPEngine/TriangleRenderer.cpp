@@ -1,11 +1,14 @@
 #include "TriangleRenderer.h"
 #include "Entity.h"
+#include "Core.h"
 #include <Graphics/Rend.h>
 
 namespace GEPEngine
 {
 	TriangleRenderer::TriangleRenderer()
 	{
+		angle = 0;
+
 		std::shared_ptr<Vbo> pos = std::make_shared<Vbo>();
 		pos->Add(glm::vec3(-0.5f, 0.5f, 0.0f));
 		pos->Add(glm::vec3(-0.5f, -0.5f, 0.0f));
@@ -30,37 +33,32 @@ namespace GEPEngine
 		myShader = std::make_shared<Shader>("../Shaders/GUIFragment.txt", "../Shaders/GUIVertex.txt");
 
 		mytex = std::make_shared<Texture>();
-
-		rotation = 0.0f;
-		_projectionMatrix = glm::perspective(glm::radians(45.0f), 1.0f, 0.01f, 100.0f);
-		_modelMatrix = glm::translate(glm::mat4(1), glm::vec3(0.0f, 0.0f, -10.0f));
 	}
 
-	GEPEngine::TriangleRenderer::~TriangleRenderer()
+	TriangleRenderer::~TriangleRenderer()
 	{
 
 	}
 
-	void GEPEngine::TriangleRenderer::onInitialise()
+	void TriangleRenderer::onInitialise()
 	{
-
+		m_entity.lock()->m_Transform->Move(glm::vec3(0, -0.5, -10));
 	}
 
-	void GEPEngine::TriangleRenderer::onTick()
+	void TriangleRenderer::onTick()
 	{
-		rotation += 0.5f;
-		_modelMatrix = glm::rotate(_modelMatrix, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.0f));
-		myShader->BindShader("u_Projection", _projectionMatrix);
-		myShader->BindShader("u_Model", _modelMatrix);
-
 		std::shared_ptr<Entity> rtn = m_entity.lock();
-		
+
+		angle = 180 * rtn->m_core.lock()->m_environment->getDT();
+		rtn->m_Transform->Rotation.y += angle;
+
 	}
 
-	void GEPEngine::TriangleRenderer::onDisplay()
+	void TriangleRenderer::onDisplay()
 	{
-		//call shader bind function, passing values from transform
-		myShader->Render(vao, mytex, _modelMatrix, _projectionMatrix);
-		std::cout << "SDGFHSFGHSF" << std::endl;
+		std::shared_ptr<Entity> rtn = m_entity.lock();
+		glm::mat4 tempMM = rtn->m_Transform->getModel();
+		glm::mat4 tempPM = rtn->m_Transform->getProjection();
+		myShader->Render(vao, mytex, tempMM, tempPM);
 	}
 }

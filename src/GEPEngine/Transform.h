@@ -12,11 +12,14 @@ namespace GEPEngine
 		glm::vec3 Scale;
 		glm::vec3 Rotation;
 
-		float rotation;
 
-		glm::mat4 getModel(glm::vec3 _rot);
+		glm::mat4 getModel();
+		glm::mat4 getProjection();
 
 		void Move(glm::vec3 _pos);
+		void Rotate(glm::vec3 _rot);
+
+		int angle;
 	private:
 
 	};
