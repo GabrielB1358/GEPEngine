@@ -1,10 +1,12 @@
 #include <memory>
 #include <vector>
+#include <GEPEngine/Transform.h>
 
 namespace GEPEngine
 {
 	struct Core;
 	struct Component;
+	struct Transform;
 
 	struct Entity
 	{
@@ -25,8 +27,9 @@ namespace GEPEngine
 
 		std::shared_ptr<Core> getCore();
 		void kill();
-
 		bool getAlive();
+
+		std::shared_ptr<Transform> m_Transform;
 
 	private:
 		friend struct Core;

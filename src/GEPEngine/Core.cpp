@@ -93,7 +93,7 @@ namespace GEPEngine
 			}
 			for (int i = 0; i < m_entities.size(); i++)
 			{
-				//m_entities[i]->display();
+				m_entities[i]->display();
 			}
 			//Kills any entities that are no longer alive
 			for (size_t ei = 0; ei < m_entities.size(); ++ei)

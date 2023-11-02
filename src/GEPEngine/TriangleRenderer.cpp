@@ -1,4 +1,5 @@
 #include "TriangleRenderer.h"
+#include "Entity.h"
 #include <Graphics/Rend.h>
 
 namespace GEPEngine
@@ -48,9 +49,12 @@ namespace GEPEngine
 	void GEPEngine::TriangleRenderer::onTick()
 	{
 		rotation += 0.5f;
-		_modelMatrix = glm::rotate(_modelMatrix, glm::radians(rotation), glm::vec3(1.0f, 0.0f, 0.0f));
+		_modelMatrix = glm::rotate(_modelMatrix, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.0f));
 		myShader->BindShader("u_Projection", _projectionMatrix);
 		myShader->BindShader("u_Model", _modelMatrix);
+
+		std::shared_ptr<Entity> rtn = m_entity.lock();
+		
 	}
 
 	void GEPEngine::TriangleRenderer::onDisplay()

@@ -26,12 +26,14 @@ namespace GEPEngine
 		//void kill();
 		virtual void initialise();
 
+
+		std::weak_ptr<Entity> m_entity;
+
 	private:
 		void tick();
 		void display();
 
 		friend struct Entity;
-		std::weak_ptr<Entity> m_entity;
 
 	};
 }

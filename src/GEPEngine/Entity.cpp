@@ -6,6 +6,7 @@ namespace GEPEngine
 {
 	Entity::Entity()
 	{
+		m_Transform = addComponent<Transform>();
 	}
 
 	void Entity::tick()

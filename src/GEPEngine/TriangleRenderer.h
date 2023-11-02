@@ -1,7 +1,7 @@
-//include component
 #pragma once
 #include <Graphics/Rend.h>
 #include "Component.h"
+
 
 namespace GEPEngine
 {

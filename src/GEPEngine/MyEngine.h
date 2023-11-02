@@ -4,5 +4,6 @@
 #include <GEPEngine/Core.h>
 #include <GEPEngine/TriangleRenderer.h>
 #include <GEPEngine/Entity.h>
+#include <GEPEngine/Transform.h>
 
 #endif
