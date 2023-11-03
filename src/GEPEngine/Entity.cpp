@@ -6,7 +6,6 @@ namespace GEPEngine
 {
 	Entity::Entity()
 	{
-		m_Transform = addComponent<Transform>();
 	}
 
 	void Entity::tick()
@@ -40,6 +39,11 @@ namespace GEPEngine
 	bool Entity::getAlive()
 	{
 		return m_alive;
+	}
+
+	std::shared_ptr<Transform> Entity::getTransform()
+	{
+		return m_transform.lock();
 	}
 
 	std::shared_ptr<Core> Entity::getCore()

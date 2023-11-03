@@ -1,5 +1,6 @@
 #include "Core.h"
 #include "Entity.h"
+#include "Transform.h"
 
 namespace GEPEngine
 {
@@ -22,6 +23,7 @@ namespace GEPEngine
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
 		rtn->m_window = std::make_shared<NativeWindow>();
+		rtn->m_resources = std::make_shared<Resources>();
 
 		rtn->m_self = rtn;
 		rtn->m_running = false;
@@ -50,6 +52,11 @@ namespace GEPEngine
 		glewInit();
 
 		return rtn;
+	}
+
+	std::shared_ptr<Resources> Core::getResources()
+	{
+		return m_resources;
 	}
 
 
@@ -122,6 +129,7 @@ namespace GEPEngine
 
 		rtn->m_core = m_self;
 		rtn->m_self = rtn;
+		rtn->m_transform = rtn->addComponent<Transform>();
 
 		m_entities.push_back(rtn);
 

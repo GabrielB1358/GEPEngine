@@ -4,18 +4,22 @@
 #include <string>
 #include <memory>
 
-struct Vbo;
-struct Vao
+
+namespace Graphics
 {
-	Vao();
-	~Vao();
+	struct Vbo;
+	struct Vao
+	{
+		Vao();
+		~Vao();
 
-	GLuint GetId();
-	void AddVbo(std::shared_ptr<Vbo> _targetVbo);
+		GLuint GetId();
+		void AddVbo(std::shared_ptr<Vbo> _targetVbo);
 
 
-private:
-	GLuint m_Id;
-	bool m_dirty;
-	std::vector<std::shared_ptr<Vbo>> Vbos{};
-};
+	private:
+		GLuint m_Id;
+		bool m_dirty;
+		std::vector<std::shared_ptr<Vbo>> Vbos{};
+	};
+}

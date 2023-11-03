@@ -25,11 +25,12 @@ namespace GEPEngine
 			return rtn;
 		}
 
+		std::shared_ptr<Transform> getTransform();
+
 		std::shared_ptr<Core> getCore();
 		void kill();
 		bool getAlive();
 
-		std::shared_ptr<Transform> m_Transform;
 		std::weak_ptr<Core> m_core;
 
 	private:
@@ -41,5 +42,6 @@ namespace GEPEngine
 		bool m_alive;
 		std::vector<std::shared_ptr<Component> > m_components;
 		std::weak_ptr<Entity> m_self;
+		std::weak_ptr<Transform> m_transform;
 	};
 }

@@ -2,49 +2,52 @@
 #include <GLM/gtc/matrix_transform.hpp>
 //#include "UserInput.h"
 
-struct Camera
+namespace Graphics
 {
-public:
-	Camera(bool _isOrtho);
-	~Camera();
+	struct Camera
+	{
+	public:
+		Camera(bool _isOrtho);
+		~Camera();
 
-	//using Inline functions as they can increase efficiency in small doses
-	inline glm::mat4 GetViewMat() { return _viewMatrix; }
+		//using Inline functions as they can increase efficiency in small doses
+		inline glm::mat4 GetViewMat() { return _viewMatrix; }
 
-	inline glm::mat4 GetProjMat() { return _projMatrix; }
+		inline glm::mat4 GetProjMat() { return _projMatrix; }
 
-	void SetViewMat(glm::mat4 _view) { _viewMatrix = _view; }
+		void SetViewMat(glm::mat4 _view) { _viewMatrix = _view; }
 
-	void SetProjMat(glm::mat4 _proj) { _projMatrix = _proj; }
+		void SetProjMat(glm::mat4 _proj) { _projMatrix = _proj; }
 
-	inline void SetPos(glm::vec3 pos) { _cameraPos = pos; }
+		inline void SetPos(glm::vec3 pos) { _cameraPos = pos; }
 
-	//void Update(UserInput* _input);
+		//void Update(UserInput* _input);
 
 
-private:
+	private:
 
-	glm::mat4 _viewMatrix;
+		glm::mat4 _viewMatrix;
 
-	glm::mat4 _projMatrix;
+		glm::mat4 _projMatrix;
 
-	glm::vec3 _cameraPos;
+		glm::vec3 _cameraPos;
 
-	glm::vec3 cameraRot;
+		glm::vec3 cameraRot;
 
-	glm::vec3 _lookAt;
+		glm::vec3 _lookAt;
 
-	glm::vec3 _up;
+		glm::vec3 _up;
 
-	glm::vec3 _translation;
+		glm::vec3 _translation;
 
-	float _cameraAngleX;
+		float _cameraAngleX;
 
-	float _cameraAngleY;
+		float _cameraAngleY;
 
-	float speed;
-	
-	float mouseSpeed;
+		float speed;
 
-	int posX, posY;
-};
+		float mouseSpeed;
+
+		int posX, posY;
+	};
+}

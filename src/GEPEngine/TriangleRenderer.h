@@ -1,6 +1,7 @@
 #pragma once
 #include <Graphics/Rend.h>
 #include "Component.h"
+#include "Resource.h"
 
 
 namespace GEPEngine
@@ -13,12 +14,13 @@ namespace GEPEngine
 
 		void onInitialise();
 
-		std::shared_ptr<Vao> vao;
+		std::shared_ptr<Graphics::Vao> vao;
 
 
 
-		std::shared_ptr<Shader> myShader;
-		std::shared_ptr<Texture> mytex;
+		std::shared_ptr<Graphics::Shader> myShader;
+		std::shared_ptr<Graphics::Texture> mytex;
+
 
 		float angle;
 

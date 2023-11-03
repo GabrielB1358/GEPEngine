@@ -19,7 +19,7 @@ namespace GEPEngine
 	}
 	std::shared_ptr<Core> Component::getCore()
 	{
-		return std::shared_ptr<Core>();
+		return m_entity.lock()->getCore();
 	}
 	std::shared_ptr<Keyboard> Component::getKeyboard()
 	{

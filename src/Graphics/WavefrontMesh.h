@@ -4,15 +4,18 @@
 #include <vector>
 #include <iostream>
 
-struct WavefrontMesh
+namespace Graphics
 {
-	WavefrontMesh(const std::string _path, size_t _vertices);
-	GLuint GetId();
-	size_t GetVertCount();
+	struct WavefrontMesh
+	{
+		WavefrontMesh(const std::string _path);
+		GLuint GetId();
+		size_t GetVertCount();
 
-private:
-	GLuint m_Id;
-	std::string m_path;
-	size_t vertCount;
-	bool m_dirty;
-};
+	private:
+		GLuint m_Id;
+		std::string m_path;
+		size_t vertCount;
+		bool m_dirty;
+	};
+}

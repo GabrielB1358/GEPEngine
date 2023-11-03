@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <GEPEngine/NativeWindow.h>
+#include <GEPEngine/Resources.h>
 #include <GEPEngine/Environment.h>
 
 namespace GEPEngine
@@ -18,6 +19,8 @@ namespace GEPEngine
 
 		static std::shared_ptr<Core> initialize();
 
+		std::shared_ptr<Resources> getResources();
+
 		void start();
 		void stop();
 
@@ -32,7 +35,7 @@ namespace GEPEngine
 		std::shared_ptr<NativeWindow> m_window;
 		friend struct entity;
 		std::vector<std::shared_ptr<Entity> > m_entities;
-		//std::shared_ptr<Environment> environment;
+		std::shared_ptr<Resources> m_resources;
 		std::shared_ptr<Keyboard> keyboard;
 		std::weak_ptr<Core> m_self;
 

@@ -28,10 +28,6 @@ add_library(Graphics
 	src/Graphics/WavefrontMesh.h
 	src/Graphics/Rend.h
 	src/Graphics/stb_image.h
-	src/Graphics/Resource.h
-	src/Graphics/Resource.cpp
-	src/Graphics/Resources.h
-	src/Graphics/Resources.cpp
 )
 
 target_link_libraries(Graphics glew32 opengl32)
@@ -53,6 +49,16 @@ add_library(GEPEngine
 	src/GEPEngine/Entity.cpp
 	src/GEPEngine/Transform.h
 	src/GEPEngine/Transform.cpp
+	src/GEPEngine/Resource.h
+	src/GEPEngine/Resource.cpp
+	src/GEPEngine/Resources.h
+	src/GEPEngine/Resources.cpp
+	src/GEPEngine/Model.cpp
+	src/GEPEngine/Model.h
+	src/GEPEngine/Shader.cpp
+	src/GEPEngine/Shader.h
+	src/GEPEngine/Texture.cpp
+	src/GEPEngine/Texture.h
 	src/GEPEngine/MyEngine.h
 )
 
@@ -63,6 +69,8 @@ target_link_libraries(GEPEngine
 
 add_executable(demo
 	src/demo/main.cpp
+	src/demo/Curuthers.cpp
+	src/demo/Curuthers.h
 )
 
 target_link_libraries(demo GEPEngine)
