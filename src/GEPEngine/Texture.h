@@ -8,6 +8,8 @@ namespace GEPEngine
 	{
 		void onLoad();
 
+		std::shared_ptr<Graphics::Texture> getTexture();
+
 	private:
 		std::shared_ptr<Graphics::Texture> m_texture;
 	};

@@ -15,6 +15,7 @@ int main()
 	//std::shared_ptr<TriangleRenderer> component1 = entity->addComponent<TriangleRenderer>();
 
 	std::shared_ptr<Curuthers> cat = entity->addComponent<Curuthers>();
+	cat->initialise();
 
 
 	

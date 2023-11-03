@@ -11,13 +11,28 @@ void Curuthers::initialise()
 	//m_Model = getCore()->getResources()->load<GEPEngine::Model>("../Modes/curuthers/curuthers.obj");
 	//m_Shader = getCore()->getResources()->load<GEPEngine::Shader>("../Shaders/gui");
 
-	m_entity.lock()->addComponent<GEPEngine::TriangleRenderer>();
+	//m_entity.lock()->addComponent<GEPEngine::TriangleRenderer>();
 
+	m_renderer = m_entity.lock()->addComponent<GEPEngine::TriangleRenderer>();
 
+	std::shared_ptr<GEPEngine::Model> m = getCore()->getResources()->load<GEPEngine::Model>("../Models/curuthers/curuthers.obj");
+	std::shared_ptr<GEPEngine::Texture> t = getCore()->getResources()->load<GEPEngine::Texture>("../Models/curuthers/Whiskers_diffuse.png");
 
-	// ADD A MODEL RENDERER CLASS THEN UNCOMMENT
-	//std::shared_ptr<GEPEngine::ModelRenderer> mr =  m_entity.lock()->addComponent<GEPEngine::ModelRenderer>();
+	m_renderer->setModel(m);
+	m_renderer->setTexture(t);
 
-	//std::shared_ptr<GEPEngine::Model> m = getCore()->getResources()->load<GEPEngine::Model>("../Modes/curuthers/curuthers.obj");
-	//mr->setModel(m);
+	m_renderer->assembleShader();
+	
+	angle = 0;
+}
+
+void Curuthers::onTick()
+{
+	angle = 180 * getCore()->m_environment->getDT();
+	m_entity.lock()->getTransform()->Rotation.y += angle;
+}
+
+void Curuthers::onDisplay()
+{
+	m_renderer->Render();
 }

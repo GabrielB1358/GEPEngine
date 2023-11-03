@@ -9,6 +9,8 @@ namespace GEPEngine
 	{
 		void onLoad() override;
 
+		std::shared_ptr<Graphics::Shader> getShader();
+
 	private:
 		std::shared_ptr<Graphics::Shader> m_shader;
 	};

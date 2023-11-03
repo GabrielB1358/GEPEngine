@@ -49,7 +49,7 @@ namespace Graphics
 	}
 
 
-	void Shader::Render(std::shared_ptr<WavefrontMesh> _mesh, std::shared_ptr<Texture> _texture, /*0Camera* _camera,*/ glm::mat4 _modelMatrix)
+	void Shader::Render(std::shared_ptr<WavefrontMesh> _mesh, std::shared_ptr<Texture> _texture, /*Camera* _camera,*/ glm::mat4 _modelMatrix, glm::mat4 _projMatrix)
 	{
 		//Select program to use
 		glUseProgram(programId);
@@ -62,7 +62,8 @@ namespace Graphics
 
 		//Bind to this shader
 		//BindShader("u_Projection", _camera->GetProjMat());
-		//BindShader("u_Model", _modelMatrix);
+		BindShader("u_Projection", _projMatrix);
+		BindShader("u_Model", _modelMatrix);
 		//BindShader("u_Viewing", _camera->GetViewMat());
 
 		//Enable anything appropriate

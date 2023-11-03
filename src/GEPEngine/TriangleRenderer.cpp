@@ -33,11 +33,8 @@ namespace GEPEngine
 		myShader = std::make_shared<Graphics::Shader>("../Shaders/GUIFragment.txt", "../Shaders/GUIVertex.txt");
 
 		mytex = std::make_shared<Graphics::Texture>("../image.png");
-	}
 
-	TriangleRenderer::~TriangleRenderer()
-	{
-
+		
 	}
 
 	void TriangleRenderer::onInitialise()
@@ -47,9 +44,9 @@ namespace GEPEngine
 
 	void TriangleRenderer::onTick()
 	{
-		std::shared_ptr<Entity> rtn = m_entity.lock();
+		//std::shared_ptr<Entity> rtn = m_entity.lock();
 
-		angle = 180 * rtn->m_core.lock()->m_environment->getDT();
+		//angle = 180 * rtn->m_core.lock()->m_environment->getDT();
 		//rtn->m_Transform->Rotation.y += angle;
 
 	}
@@ -60,5 +57,32 @@ namespace GEPEngine
 		//glm::mat4 tempMM = rtn->m_Transform->getModel();
 		//glm::mat4 tempPM = rtn->m_Transform->getProjection();
 		//myShader->Render(vao, mytex, tempMM, tempPM);
+	}
+
+	void TriangleRenderer::assembleShader()
+	{
+		//CHANGE THIS SO THAT PATH PARAMETER IS THE LOCAL STRINGS INSTEAD
+		m_Shader = getCore()->getResources()->load<GEPEngine::Shader>("../Shaders/gui");
+	}
+
+	void TriangleRenderer::Render()
+	{
+		std::shared_ptr<Transform> tmp = m_entity.lock()->getTransform();
+		m_Shader->getShader()->Render(m_Model->getModel() , m_Texture->getTexture(), tmp->getModel(), tmp->getProjection());
+	}
+
+	void TriangleRenderer::setFragPath(std::string _path) { m_fragPath = _path; }
+	void TriangleRenderer::setVertPath(std::string _path) { m_vertPath = _path; }
+	std::string TriangleRenderer::getFragPath() { return m_fragPath; }
+	std::string TriangleRenderer::getVertPath() { return m_vertPath; }
+	
+	void TriangleRenderer::setModel(std::shared_ptr<GEPEngine::Model> _model)
+	{
+		m_Model = _model;
+	}
+
+	void TriangleRenderer::setTexture(std::shared_ptr<GEPEngine::Texture> _texture)
+	{
+		m_Texture = _texture;
 	}
 }
