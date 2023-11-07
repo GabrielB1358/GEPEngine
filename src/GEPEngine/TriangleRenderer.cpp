@@ -30,45 +30,24 @@ namespace GEPEngine
 		vao->AddVbo(pos);
 		vao->AddVbo(coords);
 
-		myShader = std::make_shared<Graphics::Shader>("../Shaders/GUIFragment.txt", "../Shaders/GUIVertex.txt");
-
-		mytex = std::make_shared<Graphics::Texture>("../image.png");
-
-		
 	}
 
 	void TriangleRenderer::onInitialise()
 	{
-		//m_entity.lock()->m_Transform->Move(glm::vec3(0, -0.5, -10));
 	}
 
 	void TriangleRenderer::onTick()
 	{
-		//std::shared_ptr<Entity> rtn = m_entity.lock();
-
-		//angle = 180 * rtn->m_core.lock()->m_environment->getDT();
-		//rtn->m_Transform->Rotation.y += angle;
-
 	}
 
 	void TriangleRenderer::onDisplay()
 	{
-		std::shared_ptr<Entity> rtn = m_entity.lock();
-		//glm::mat4 tempMM = rtn->m_Transform->getModel();
-		//glm::mat4 tempPM = rtn->m_Transform->getProjection();
-		//myShader->Render(vao, mytex, tempMM, tempPM);
-	}
+		m_Model = getCore()->getResources()->load<GEPEngine::Model>(m_modPath);
+		m_Texture = getCore()->getResources()->load<GEPEngine::Texture>(m_texPath);
+		m_Shader = getCore()->getResources()->load<GEPEngine::Shader>(m_shaderPath);
 
-	void TriangleRenderer::assembleShader()
-	{
-		//CHANGE THIS SO THAT PATH PARAMETER IS THE LOCAL STRINGS INSTEAD
-		m_Shader = getCore()->getResources()->load<GEPEngine::Shader>("../Shaders/gui");
-	}
-
-	void TriangleRenderer::Render()
-	{
 		std::shared_ptr<Transform> tmp = m_entity.lock()->getTransform();
-		m_Shader->getShader()->Render(m_Model->getModel() , m_Texture->getTexture(), tmp->getModel(), tmp->getProjection());
+		m_Shader->getShader()->Render(m_Model->getModel(), m_Texture->getTexture(), tmp->getModel(), tmp->getProjection());
 	}
 
 	void TriangleRenderer::setFragPath(std::string _path) { m_fragPath = _path; }
@@ -76,13 +55,18 @@ namespace GEPEngine
 	std::string TriangleRenderer::getFragPath() { return m_fragPath; }
 	std::string TriangleRenderer::getVertPath() { return m_vertPath; }
 	
-	void TriangleRenderer::setModel(std::shared_ptr<GEPEngine::Model> _model)
+	void TriangleRenderer::setModel(std::string _p)
 	{
-		m_Model = _model;
+		m_modPath = _p;
 	}
 
-	void TriangleRenderer::setTexture(std::shared_ptr<GEPEngine::Texture> _texture)
+	void TriangleRenderer::setTexture(std::string _p)
 	{
-		m_Texture = _texture;
+		m_texPath = _p;
+	}
+
+	void TriangleRenderer::setShader(std::string _p)
+	{
+		m_shaderPath = _p;
 	}
 }

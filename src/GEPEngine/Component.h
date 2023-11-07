@@ -17,6 +17,7 @@ namespace GEPEngine
 		std::shared_ptr<Core> getCore();
 		std::shared_ptr<Keyboard> getKeyboard();
 		std::shared_ptr<Environment> getEnvironment();
+		double getDT();
 
 		void onInit();
 		void onBegin();

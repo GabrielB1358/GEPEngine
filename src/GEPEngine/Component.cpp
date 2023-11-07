@@ -29,6 +29,10 @@ namespace GEPEngine
 	{
 		return std::shared_ptr<Environment>();
 	}
+	double Component::getDT()
+	{
+		return 0.0;
+	}
 	void Component::onBegin()
 	{
 	}

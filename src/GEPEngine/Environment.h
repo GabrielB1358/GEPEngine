@@ -10,10 +10,10 @@ namespace GEPEngine
 
 		void Tick();
 
-		float getDT();
+		double getDT();
 
 	private:
-		float deltaTime = 0;
-		float last = 0;
+		double deltaTime = 0;
+		double last = 0;
 	};
 }

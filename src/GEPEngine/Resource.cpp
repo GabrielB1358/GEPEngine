@@ -12,6 +12,7 @@ namespace GEPEngine
 
 	void Resource::load()
 	{
+		onLoad();
 	}
 
 }

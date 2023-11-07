@@ -25,12 +25,12 @@ namespace GEPEngine
 		gettimeofday(&tv, NULL);
 		double curr = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000;
 #endif
-		float diff = curr - last;
+		double diff = curr - last;
 		deltaTime = diff / 1000.0f;
 		last = curr;
 	}
 
-	float Environment::getDT()
+	double Environment::getDT()
 	{
 		return deltaTime;
 	}

@@ -26,7 +26,7 @@ namespace GEPEngine
 
     glm::mat4 Transform::getProjection()
     {
-        return glm::mat4(1);
+        return glm::perspective(glm::radians(45.0f), 1.0f, 0.01f, 150.0f);
     }
 
     void Transform::Move(glm::vec3 _pos)
