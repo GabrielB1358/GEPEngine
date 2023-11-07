@@ -11,27 +11,17 @@
 namespace GEPEngine
 {
 
-	struct TriangleRenderer : Component
+	struct ModelRenderer : Component
 	{
-		TriangleRenderer();
+		ModelRenderer();
 		void onInitialise();
 
 		std::shared_ptr<Graphics::Vao> vao;
 		std::shared_ptr<Graphics::Shader> myShader;
 		std::shared_ptr<Graphics::Texture> mytex;
-		float angle;
-
 
 
 		//Model Loader stuff
-		std::shared_ptr<GEPEngine::Shader> m_Shader;
-		std::shared_ptr<GEPEngine::Texture> m_Texture;
-		std::shared_ptr<GEPEngine::Model> m_Model;
-
-		std::string m_modPath;
-		std::string m_texPath;
-		std::string m_shaderPath;
-
 		void setFragPath(std::string _path);
 		std::string getFragPath();
 
@@ -42,10 +32,6 @@ namespace GEPEngine
 		void setTexture(std::string _p);
 		void setShader(std::string _p);
 
-		void assembleShader();
-		void Render();
-
-
 	private:
 		void onDisplay() override;
 		void onTick() override;
@@ -53,5 +39,13 @@ namespace GEPEngine
 		//model loader stuff
 		std::string m_fragPath;
 		std::string m_vertPath;
+
+		std::shared_ptr<GEPEngine::Shader> m_Shader;
+		std::shared_ptr<GEPEngine::Texture> m_Texture;
+		std::shared_ptr<GEPEngine::Model> m_Model;
+
+		std::string m_modPath;
+		std::string m_texPath;
+		std::string m_shaderPath;
 	};
 }

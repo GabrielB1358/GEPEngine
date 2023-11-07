@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
-#include <GEPEngine/NativeWindow.h>
 #include <GEPEngine/Resources.h>
 #include <GEPEngine/Environment.h>
+#include <GEPEngine/Keyboard.h>
 
 namespace GEPEngine
 {
@@ -36,7 +36,7 @@ namespace GEPEngine
 		friend struct entity;
 		std::vector<std::shared_ptr<Entity> > m_entities;
 		std::shared_ptr<Resources> m_resources;
-		std::shared_ptr<Keyboard> keyboard;
+		std::shared_ptr<Keyboard> m_keyboard;
 		std::weak_ptr<Core> m_self;
 
 		//SDL_Window* m_nativeWindow;

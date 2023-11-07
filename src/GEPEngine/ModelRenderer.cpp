@@ -1,14 +1,15 @@
-#include "TriangleRenderer.h"
+#include "ModelRenderer.h"
 #include "Entity.h"
 #include "Core.h"
 #include <Graphics/Rend.h>
 
 namespace GEPEngine
 {
-	TriangleRenderer::TriangleRenderer()
+	ModelRenderer::ModelRenderer()
 	{
-		angle = 0;
 
+
+		//VBO stuff here for reference for when making orthographic renderer and that x
 		std::shared_ptr<Graphics::Vbo> pos = std::make_shared<Graphics::Vbo>();
 		pos->Add(glm::vec3(-0.5f, 0.5f, 0.0f));
 		pos->Add(glm::vec3(-0.5f, -0.5f, 0.0f));
@@ -32,15 +33,15 @@ namespace GEPEngine
 
 	}
 
-	void TriangleRenderer::onInitialise()
+	void ModelRenderer::onInitialise()
 	{
 	}
 
-	void TriangleRenderer::onTick()
+	void ModelRenderer::onTick()
 	{
 	}
 
-	void TriangleRenderer::onDisplay()
+	void ModelRenderer::onDisplay()
 	{
 		m_Model = getCore()->getResources()->load<GEPEngine::Model>(m_modPath);
 		m_Texture = getCore()->getResources()->load<GEPEngine::Texture>(m_texPath);
@@ -50,22 +51,22 @@ namespace GEPEngine
 		m_Shader->getShader()->Render(m_Model->getModel(), m_Texture->getTexture(), tmp->getModel(), tmp->getProjection());
 	}
 
-	void TriangleRenderer::setFragPath(std::string _path) { m_fragPath = _path; }
-	void TriangleRenderer::setVertPath(std::string _path) { m_vertPath = _path; }
-	std::string TriangleRenderer::getFragPath() { return m_fragPath; }
-	std::string TriangleRenderer::getVertPath() { return m_vertPath; }
+	void ModelRenderer::setFragPath(std::string _path) { m_fragPath = _path; }
+	void ModelRenderer::setVertPath(std::string _path) { m_vertPath = _path; }
+	std::string ModelRenderer::getFragPath() { return m_fragPath; }
+	std::string ModelRenderer::getVertPath() { return m_vertPath; }
 	
-	void TriangleRenderer::setModel(std::string _p)
+	void ModelRenderer::setModel(std::string _p)
 	{
 		m_modPath = _p;
 	}
 
-	void TriangleRenderer::setTexture(std::string _p)
+	void ModelRenderer::setTexture(std::string _p)
 	{
 		m_texPath = _p;
 	}
 
-	void TriangleRenderer::setShader(std::string _p)
+	void ModelRenderer::setShader(std::string _p)
 	{
 		m_shaderPath = _p;
 	}

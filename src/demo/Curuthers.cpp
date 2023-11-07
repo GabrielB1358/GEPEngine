@@ -4,7 +4,7 @@
 
 void Curuthers::initialise()
 {
-	m_renderer = m_entity.lock()->addComponent<GEPEngine::TriangleRenderer>();
+	m_renderer = m_entity.lock()->addComponent<GEPEngine::ModelRenderer>();
 
 	m_renderer->setModel("../Models/curuthers/curuthers.obj");
 	m_renderer->setTexture("../Models/curuthers/Whiskers_diffuse.png");

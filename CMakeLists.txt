@@ -33,8 +33,8 @@ add_library(Graphics
 target_link_libraries(Graphics glew32 opengl32)
 
 add_library(GEPEngine
-	src/GEPEngine/TriangleRenderer.cpp
-	src/GEPEngine/TriangleRenderer.h
+	src/GEPEngine/ModelRenderer.cpp
+	src/GEPEngine/ModelRenderer.h
 	src/GEPEngine/NativeWindow.cpp
 	src/GEPEngine/NativeWindow.h
 	src/GEPEngine/Core.h

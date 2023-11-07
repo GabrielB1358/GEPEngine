@@ -3,7 +3,7 @@
 #include <GEPEngine/Texture.h>
 #include <GEPEngine/Model.h>
 #include <GEPEngine/Shader.h>
-#include <GEPEngine/TriangleRenderer.h>
+#include <GEPEngine/ModelRenderer.h>
 
 
 struct Curuthers : GEPEngine::Component
@@ -13,7 +13,7 @@ struct Curuthers : GEPEngine::Component
 	float angle;
 
 private:
-	std::shared_ptr<GEPEngine::TriangleRenderer> m_renderer;
+	std::shared_ptr<GEPEngine::ModelRenderer> m_renderer;
 
 	void onTick() override;
 };
