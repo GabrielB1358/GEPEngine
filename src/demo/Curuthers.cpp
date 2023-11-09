@@ -1,5 +1,6 @@
 #include "Curuthers.h"
 #include <GEPEngine/myEngine.h>
+#include <GEPEngine/Keyboard.h>
 
 
 void Curuthers::initialise()
@@ -19,4 +20,9 @@ void Curuthers::onTick()
 {
 	angle = 180 * getCore()->m_environment->getDT();
 	m_entity.lock()->getTransform()->Rotate(glm::vec3(0, angle, 0));
+
+	if (getKeyboard()->isKeyDown(GEPEngine::Keys::a) == true)
+	{
+		m_entity.lock()->getTransform()->Move(glm::vec3(5, 0, 0));
+	}
 }

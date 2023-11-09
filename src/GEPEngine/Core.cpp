@@ -71,6 +71,8 @@ namespace GEPEngine
 		m_environment = std::make_shared<Environment>();
 		m_environment->Init();
 
+		m_keyboard = std::make_shared<Keyboard>();
+
 
 		while (m_running)
 		{
@@ -78,13 +80,12 @@ namespace GEPEngine
 			m_environment->Tick();
 
 			//Check any inputs
-			while (SDL_PollEvent(&event))
+			if (m_keyboard->keyCodeLoop() == false)
 			{
-				if (event.type == SDL_QUIT)
-				{
-					m_running = false;
-				}
+				m_running = false;
+				return;
 			}
+
 
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

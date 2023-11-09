@@ -8,8 +8,6 @@ namespace GEPEngine
 {
 	struct Entity;
 	struct Component;
-	struct Keyboard;
-	struct Environment;
 
 
 	struct Core
@@ -30,13 +28,13 @@ namespace GEPEngine
 		std::shared_ptr<T> addComponent() { }
 
 		std::shared_ptr<Environment> m_environment;
+		std::shared_ptr<Keyboard> m_keyboard;
 
 	private:
 		std::shared_ptr<NativeWindow> m_window;
 		friend struct entity;
 		std::vector<std::shared_ptr<Entity> > m_entities;
 		std::shared_ptr<Resources> m_resources;
-		std::shared_ptr<Keyboard> m_keyboard;
 		std::weak_ptr<Core> m_self;
 
 		//SDL_Window* m_nativeWindow;

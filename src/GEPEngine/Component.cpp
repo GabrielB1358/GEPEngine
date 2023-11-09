@@ -1,5 +1,7 @@
 #include "Component.h"
 #include "Entity.h"
+#include "Core.h"
+
 
 
 namespace GEPEngine
@@ -23,7 +25,7 @@ namespace GEPEngine
 	}
 	std::shared_ptr<Keyboard> Component::getKeyboard()
 	{
-		return std::shared_ptr<Keyboard>();
+		return getCore()->m_keyboard;
 	}
 	std::shared_ptr<Environment> Component::getEnvironment()
 	{

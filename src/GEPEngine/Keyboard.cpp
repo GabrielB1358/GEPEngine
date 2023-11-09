@@ -4,49 +4,111 @@ namespace GEPEngine
 {
 	Keyboard::Keyboard()
 	{
-		event = SDL_Event{ 0 };
+		m_running = true;
+	}
+
+	bool Keyboard::keyCodeLoop()
+	{
+		SDL_Event event;
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE)
+			{
+				return false;
+			}
+			if (event.type == SDL_KEYDOWN)
+			{
+				if (std::find(keyCodes.begin(), keyCodes.end(), event.key.keysym.sym) != keyCodes.end())
+				{
+					continue;
+				}
+				else
+				{
+					keyCodes.push_back(event.key.keysym.sym);
+					pressedKeys.push_back(event.key.keysym.sym);
+				}
+			}
+			else if (event.type == SDL_KEYUP)
+			{
+				for (int i = 0; i < keyCodes.size(); i++)
+				{
+					if (keyCodes[i] == event.key.keysym.sym)
+					{
+						keyCodes.erase(keyCodes.begin() + i);
+						releasedKeys.push_back(event.key.keysym.sym);
+					}
+				}
+			}
+		}
+		return true;
+
 	}
 
 	void Keyboard::onTick()
 	{
-		//Poll stuff
+		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
+			if (event.type == SDL_QUIT)
+			{
+				m_running = false;
+			}
 			if (event.type == SDL_KEYDOWN)
 			{
-				pressedKeys.push_back(event.key.keysym.sym);
+				if (std::find(keyCodes.begin(), keyCodes.end(), event.key.keysym.sym) != keyCodes.end())
+				{
+					continue;
+				}
+				else
+				{
+					keyCodes.push_back(event.key.keysym.sym);
+					pressedKeys.push_back(event.key.keysym.sym);
+				}
 			}
-			if (event.type == SDL_KEYUP)
+			else if (event.type == SDL_KEYUP)
 			{
-				releasedKeys.push_back(event.key.keysym.sym);
-			}
-			
-			if (event.button.button == SDL_MOUSEBUTTONDOWN)
-			{
-
-			}
-			if (event.button.button == SDL_MOUSEBUTTONUP)
-			{
-
+				for (int i = 0; i < keyCodes.size(); i++)
+				{
+					if (keyCodes[i] == event.key.keysym.sym)
+					{
+						keyCodes.erase(keyCodes.begin() + i);
+						releasedKeys.push_back(event.key.keysym.sym);
+					}
+				}
 			}
 		}
-
-		pressedKeys.clear();
-		releasedKeys.clear();
 	}
 
-	bool Keyboard::isKey(int keyCode)
+	//Make a function that converts from an SDL key to the Keys key
+	//then use that in the find functions to make the keyboard work 
+
+	bool Keyboard::isKey(Keys keyCode)
 	{
-		return false;
+		if (std::find(keyCodes.begin(), keyCodes.end(), keyCode) != keyCodes.end())
+		{
+			return true;
+		}
+		else
+			return false;
 	}
 
-	bool Keyboard::isKeyDown(int keyCode)
+	bool Keyboard::isKeyDown(Keys keyCode)
 	{
-		return false;
+		if (std::find(pressedKeys.begin(), pressedKeys.end(), keyCode) != pressedKeys.end())
+		{
+			return true;
+		}
+		else
+			return false;
 	}
 
-	bool Keyboard::isKeyUp(int keyCode)
+	bool Keyboard::isKeyUp(Keys keyCode)
 	{
-		return false;
+		if (std::find(releasedKeys.begin(), releasedKeys.end(), keyCode) != releasedKeys.end())
+		{
+			return true;
+		}
+		else
+			return false;
 	}
 }
