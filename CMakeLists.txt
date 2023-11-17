@@ -59,6 +59,8 @@ add_library(GEPEngine
 	src/GEPEngine/Shader.h
 	src/GEPEngine/Texture.cpp
 	src/GEPEngine/Texture.h
+	src/GEPEngine/BoxCollider.cpp
+	src/GEPEngine/BoxCollider.h
 	src/GEPEngine/MyEngine.h
 )
 
@@ -71,6 +73,8 @@ add_executable(demo
 	src/demo/main.cpp
 	src/demo/Curuthers.cpp
 	src/demo/Curuthers.h
+	src/demo/evilBloke.cpp
+	src/demo/evilBloke.h
 )
 
 target_link_libraries(demo GEPEngine)

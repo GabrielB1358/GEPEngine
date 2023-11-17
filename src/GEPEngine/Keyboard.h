@@ -8,7 +8,11 @@
 namespace GEPEngine
 {
 	enum Keys {
-		a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,
+		w = SDLK_w,
+		a = SDLK_a,
+		s = SDLK_s,
+		d = SDLK_d,
+		b,c,e,f,g,h,i,j,k,l,m,n,o,p,q,r,t,u,v,x,y,z,
 		one, two, three, four, five, six, seven, eight, nine,
 		uparrow, downarrow, leftarrow, rightarrow,
 		space, rshift, lshift, lcontrol, enter
@@ -16,20 +20,18 @@ namespace GEPEngine
 
 
 	struct Core;
-	struct Keyboard : Component
+	struct Keyboard
 	{
 		Keyboard();
-		bool keyCodeLoop();
+		void processKeys(SDL_Event _e);
 
 		bool isKey(Keys keyCode);
 		bool isKeyDown(Keys keyCode);
 		bool isKeyUp(Keys keyCode);
 
-		void onTick() override;
+		void onTick();
 
 		bool m_running;
-
-	private:
 
 		std::vector<int> keyCodes;
 		std::vector<int> pressedKeys;

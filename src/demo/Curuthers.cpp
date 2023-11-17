@@ -16,13 +16,30 @@ void Curuthers::initialise()
 	m_entity.lock()->getTransform()->Move(glm::vec3(0, -0.5, -8));
 }
 
+void Curuthers::Move(glm::vec3 _move)
+{
+	m_entity.lock()->getTransform()->Move(_move);
+}
+
 void Curuthers::onTick()
 {
 	angle = 180 * getCore()->m_environment->getDT();
 	m_entity.lock()->getTransform()->Rotate(glm::vec3(0, angle, 0));
-
-	if (getKeyboard()->isKeyDown(GEPEngine::Keys::a) == true)
+	
+	if (getKeyboard()->isKey(GEPEngine::Keys::d) == true)
 	{
-		m_entity.lock()->getTransform()->Move(glm::vec3(5, 0, 0));
+		Move(glm::vec3(0.02, 0, 0));
+	}
+	if (getKeyboard()->isKey(GEPEngine::Keys::a) == true)
+	{
+		Move(glm::vec3(-0.02, 0, 0));
+	}
+	if (getKeyboard()->isKey(GEPEngine::Keys::w) == true)
+	{
+		Move(glm::vec3(0, 0.02, 0));
+	}
+	if (getKeyboard()->isKey(GEPEngine::Keys::s) == true)
+	{
+		Move(glm::vec3(0, -0.02, 0));
 	}
 }

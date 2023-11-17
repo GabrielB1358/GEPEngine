@@ -7,80 +7,34 @@ namespace GEPEngine
 		m_running = true;
 	}
 
-	bool Keyboard::keyCodeLoop()
+	void Keyboard::processKeys(SDL_Event _e)
 	{
-		SDL_Event event;
-		while (SDL_PollEvent(&event))
+		if (_e.type == SDL_KEYDOWN)
 		{
-			if (event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE)
+			if (std::find(keyCodes.begin(), keyCodes.end(), _e.key.keysym.sym) == keyCodes.end())
 			{
-				return false;
+				keyCodes.push_back(_e.key.keysym.sym);
+				pressedKeys.push_back(_e.key.keysym.sym);
 			}
-			if (event.type == SDL_KEYDOWN)
+		}
+		else if (_e.type == SDL_KEYUP)
+		{
+			for (int i = 0; i < keyCodes.size(); i++)
 			{
-				if (std::find(keyCodes.begin(), keyCodes.end(), event.key.keysym.sym) != keyCodes.end())
+				if (keyCodes[i] == _e.key.keysym.sym)
 				{
-					continue;
-				}
-				else
-				{
-					keyCodes.push_back(event.key.keysym.sym);
-					pressedKeys.push_back(event.key.keysym.sym);
-				}
-			}
-			else if (event.type == SDL_KEYUP)
-			{
-				for (int i = 0; i < keyCodes.size(); i++)
-				{
-					if (keyCodes[i] == event.key.keysym.sym)
-					{
-						keyCodes.erase(keyCodes.begin() + i);
-						releasedKeys.push_back(event.key.keysym.sym);
-					}
+					keyCodes.erase(keyCodes.begin() + i);
+					releasedKeys.push_back(_e.key.keysym.sym);
 				}
 			}
 		}
-		return true;
-
 	}
 
 	void Keyboard::onTick()
 	{
-		SDL_Event event;
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT)
-			{
-				m_running = false;
-			}
-			if (event.type == SDL_KEYDOWN)
-			{
-				if (std::find(keyCodes.begin(), keyCodes.end(), event.key.keysym.sym) != keyCodes.end())
-				{
-					continue;
-				}
-				else
-				{
-					keyCodes.push_back(event.key.keysym.sym);
-					pressedKeys.push_back(event.key.keysym.sym);
-				}
-			}
-			else if (event.type == SDL_KEYUP)
-			{
-				for (int i = 0; i < keyCodes.size(); i++)
-				{
-					if (keyCodes[i] == event.key.keysym.sym)
-					{
-						keyCodes.erase(keyCodes.begin() + i);
-						releasedKeys.push_back(event.key.keysym.sym);
-					}
-				}
-			}
-		}
+		pressedKeys.clear();
+		releasedKeys.clear();
 	}
-
-	//Make a function that converts from an SDL key to the Keys key
-	//then use that in the find functions to make the keyboard work 
 
 	bool Keyboard::isKey(Keys keyCode)
 	{

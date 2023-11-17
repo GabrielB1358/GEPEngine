@@ -79,20 +79,19 @@ namespace GEPEngine
 			//Tick Environment, updating deltatime
 			m_environment->Tick();
 
-			//Check any inputs
-			if (m_keyboard->keyCodeLoop() == false)
-			{
-				m_running = false;
-				return;
-			}
-
-
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 			glClearColor(0.5, 0, 1, 1);
 
-
+			//Poll keyboard inputs and attend to appropriate vectors
+			while (SDL_PollEvent(&event))
+			{
+				if (event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE)
+				{
+					m_running = false;
+				}
+				m_keyboard->processKeys(event);
+			}
 
 			//Tick and display all entities
 			for (int i = 0; i < m_entities.size();i++)
@@ -103,6 +102,7 @@ namespace GEPEngine
 			{
 				m_entities[i]->display();
 			}
+
 			//Kills any entities that are no longer alive
 			for (size_t ei = 0; ei < m_entities.size(); ++ei)
 			{
@@ -113,6 +113,9 @@ namespace GEPEngine
 				}
 			}
 
+
+			//tick keyboard, clearing the key vectors
+			m_keyboard->onTick();
 			SDL_GL_SwapWindow(m_window->window);
 		}
 	}

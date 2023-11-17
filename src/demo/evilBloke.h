@@ -5,8 +5,7 @@
 #include <GEPEngine/Shader.h>
 #include <GEPEngine/ModelRenderer.h>
 
-
-struct Curuthers : GEPEngine::Component
+struct evilBloke : GEPEngine::Component
 {
 	void initialise();
 
