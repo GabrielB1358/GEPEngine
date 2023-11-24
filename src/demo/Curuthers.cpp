@@ -13,12 +13,8 @@ void Curuthers::initialise()
 
 	
 	angle = 0;
-	m_entity.lock()->getTransform()->Move(glm::vec3(0, -0.5, -8));
-}
-
-void Curuthers::Move(glm::vec3 _move)
-{
-	m_entity.lock()->getTransform()->Move(_move);
+	Move(glm::vec3(0, -0.5, -8));
+	Scale(glm::vec3(0.25, 0.25, 0.25));
 }
 
 void Curuthers::onTick()
@@ -42,4 +38,22 @@ void Curuthers::onTick()
 	{
 		Move(glm::vec3(0, -0.02, 0));
 	}
+	if (getKeyboard()->isKey(GEPEngine::Keys::space) == true)
+	{
+		Move(glm::vec3(0, 0, -0.02));
+	}
+	if (getKeyboard()->isKey(GEPEngine::Keys::lshift) == true)
+	{
+		Move(glm::vec3(0, 0, 0.02));
+	}
+}
+
+void Curuthers::Move(glm::vec3 _move)
+{
+	m_entity.lock()->getTransform()->Move(_move);
+}
+
+void Curuthers::Scale(glm::vec3 _scale)
+{
+	m_entity.lock()->getTransform()->Scale = _scale;
 }

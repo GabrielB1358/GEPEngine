@@ -3,6 +3,7 @@
 #include <GEPEngine/Resources.h>
 #include <GEPEngine/Environment.h>
 #include <GEPEngine/Keyboard.h>
+#include <GEPEngine/BoxCollider.h>
 
 namespace GEPEngine
 {
@@ -20,12 +21,14 @@ namespace GEPEngine
 		std::shared_ptr<Resources> getResources();
 
 		void start();
-		void stop();
 
 		std::shared_ptr<Entity> addEntity();
 
 		template <typename T>
 		std::shared_ptr<T> addComponent() { }
+
+		template <typename T>
+		void findColliders(std::vector<std::shared_ptr<T> >& _out);
 
 		std::shared_ptr<Environment> m_environment;
 		std::shared_ptr<Keyboard> m_keyboard;
@@ -35,6 +38,7 @@ namespace GEPEngine
 		friend struct entity;
 		std::vector<std::shared_ptr<Entity> > m_entities;
 		std::shared_ptr<Resources> m_resources;
+		std::shared_ptr<BoxCollider> m_boxColliders;
 		std::weak_ptr<Core> m_self;
 
 		//SDL_Window* m_nativeWindow;

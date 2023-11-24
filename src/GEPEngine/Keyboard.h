@@ -15,7 +15,7 @@ namespace GEPEngine
 		b,c,e,f,g,h,i,j,k,l,m,n,o,p,q,r,t,u,v,x,y,z,
 		one, two, three, four, five, six, seven, eight, nine,
 		uparrow, downarrow, leftarrow, rightarrow,
-		space, rshift, lshift, lcontrol, enter
+		space = SDLK_SPACE, rshift, lshift = SDLK_LSHIFT, lcontrol, enter
 	};
 
 

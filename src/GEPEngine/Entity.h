@@ -32,6 +32,7 @@ namespace GEPEngine
 		bool getAlive();
 
 		std::weak_ptr<Core> m_core;
+		std::vector<std::shared_ptr<Component> > m_components;
 
 	private:
 		friend struct Core;
@@ -40,7 +41,6 @@ namespace GEPEngine
 		void display();
 
 		bool m_alive;
-		std::vector<std::shared_ptr<Component> > m_components;
 		std::weak_ptr<Entity> m_self;
 		std::weak_ptr<Transform> m_transform;
 	};

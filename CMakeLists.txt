@@ -61,6 +61,8 @@ add_library(GEPEngine
 	src/GEPEngine/Texture.h
 	src/GEPEngine/BoxCollider.cpp
 	src/GEPEngine/BoxCollider.h
+	src/GEPEngine/Rigidbody.cpp
+	src/GEPEngine/Rigidbody.h
 	src/GEPEngine/MyEngine.h
 )
 

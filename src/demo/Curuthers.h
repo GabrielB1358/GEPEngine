@@ -11,6 +11,9 @@ struct Curuthers : GEPEngine::Component
 	void initialise();
 
 	void Move(glm::vec3 _move);
+
+	void Scale(glm::vec3 _scale);
+
 	float angle;
 
 private:
