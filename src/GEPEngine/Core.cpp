@@ -117,31 +117,6 @@ namespace GEPEngine
 		}
 	}
 
-	template <typename T>
-	void findColliders(std::vector<std::shared_ptr<T> >& _out)
-	{
-		//Go through each entity in core
-		for (size_t i = 0; i < m_entities.size(); i++)
-		{
-			std::shared_ptr<Entity> e = _entities.at(i);
-			
-			//Go through each component in entity
-			for (size_t ei = 0; ei < e->m_components.size(); ei++)
-			{
-				std::shared_ptr<Component> c = e->m_components.at(ei);
-
-				//Try to dynamic cast the component to a T
-				std::shared_ptr<T> t = std::dynamic_pointer_cast<T>(c);
-
-				//if it succeeds then add it to the output array
-				if (t)
-				{
-					_out.push_back(t);
-				}
-			}
-		}
-	}
-
 	std::shared_ptr<Entity> Core::addEntity()
 	{
 		std::shared_ptr<Entity> rtn = std::make_shared<Entity>();

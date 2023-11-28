@@ -15,6 +15,7 @@ int main()
 	std::shared_ptr<Entity> entity = core->addEntity();
 	std::shared_ptr<Curuthers> cat = entity->addComponent<Curuthers>();
 
+
 	std::shared_ptr<Entity> entity2 = core->addEntity();
 	std::shared_ptr<evilBloke> naughty = entity2->addComponent<evilBloke>();
 

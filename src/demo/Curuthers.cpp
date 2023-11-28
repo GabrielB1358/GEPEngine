@@ -6,12 +6,16 @@
 void Curuthers::initialise()
 {
 	m_renderer = m_entity.lock()->addComponent<GEPEngine::ModelRenderer>();
+	m_collider = m_entity.lock()->addComponent<GEPEngine::BoxCollider>();
+	m_rigibody = m_entity.lock()->addComponent<GEPEngine::Rigidbody>();
 
 	m_renderer->setModel("../Models/curuthers/curuthers.obj");
 	m_renderer->setTexture("../Models/curuthers/Whiskers_diffuse.png");
 	m_renderer->setShader("../Shaders/gui");
 
-	
+	m_collider->m_size = glm::vec3(0.25, 0.25, 0.25);
+
+
 	angle = 0;
 	Move(glm::vec3(0, -0.5, -8));
 	Scale(glm::vec3(0.25, 0.25, 0.25));

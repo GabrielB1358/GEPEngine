@@ -1,3 +1,4 @@
+#pragma once
 #include <GEPEngine/Core.h>
 #include <GEPEngine/Component.h>
 #include <GEPEngine/Texture.h>
@@ -14,6 +15,7 @@ struct evilBloke : GEPEngine::Component
 
 private:
 	std::shared_ptr<GEPEngine::ModelRenderer> m_renderer;
+	std::shared_ptr<GEPEngine::BoxCollider> m_collider;
 
 	void onTick() override;
 };

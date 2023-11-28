@@ -12,6 +12,7 @@ namespace GEPEngine
 	{
 		void onTick();
 
+		int selfIndex;
 		std::vector<std::shared_ptr<BoxCollider> > m_colliders;
 		std::shared_ptr<Core> m_core;
 	};
