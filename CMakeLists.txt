@@ -63,12 +63,15 @@ add_library(GEPEngine
 	src/GEPEngine/BoxCollider.h
 	src/GEPEngine/Rigidbody.cpp
 	src/GEPEngine/Rigidbody.h
+	src/GEPEngine/ALSound.cpp
+	src/GEPEngine/ALSound.h
 	src/GEPEngine/MyEngine.h
 )
 
 target_link_libraries(GEPEngine
  Graphics
  SDL2
+ openal32
 )
 
 add_executable(demo

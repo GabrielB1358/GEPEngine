@@ -95,7 +95,7 @@ namespace GEPEngine
 			_pos.y += amount;
 			
 			amount += step;
-			if (amount > 100)
+			if (amount > 40)
 			{
 				break;
 			}
