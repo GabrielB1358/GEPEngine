@@ -19,8 +19,12 @@ int main()
 	std::shared_ptr<Entity> entity2 = core->addEntity();
 	std::shared_ptr<evilBloke> naughty = entity2->addComponent<evilBloke>();
 
+	std::shared_ptr<ALSound> sound = entity->addComponent<ALSound>();
+
 	//naughty->m_entity.lock()->getTransform()->Position = glm::vec3(2, 1, -10);
 	cat->m_entity.lock()->getTransform()->Position = glm::vec3(-0.5, 0, -4);
+
+	
 	core->start();
 
 	return 0;

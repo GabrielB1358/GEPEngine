@@ -66,6 +66,7 @@ add_library(GEPEngine
 	src/GEPEngine/ALSound.cpp
 	src/GEPEngine/ALSound.h
 	src/GEPEngine/MyEngine.h
+	src/GEPEngine/stb_vorbis.c
 )
 
 target_link_libraries(GEPEngine

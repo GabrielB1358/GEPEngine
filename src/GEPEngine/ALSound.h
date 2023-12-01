@@ -15,15 +15,20 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
-#include "stb_vorbis.c"
+#include "Component.h"
+//#include "stb_vorbis.c"
 
-struct ALSound
+namespace GEPEngine
 {
-	ALSound(glm::vec3 _listenerPos);
-	ALSound();
+	struct ALSound : Component
+	{
+		//ALSound(glm::vec3 _listenerPos);
+		//ALSound();
 
-	void load_ogg(const std::string&, std::vector<unsigned char>&, ALenum&, ALsizei&);
+		void initialise() override;
+		void load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq);
 
-	ALCdevice* aDevice;
-	ALCcontext* aContext;
-};
+		ALCdevice* aDevice;
+		ALCcontext* aContext;
+	};
+}
