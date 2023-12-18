@@ -4,12 +4,12 @@
 
 namespace GEPEngine
 {
-	bool BoxCollider::colliding(BoxCollider& _other)
+	bool BoxCollider::colliding(std::shared_ptr<BoxCollider> _other)
 	{
 		glm::vec3 a = m_entity.lock()->getTransform()->Position;
-		glm::vec3 b = _other.m_entity.lock()->getTransform()->Position;
+		glm::vec3 b = _other->getEntity()->getTransform()->Position;
 		glm::vec3 ahs = m_size / 2.0f;
-		glm::vec3 bhs = _other.m_size / 2.0f;
+		glm::vec3 bhs = _other->m_size / 2.0f;
 
 		return checkCollision(a, b, ahs, bhs);
 	}
@@ -23,37 +23,37 @@ namespace GEPEngine
 
 		return checkCollision(a, b, ahs, bhs);
 	}
-
+	
 	bool BoxCollider::checkCollision(glm::vec3 a, glm::vec3 b, glm::vec3 ahs, glm::vec3 bhs)
 	{
 		if (a.x > b.x)
 		{
-			if (a.x - ahs.x > b.x + bhs.x)
+			if (b.x + bhs.x < a.x - ahs.x)
 				return false;
 		}
 		else
 		{
-			if (b.x - bhs.x > a.x + ahs.x)
+			if (a.x + ahs.x < b.x - bhs.x)
 				return false;
 		}
 		if (a.z > b.z)
 		{
-			if (a.z - ahs.z > b.z + bhs.z)
+			if (b.z + bhs.z < a.z - ahs.z)
 				return false;
 		}
 		else
 		{
-			if (b.z - bhs.z > a.z + ahs.z)
+			if (a.z + ahs.z < b.z - bhs.z)
 				return false;
 		}
 		if (a.y > b.y)
 		{
-			if (a.y - ahs.y > b.y + bhs.y)
+			if (b.y + bhs.y < a.y - ahs.y)
 				return false;
 		}
 		else
 		{
-			if (b.y - bhs.y > a.y + ahs.y)
+			if (a.y + ahs.y < b.y - bhs.y)
 				return false;
 		}
 
@@ -62,12 +62,13 @@ namespace GEPEngine
 
 	glm::vec3 BoxCollider::getCollisionResponse(glm::vec3 _pos, glm::vec3 _size)
 	{
-		float amount = 0.1f;
-		float step = 0.1f;
+		//This is effectively the cludge method
+		float amount = 0.000001f;
+		float step =   0.000001f;
 
 		while(true)
 		{
-			if (!colliding(_pos, _size))
+ 			if (!colliding(_pos, _size))
 				break;
 			_pos.x += amount;
 			if (!colliding(_pos, _size))

@@ -25,6 +25,25 @@ namespace GEPEngine
 			return rtn;
 		}
 
+		template <typename T>
+		std::shared_ptr<T> getComponent()
+		{
+			//Go through each component in entity
+			for (size_t ci = 0; ci < m_components.size(); ++ci)
+			{
+				std::shared_ptr<Component> c = m_components.at(ci);
+
+				//Try to dynamic cast the component to a T
+				std::shared_ptr<T> t = std::dynamic_pointer_cast<T>(c);
+
+				//if it succeeds then add it to the output array
+				if (t)
+				{
+					return t;
+				}
+			} 
+		}
+
 		std::shared_ptr<Transform> getTransform();
 
 		std::shared_ptr<Core> getCore();

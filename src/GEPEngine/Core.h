@@ -4,6 +4,7 @@
 #include <GEPEngine/Environment.h>
 #include <GEPEngine/Keyboard.h>
 #include <GEPEngine/BoxCollider.h>
+#include "ALSound.h"
 
 namespace GEPEngine
 {
@@ -25,20 +26,23 @@ namespace GEPEngine
 		std::shared_ptr<Entity> addEntity();
 
 		template <typename T>
-		std::shared_ptr<T> addComponent() { }
+		std::shared_ptr<T> addComponent()
+		{
+
+		}
 
 		template <typename T>
 		void findColliders(std::vector<std::shared_ptr<T> >& _out)
 		{
 			//Go through each entity in core
-			for (size_t i = 0; i < m_entities.size(); i++)
+			for (size_t ei = 0; ei < m_entities.size(); ++ei)
 			{
-				std::shared_ptr<Entity> e = m_entities.at(i);
+				std::shared_ptr<Entity> e = m_entities.at(ei);
 
 				//Go through each component in entity
-				for (size_t ei = 0; ei < e->m_components.size(); ei++)
+				for (size_t ci = 0; ci < e->m_components.size(); ++ci)
 				{
-					std::shared_ptr<Component> c = e->m_components.at(ei);
+					std::shared_ptr<Component> c = e->m_components.at(ci);
 
 					//Try to dynamic cast the component to a T
 					std::shared_ptr<T> t = std::dynamic_pointer_cast<T>(c);
@@ -54,6 +58,10 @@ namespace GEPEngine
 
 		std::shared_ptr<Environment> m_environment;
 		std::shared_ptr<Keyboard> m_keyboard;
+
+		//static ALCdevice* aDevice;
+		//static ALCcontext* aContext;
+
 
 	private:
 		std::shared_ptr<NativeWindow> m_window;

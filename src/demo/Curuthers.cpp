@@ -8,12 +8,15 @@ void Curuthers::initialise()
 	m_renderer = m_entity.lock()->addComponent<GEPEngine::ModelRenderer>();
 	m_collider = m_entity.lock()->addComponent<GEPEngine::BoxCollider>();
 	m_rigibody = m_entity.lock()->addComponent<GEPEngine::Rigidbody>();
+	m_soundSource = m_entity.lock()->addComponent<GEPEngine::ALSound>();
 
 	m_renderer->setModel("../Models/curuthers/curuthers.obj");
 	m_renderer->setTexture("../Models/curuthers/Whiskers_diffuse.png");
 	m_renderer->setShader("../Shaders/gui");
 
-	m_collider->m_size = glm::vec3(0.25, 0.25, 0.25);
+	m_collider->m_size = glm::vec3(0.15f, 0.15f, 0.15f);
+	m_collider->m_offset = glm::vec3(0);
+
 
 
 	angle = 0;
@@ -24,11 +27,12 @@ void Curuthers::initialise()
 void Curuthers::onTick()
 {
 	angle = 180 * getCore()->m_environment->getDT();
-	m_entity.lock()->getTransform()->Rotate(glm::vec3(0, angle, 0));
+	//m_entity.lock()->getTransform()->Rotate(glm::vec3(0, angle, 0));
 	
 	if (getKeyboard()->isKey(GEPEngine::Keys::d) == true)
 	{
 		Move(glm::vec3(0.02, 0, 0));
+		//m_soundSource->playSound("../dixie_horn.ogg");
 	}
 	if (getKeyboard()->isKey(GEPEngine::Keys::a) == true)
 	{

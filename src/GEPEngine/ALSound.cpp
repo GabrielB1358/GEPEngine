@@ -1,10 +1,51 @@
 #include <iostream>
 #include "ALSound.h"
+#include "Transform.h"
+#include "Entity.h"
 #include "stb_vorbis.c"
 
 namespace GEPEngine
 {
+	ALSound::ALSound()
+	{
+	}
 
+	ALSound::ALSound(std::string _path, glm::vec3 _sourcePos)
+	{
+		m_path = _path;
+	}
+
+	void ALSound::initialise()
+	{
+		//	PREPARE BUFFER
+
+		ALenum format = 0;
+		ALsizei freq = 0;
+		std::vector<unsigned char> bufferData;
+		load_ogg("../dixie_horn.ogg", bufferData, format, freq);
+
+		ALuint bufferId = 0;
+		alGenBuffers(1, &bufferId);
+
+		alBufferData(bufferId, format, &bufferData.at(0),
+			static_cast<ALsizei>(bufferData.size()), freq);
+
+		//prepare sound source
+
+		alGenSources(1, &sourceId);
+
+		alSource3f(sourceId, AL_POSITION, 0.0f,0.0f,0.0f);
+		//alSourcef(sourceId, AL_PITCH, 10);
+		//alSourcef(sourceId, AL_GAIN, vol);
+		alSourcei(sourceId, AL_BUFFER, bufferId);
+
+		//play sound source
+		alSourcePlay(sourceId);
+
+		alcMakeContextCurrent(NULL);
+		alcDestroyContext(aContext);
+		alcCloseDevice(aDevice);
+	}
 
 	void ALSound::load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq)
 	{
@@ -40,64 +81,13 @@ namespace GEPEngine
 		// Clean up the read data
 		free(output);
 	}
-
-	//ALSound::ALSound(glm::vec3 _listenerPos)
-	//{
-
-	//}
-
-	void ALSound::initialise()
+	
+	
+	void ALSound::onTick()
 	{
-		std::cout << "yp\n";
-		aDevice = alcOpenDevice(NULL);
-
-		if (!aDevice)
-		{
-			throw std::runtime_error("Couldn't open audio device");
-		}
-
-		aContext = alcCreateContext(aDevice, NULL);
-
-		if (!aContext)
-		{
-			alcCloseDevice(aDevice);
-			throw std::runtime_error("Couldn't create audio context");
-		}
-
-		if (!alcMakeContextCurrent(aContext))
-		{
-			alcDestroyContext(aContext);
-			alcCloseDevice(aDevice);
-			throw std::runtime_error("Couldn't make context current");
-		}
-
-
-		//alListener3f(AL_POSITION, _listenerPos.x, _listenerPos.y, _listenerPos.z);
-
-		//	PREPARE BUFFER
-
-		ALenum format = 0;
-		ALsizei freq = 0;
-		std::vector<unsigned char> bufferData;
-		load_ogg("../dixie_horn.ogg", bufferData, format, freq);
-
-		ALuint bufferId = 0;
-		alGenBuffers(1, &bufferId);
-
-		alBufferData(bufferId, format, &bufferData.at(0),
-			static_cast<ALsizei>(bufferData.size()), freq);
-
-		//prepare sound source
-
-		ALuint sourceId = 0;
-		alGenSources(1, &sourceId);
-
-		//alSource3f(sourceId, AL_POSITION, 0.0f, 0.0f, 0.0f);
-		//alSourcef(sourceId, AL_PITCH, 10);
-		//alSourcef(sourceId, AL_GAIN, vol);
-		alSourcei(sourceId, AL_BUFFER, bufferId);
-
-		//play sound source
-		alSourcePlay(sourceId);
+		//This tracks the audio source position to the entity its attached to's position
+		glm::vec3 tmp = getEntity()->getTransform()->Position;
+		alSource3f(sourceId, AL_POSITION, tmp.x, tmp.y, tmp.z);
 	}
+
 }

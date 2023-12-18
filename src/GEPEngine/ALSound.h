@@ -1,3 +1,4 @@
+#pragma once
 #include <AL/al.h>
 #include <AL/alc.h>
 
@@ -16,19 +17,26 @@
 #include <glm/ext.hpp>
 
 #include "Component.h"
-//#include "stb_vorbis.c"
 
 namespace GEPEngine
 {
 	struct ALSound : Component
 	{
-		//ALSound(glm::vec3 _listenerPos);
-		//ALSound();
+		ALSound(std::string _path, glm::vec3 _sourcePos);
+		ALSound();
 
 		void initialise() override;
+		void onTick();
 		void load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq);
+		void addNewSource(std::string _path, glm::vec3 _pos);
+		void setupSource(std::string _path, glm::vec3 _pos);
+
+		std::vector<ALuint> audioSources;
 
 		ALCdevice* aDevice;
 		ALCcontext* aContext;
+		ALuint sourceId = 0;
+		std::string m_path;
+		
 	};
 }

@@ -20,6 +20,7 @@ namespace GEPEngine
 
 	std::shared_ptr<Core> Core::initialize()
 	{
+		//Setting up core and the window
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
 		rtn->m_window = std::make_shared<NativeWindow>();
@@ -50,6 +51,32 @@ namespace GEPEngine
 		}
 
 		glewInit();
+
+		//						====== AUDIO DEVICE THINGS ======
+		ALCdevice* aDevice;
+		ALCcontext* aContext;
+
+		aDevice = alcOpenDevice(NULL);
+
+		if (!aDevice)
+		{
+			throw std::runtime_error("Couldn't open audio device");
+		}
+
+		aContext = alcCreateContext(aDevice, NULL);
+
+		if (!aContext)
+		{
+			alcCloseDevice(aDevice);
+			throw std::runtime_error("Couldn't create audio context");
+		}
+
+		if (!alcMakeContextCurrent(aContext))
+		{
+			alcDestroyContext(aContext);
+			alcCloseDevice(aDevice);
+			throw std::runtime_error("Couldn't make context current");
+		}
 
 		return rtn;
 	}

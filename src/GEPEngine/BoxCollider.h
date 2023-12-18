@@ -7,7 +7,7 @@ namespace GEPEngine
 	struct BoxCollider : Component
 	{
 		bool colliding(glm::vec3 _pos, glm::vec3 _size);
-		bool colliding(BoxCollider& _other);
+		bool colliding(std::shared_ptr<BoxCollider> _other);
 		bool checkCollision(glm::vec3 a, glm::vec3 b, glm::vec3 ahs, glm::vec3 bhs);
 
 		glm::vec3 getCollisionResponse(glm::vec3 _pos, glm::vec3 _size);
