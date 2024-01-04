@@ -15,23 +15,27 @@
 
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
+#include "ALAudio.h"
 
 #include "Component.h"
 
 namespace GEPEngine
 {
-	struct ALSound : Component
+	struct Entity;
+	struct Core;
+
+	struct ALSoundSrc : Component
 	{
-		ALSound(std::string _path, glm::vec3 _sourcePos);
-		ALSound();
+		ALSoundSrc();
 
 		void initialise() override;
 		void onTick();
 		void load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq);
-		void addNewSource(std::string _path, glm::vec3 _pos);
-		void setupSource(std::string _path, glm::vec3 _pos);
 
-		std::vector<ALuint> audioSources;
+		void setAudio(ALAudio _audio); //need to have Audio as parameter? using core->resources->load-> return audio
+		void setLoop(bool _doesLoop);
+		void playSound(std::string _path);
+	
 
 		ALCdevice* aDevice;
 		ALCcontext* aContext;

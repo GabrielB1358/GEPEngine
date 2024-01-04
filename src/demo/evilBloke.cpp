@@ -12,7 +12,7 @@ void evilBloke::initialise()
 	m_renderer->setTexture("../Models/absolutelyevilbloke/blorger.png");
 	m_renderer->setShader("../Shaders/gui");
 
-	m_collider->m_size = glm::vec3(0.25f, 0.25f, 0.25f);
+	m_collider->m_size = glm::vec3(0.5f, 0.5f, 0.5f);
 	m_collider->m_offset = glm::vec3(0);
 
 

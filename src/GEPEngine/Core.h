@@ -4,7 +4,7 @@
 #include <GEPEngine/Environment.h>
 #include <GEPEngine/Keyboard.h>
 #include <GEPEngine/BoxCollider.h>
-#include "ALSound.h"
+#include <GEPEngine/ALSoundSrc.h>
 
 namespace GEPEngine
 {
@@ -58,6 +58,7 @@ namespace GEPEngine
 
 		std::shared_ptr<Environment> m_environment;
 		std::shared_ptr<Keyboard> m_keyboard;
+		std::shared_ptr<ALAudio> m_Audio;
 
 		//static ALCdevice* aDevice;
 		//static ALCcontext* aContext;

@@ -1,21 +1,37 @@
 #include <iostream>
-#include "ALSound.h"
+#include "ALSoundSrc.h"
 #include "Transform.h"
 #include "Entity.h"
 #include "stb_vorbis.c"
 
+#include <GEPEngine/Core.h>
+#include <GEPEngine/Entity.h>
+
 namespace GEPEngine
 {
-	ALSound::ALSound()
+	ALSoundSrc::ALSoundSrc()
 	{
+
 	}
 
-	ALSound::ALSound(std::string _path, glm::vec3 _sourcePos)
+	void ALSoundSrc::onTick()
 	{
-		m_path = _path;
+		//Probably wrong tbh youre shit at code
+
+		//This tracks the audio source position to the entity its attached to's position
+		//glm::vec3 tmp = getEntity()->getTransform()->Position;
+		//alSource3f(sourceId, AL_POSITION, tmp.x, tmp.y, tmp.z);
 	}
 
-	void ALSound::initialise()
+	void ALSoundSrc::playSound(std::string _path)
+	{
+		std::shared_ptr<ALuint> st = getCore()->getResources()->load<ALuint>("shitdickandballs");
+		//make or find the audio file thing
+		//load this new audio (turn initialise funtion into one that sets up buffer and source for playing sound
+		//play it
+	}
+
+	void ALSoundSrc::initialise()
 	{
 		//	PREPARE BUFFER
 
@@ -32,6 +48,7 @@ namespace GEPEngine
 
 		//prepare sound source
 
+		//reset source id to 0 evertime
 		alGenSources(1, &sourceId);
 
 		alSource3f(sourceId, AL_POSITION, 0.0f,0.0f,0.0f);
@@ -47,7 +64,7 @@ namespace GEPEngine
 		alcCloseDevice(aDevice);
 	}
 
-	void ALSound::load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq)
+	void ALSoundSrc::load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq)
 	{
 		int channels = 0;
 		int sampleRate = 0;
@@ -83,11 +100,9 @@ namespace GEPEngine
 	}
 	
 	
-	void ALSound::onTick()
+	void ALSoundSrc::setAudio(ALAudio _audio)
 	{
-		//This tracks the audio source position to the entity its attached to's position
-		glm::vec3 tmp = getEntity()->getTransform()->Position;
-		alSource3f(sourceId, AL_POSITION, tmp.x, tmp.y, tmp.z);
+		
 	}
 
 }

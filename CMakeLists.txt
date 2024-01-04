@@ -63,8 +63,10 @@ add_library(GEPEngine
 	src/GEPEngine/BoxCollider.h
 	src/GEPEngine/Rigidbody.cpp
 	src/GEPEngine/Rigidbody.h
-	src/GEPEngine/ALSound.cpp
-	src/GEPEngine/ALSound.h
+	src/GEPEngine/ALSoundSrc.cpp
+	src/GEPEngine/ALSoundSrc.h
+	src/GEPEngine/ALAudio.cpp
+	src/GEPEngine/ALAudio.h
 	src/GEPEngine/MyEngine.h
 	src/GEPEngine/stb_vorbis.c
 )

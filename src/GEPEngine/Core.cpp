@@ -25,6 +25,7 @@ namespace GEPEngine
 
 		rtn->m_window = std::make_shared<NativeWindow>();
 		rtn->m_resources = std::make_shared<Resources>();
+		rtn->m_Audio = std::make_shared<ALAudio>();
 
 		rtn->m_self = rtn;
 		rtn->m_running = false;
@@ -52,29 +53,27 @@ namespace GEPEngine
 
 		glewInit();
 
-		//						====== AUDIO DEVICE THINGS ======
-		ALCdevice* aDevice;
-		ALCcontext* aContext;
+		//						====== AUDIO SETUP ======
 
-		aDevice = alcOpenDevice(NULL);
+		rtn->m_Audio->aDevice = alcOpenDevice(NULL);
 
-		if (!aDevice)
+		if (!rtn->m_Audio->aDevice)
 		{
 			throw std::runtime_error("Couldn't open audio device");
 		}
 
-		aContext = alcCreateContext(aDevice, NULL);
+		rtn->m_Audio->aContext = alcCreateContext(rtn->m_Audio->aDevice, NULL);
 
-		if (!aContext)
+		if (!rtn->m_Audio->aContext)
 		{
-			alcCloseDevice(aDevice);
+			alcCloseDevice(rtn->m_Audio->aDevice);
 			throw std::runtime_error("Couldn't create audio context");
 		}
 
-		if (!alcMakeContextCurrent(aContext))
+		if (!alcMakeContextCurrent(rtn->m_Audio->aContext))
 		{
-			alcDestroyContext(aContext);
-			alcCloseDevice(aDevice);
+			alcDestroyContext(rtn->m_Audio->aContext);
+			alcCloseDevice(rtn->m_Audio->aDevice);
 			throw std::runtime_error("Couldn't make context current");
 		}
 

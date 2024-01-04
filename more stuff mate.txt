@@ -1,0 +1,4 @@
+audio source is a component, you attach audio sources to entities that need them
+
+Audio is class that inherits from resource that is used to change the current audio being played and probably
+also to update the positions of audio sources using the entity's transform ve3

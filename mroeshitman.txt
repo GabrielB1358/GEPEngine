@@ -1,0 +1,22 @@
+move initialise shit to onload
+audio source is one per sound
+seperate play sound function to the onload
+
+sound plays then source deletes itself x
+
+audio contains device and context
+core need audio variable for initialisation
+
+
+
+you can bypass resource loading but using the load (from resource) saves a lot of
+computational time with loading a new file
+
+
+SHORTCUTS FOR REACHING SHIT LIKE DELTA TIME THROUGH COMPONENTS
+
+camera mate x
+
+play function that takes a path
+load file resource for audio sound
+run the function

@@ -11,6 +11,7 @@ namespace GEPEngine
 	struct Entity;
 	struct Keyboard;
 	struct Environment;
+	//audio source struct
 
 	struct Component
 	{
@@ -18,6 +19,7 @@ namespace GEPEngine
 		std::shared_ptr<Core> getCore();
 		std::shared_ptr<Keyboard> getKeyboard();
 		std::shared_ptr<Environment> getEnvironment();
+		//get audio source
 		double getDT();
 
 		void onInit();

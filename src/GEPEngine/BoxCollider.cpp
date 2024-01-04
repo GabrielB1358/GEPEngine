@@ -63,8 +63,8 @@ namespace GEPEngine
 	glm::vec3 BoxCollider::getCollisionResponse(glm::vec3 _pos, glm::vec3 _size)
 	{
 		//This is effectively the cludge method
-		float amount = 0.000001f;
-		float step =   0.000001f;
+		float amount = 0.01f;
+		float step =   0.01f;
 
 		while(true)
 		{

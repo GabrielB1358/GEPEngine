@@ -4,7 +4,6 @@
 #include <GEPEngine/Model.h>
 #include <GEPEngine/Shader.h>
 #include <GEPEngine/ModelRenderer.h>
-#include <GEPEngine/ALSound.h>
 
 
 struct Curuthers : GEPEngine::Component
@@ -21,7 +20,6 @@ private:
 	std::shared_ptr<GEPEngine::ModelRenderer> m_renderer;
 	std::shared_ptr<GEPEngine::BoxCollider> m_collider;
 	std::shared_ptr<GEPEngine::Rigidbody> m_rigibody;
-	std::shared_ptr<GEPEngine::ALSound> m_soundSource;
 
 	void onTick() override;
 };
