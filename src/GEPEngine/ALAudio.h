@@ -1,3 +1,4 @@
+#pragma once
 #include "Resource.h"
 #include <string>
 #include <memory>
@@ -9,8 +10,8 @@ namespace GEPEngine
 	{
 		friend struct ALSoundSrc;
 		
-		static ALCdevice* aDevice;
-		static ALCcontext* aContext;
+		ALCdevice* aDevice;
+		ALCcontext* aContext;
 
 	private:
 

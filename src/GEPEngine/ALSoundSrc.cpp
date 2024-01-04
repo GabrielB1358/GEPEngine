@@ -25,7 +25,7 @@ namespace GEPEngine
 
 	void ALSoundSrc::playSound(std::string _path)
 	{
-		std::shared_ptr<ALuint> st = getCore()->getResources()->load<ALuint>("shitdickandballs");
+		//std::shared_ptr<ALuint> st = getCore()->getResources()->load<ALuint>("shitdickandballs");
 		//make or find the audio file thing
 		//load this new audio (turn initialise funtion into one that sets up buffer and source for playing sound
 		//play it
@@ -60,8 +60,8 @@ namespace GEPEngine
 		alSourcePlay(sourceId);
 
 		alcMakeContextCurrent(NULL);
-		alcDestroyContext(aContext);
-		alcCloseDevice(aDevice);
+		//alcDestroyContext(aContext);
+		//alcCloseDevice(aDevice);
 	}
 
 	void ALSoundSrc::load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq)

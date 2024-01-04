@@ -1,3 +1,4 @@
+#pragma once
 #include <memory>
 #include <vector>
 #include <GEPEngine/Transform.h>

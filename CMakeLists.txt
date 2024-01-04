@@ -83,6 +83,8 @@ add_executable(demo
 	src/demo/Curuthers.h
 	src/demo/evilBloke.cpp
 	src/demo/evilBloke.h
+	src/demo/hornSound.cpp
+	src/demo/hornSound.h
 )
 
 target_link_libraries(demo GEPEngine)
