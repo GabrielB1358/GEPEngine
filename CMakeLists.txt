@@ -67,6 +67,8 @@ add_library(GEPEngine
 	src/GEPEngine/ALSoundSrc.h
 	src/GEPEngine/ALAudio.cpp
 	src/GEPEngine/ALAudio.h
+	src/GEPEngine/Camera.cpp
+	src/GEPEngine/Camera.h
 	src/GEPEngine/MyEngine.h
 	src/GEPEngine/stb_vorbis.c
 )
