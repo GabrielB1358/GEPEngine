@@ -8,3 +8,5 @@ similar to drawing an image but uses the input structure (MOUSE STUFF)
 to return the state of the mouse (mouse screen coords i think)
 returns true if clicked
 ^^ shit is fiddly apparently
+
+SORT CAMERA BEFORE GUI AS YOU NEED IT FOR MOUSE POSITION STUFF
