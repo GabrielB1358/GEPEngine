@@ -25,7 +25,6 @@ namespace GEPEngine
 
 		rtn->m_window = std::make_shared<NativeWindow>();
 		rtn->m_resources = std::make_shared<Resources>();
-		rtn->m_Audio = std::make_shared<ALAudio>();
 
 		rtn->m_self = rtn;
 		rtn->m_running = false;
@@ -55,27 +54,32 @@ namespace GEPEngine
 
 		//						====== AUDIO SETUP ======
 
-		rtn->m_Audio->aDevice = alcOpenDevice(NULL);
+		ALCdevice* m_aDevice;
+		ALCcontext* m_aContext;
 
-		if (!rtn->m_Audio->aDevice)
+		m_aDevice = alcOpenDevice(NULL);
+
+		if (!m_aDevice)
 		{
 			throw std::runtime_error("Couldn't open audio device");
 		}
 
-		rtn->m_Audio->aContext = alcCreateContext(rtn->m_Audio->aDevice, NULL);
+		m_aContext = alcCreateContext(m_aDevice, NULL);
 
-		if (!rtn->m_Audio->aContext)
+		if (!m_aContext)
 		{
-			alcCloseDevice(rtn->m_Audio->aDevice);
+			alcCloseDevice(m_aDevice);
 			throw std::runtime_error("Couldn't create audio context");
 		}
 
-		if (!alcMakeContextCurrent(rtn->m_Audio->aContext))
+		if (!alcMakeContextCurrent(m_aContext))
 		{
-			alcDestroyContext(rtn->m_Audio->aContext);
-			alcCloseDevice(rtn->m_Audio->aDevice);
+			alcDestroyContext(m_aContext);
+			alcCloseDevice(m_aDevice);
 			throw std::runtime_error("Couldn't make context current");
 		}
+
+		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
 
 		return rtn;
 	}
@@ -95,6 +99,7 @@ namespace GEPEngine
 		m_environment->Init();
 
 		m_keyboard = std::make_shared<Keyboard>();
+		m_mouseInput = std::make_shared<MouseInput>();
 
 
 		while (m_running)
@@ -114,7 +119,9 @@ namespace GEPEngine
 					m_running = false;
 				}
 				m_keyboard->processKeys(event);
+				m_mouseInput->processMouseInput(event);
 			}
+
 
 			//Tick and display all entities
 			for (int i = 0; i < m_entities.size();i++)
@@ -125,6 +132,8 @@ namespace GEPEngine
 			{
 				m_entities[i]->display();
 			}
+
+			m_mouseInput->postMouseProcess();
 
 			//Kills any entities that are no longer alive
 			for (size_t ei = 0; ei < m_entities.size(); ++ei)

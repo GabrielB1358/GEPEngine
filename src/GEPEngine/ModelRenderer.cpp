@@ -43,12 +43,15 @@ namespace GEPEngine
 
 	void ModelRenderer::onDisplay()
 	{
+		//Load the model, texture and shader resources
 		m_Model = getCore()->getResources()->load<GEPEngine::Model>(m_modPath);
 		m_Texture = getCore()->getResources()->load<GEPEngine::Texture>(m_texPath);
 		m_Shader = getCore()->getResources()->load<GEPEngine::Shader>(m_shaderPath);
-
-		std::shared_ptr<Transform> tmp = m_entity.lock()->getTransform();
-		m_Shader->getShader()->Render(m_Model->getModel(), m_Texture->getTexture(), tmp->getModel(), tmp->getProjection());
+		m_Camera = getCore()->m_camera;
+		
+		//Use the shader Render function to display
+		glm::mat4 modelMatrix = m_entity.lock()->getTransform()->getModel();
+		m_Shader->getShader()->Render(m_Model->getModel(), m_Texture->getTexture(), m_Camera, modelMatrix);
 	}
 
 	void ModelRenderer::setFragPath(std::string _path) { m_fragPath = _path; }

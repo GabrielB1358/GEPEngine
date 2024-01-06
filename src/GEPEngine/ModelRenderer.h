@@ -37,6 +37,8 @@ namespace GEPEngine
 		void onTick() override;
 
 		//model loader stuff
+		std::shared_ptr<Camera> m_Camera;
+
 		std::string m_fragPath;
 		std::string m_vertPath;
 

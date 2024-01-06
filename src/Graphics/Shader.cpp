@@ -48,8 +48,8 @@ namespace Graphics
 		return temp;
 	}
 
-
-	void Shader::Render(std::shared_ptr<WavefrontMesh> _mesh, std::shared_ptr<Texture> _texture, /*Camera* _camera,*/ glm::mat4 _modelMatrix, glm::mat4 _projMatrix)
+	//Render function for 3D models
+	void Shader::Render(std::shared_ptr<WavefrontMesh> _mesh, std::shared_ptr<Texture> _texture, std::shared_ptr<GEPEngine::Camera> _camera, glm::mat4 _modelMatrix)
 	{
 		//Select program to use
 		glUseProgram(programId);
@@ -61,10 +61,9 @@ namespace Graphics
 		glBindTexture(GL_TEXTURE_2D, _texture->GetId());
 
 		//Bind to this shader
-		//BindShader("u_Projection", _camera->GetProjMat());
-		BindShader("u_Projection", _projMatrix);
+		BindShader("u_Projection", _camera->getProjMat());
 		BindShader("u_Model", _modelMatrix);
-		//BindShader("u_Viewing", _camera->GetViewMat());
+		BindShader("u_Viewing", _camera->getViewMat());
 
 		//Enable anything appropriate
 		glEnable(GL_DEPTH_TEST);
@@ -81,7 +80,8 @@ namespace Graphics
 
 	}
 
-	void Shader::Render(std::shared_ptr<Vao> _Vao, std::shared_ptr<Texture> _texture, glm::mat4 _modelMatrix, glm::mat4 _projectionMatrix)
+	//Render function for 2D, orthographic things
+	void Shader::Render(std::shared_ptr<Vao> _Vao, std::shared_ptr<Texture> _texture, glm::mat4 _modelMatrix, std::shared_ptr<GEPEngine::Camera> _camera)
 	{
 		//Select program to use
 		glUseProgram(programId);
@@ -93,8 +93,7 @@ namespace Graphics
 		glBindTexture(GL_TEXTURE_2D, _texture->GetId());
 
 		//Bind this shader
-		//BindShader("u_Projection", _camera->GetProjMat());
-		BindShader("u_Projection", _projectionMatrix);
+		BindShader("u_Projection", _camera->getProjMat());
 		BindShader("u_Model", _modelMatrix);
 
 		//draw the 3 triangle vertices

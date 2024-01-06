@@ -8,6 +8,7 @@ namespace GEPEngine
 	struct Core;
 	struct Component;
 	struct Transform;
+	struct Camera;
 
 	struct Entity
 	{

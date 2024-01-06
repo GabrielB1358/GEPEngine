@@ -4,6 +4,7 @@
 #include <string>
 #include <GL/glew.h>
 #include <memory>
+#include <GEPEngine/Camera.h>
 
 namespace Graphics
 {
@@ -21,8 +22,8 @@ namespace Graphics
 		void Link();
 		void BindShader(const char* _name, glm::mat4 _matrix);
 
-		void Render(std::shared_ptr<WavefrontMesh> _mesh, std::shared_ptr<Texture> _texture, /*Camera* _camera,*/ glm::mat4 _modelMatrix, glm::mat4 _projMatrix);
-		void Render(std::shared_ptr<Vao> _vao, std::shared_ptr<Texture> _texture, glm::mat4 _modelMatrix, glm::mat4 _projectionMatrix);
+		void Render(std::shared_ptr<WavefrontMesh> _mesh, std::shared_ptr<Texture> _texture, std::shared_ptr<GEPEngine::Camera> _camera, glm::mat4 _modelMatrix);
+		void Render(std::shared_ptr<Vao> _vao, std::shared_ptr<Texture> _texture, glm::mat4 _modelMatrix, std::shared_ptr<GEPEngine::Camera> _camera);
 
 		std::string ReadFile(std::string _path);
 

@@ -2,6 +2,16 @@
 #include <GEPEngine/myEngine.h>
 #include <GEPEngine/Keyboard.h>
 
+Curuthers::Curuthers()
+{
+
+}
+
+Curuthers::Curuthers(bool greg)
+{
+	//yeah
+}
+
 
 void Curuthers::initialise()
 {
@@ -11,11 +21,14 @@ void Curuthers::initialise()
 
 	m_renderer->setModel("../Models/curuthers/curuthers.obj");
 	m_renderer->setTexture("../Models/curuthers/Whiskers_diffuse.png");
-	m_renderer->setShader("../Shaders/gui");
+	m_renderer->setShader("../Shaders/notGUI");
 
 	m_collider->m_size = glm::vec3(0.5f, 0.5f, 0.5f);
 	m_collider->m_offset = glm::vec3(0);
 
+
+	m_audioLoader = m_entity.lock()->addComponent<GEPEngine::ALAudio>();
+	m_audioLoader->setSound("../dixie_horn.ogg");
 
 
 	angle = 0;
@@ -53,6 +66,11 @@ void Curuthers::onTick()
 	if (getKeyboard()->isKey(GEPEngine::Keys::lshift) == true)
 	{
 		Move(glm::vec3(0, 0, step));
+	}
+	if (getKeyboard()->isKey(GEPEngine::Keys::p) == true)
+	{
+		m_audioLoader->playSound();
+		std::cout << "play sound";
 	}
 }
 

@@ -3,8 +3,10 @@
 #include <GEPEngine/Resources.h>
 #include <GEPEngine/Environment.h>
 #include <GEPEngine/Keyboard.h>
+#include <GEPEngine/MouseInput.h>
 #include <GEPEngine/BoxCollider.h>
 #include <GEPEngine/ALSoundSrc.h>
+#include <GEPEngine/Camera.h>
 
 namespace GEPEngine
 {
@@ -56,12 +58,10 @@ namespace GEPEngine
 			}
 		}
 
+		std::shared_ptr<Camera> m_camera;
 		std::shared_ptr<Environment> m_environment;
 		std::shared_ptr<Keyboard> m_keyboard;
-		std::shared_ptr<ALAudio> m_Audio;
-
-		//static ALCdevice* aDevice;
-		//static ALCcontext* aContext;
+		std::shared_ptr<MouseInput> m_mouseInput;
 
 
 	private:

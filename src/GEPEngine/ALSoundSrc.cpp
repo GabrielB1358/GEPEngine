@@ -14,31 +14,19 @@ namespace GEPEngine
 
 	}
 
-	void ALSoundSrc::onTick()
+	void ALSoundSrc::playSound()
 	{
-		//Probably wrong tbh youre shit at code
-
-		//This tracks the audio source position to the entity its attached to's position
-		//glm::vec3 tmp = getEntity()->getTransform()->Position;
-		//alSource3f(sourceId, AL_POSITION, tmp.x, tmp.y, tmp.z);
+		//Play the sound
+		alSourcePlay(sourceId);
 	}
 
-	void ALSoundSrc::playSound(std::string _path)
+	void ALSoundSrc::onLoad()
 	{
-		//std::shared_ptr<ALuint> st = getCore()->getResources()->load<ALuint>("shitdickandballs");
-		//make or find the audio file thing
-		//load this new audio (turn initialise funtion into one that sets up buffer and source for playing sound
-		//play it
-	}
-
-	void ALSoundSrc::initialise()
-	{
-		//	PREPARE BUFFER
-
+		//Prepare Buffer
 		ALenum format = 0;
 		ALsizei freq = 0;
 		std::vector<unsigned char> bufferData;
-		load_ogg("../dixie_horn.ogg", bufferData, format, freq);
+		load_ogg(getPath(), bufferData, format, freq);
 
 		ALuint bufferId = 0;
 		alGenBuffers(1, &bufferId);
@@ -46,22 +34,17 @@ namespace GEPEngine
 		alBufferData(bufferId, format, &bufferData.at(0),
 			static_cast<ALsizei>(bufferData.size()), freq);
 
-		//prepare sound source
+		
+		//Prepare Sound Source
 
-		//reset source id to 0 evertime
+		sourceId = 0;
 		alGenSources(1, &sourceId);
 
-		alSource3f(sourceId, AL_POSITION, 0.0f,0.0f,0.0f);
-		//alSourcef(sourceId, AL_PITCH, 10);
-		//alSourcef(sourceId, AL_GAIN, vol);
 		alSourcei(sourceId, AL_BUFFER, bufferId);
 
-		//play sound source
-		alSourcePlay(sourceId);
-
-		alcMakeContextCurrent(NULL);
-		//alcDestroyContext(aContext);
-		//alcCloseDevice(aDevice);
+		//alSource3f(sourceId, AL_POSITION, 0.0f, 0.0f, 0.0f);
+		//alSourcef(sourceId, AL_PITCH, 10);
+		//alSourcef(sourceId, AL_GAIN, vol);
 	}
 
 	void ALSoundSrc::load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq)
@@ -99,10 +82,5 @@ namespace GEPEngine
 		free(output);
 	}
 	
-	
-	void ALSoundSrc::setAudio(ALAudio _audio)
-	{
-		
-	}
 
 }

@@ -27,6 +27,10 @@ namespace GEPEngine
 	{
 		return getCore()->m_keyboard;
 	}
+	std::shared_ptr<MouseInput> Component::getMouseInput()
+	{
+		return getCore()->m_mouseInput;
+	}
 	std::shared_ptr<Environment> Component::getEnvironment()
 	{
 		return std::shared_ptr<Environment>();

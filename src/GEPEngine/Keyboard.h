@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <vector>
-#include "Component.h"
 #include <GEPEngine/NativeWindow.h>
 
 namespace GEPEngine
@@ -12,7 +11,21 @@ namespace GEPEngine
 		a = SDLK_a,
 		s = SDLK_s,
 		d = SDLK_d,
-		b,c,e,f,g,h,i,j,k,l,m,n,o,p,q,r,t,u,v,x,y,z,
+		b,
+		c,
+		e,
+		f,
+		g,
+		h,
+		i,
+		j,
+		k,
+		l,
+		m,
+		n,
+		o,
+		p = SDLK_p,
+		q,r,t,u,v,x,y,z,
 		one, two, three, four, five, six, seven, eight, nine,
 		uparrow, downarrow, leftarrow, rightarrow,
 		space = SDLK_SPACE, rshift, lshift = SDLK_LSHIFT, lcontrol, enter

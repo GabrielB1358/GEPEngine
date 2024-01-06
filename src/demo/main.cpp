@@ -1,7 +1,8 @@
 #include <iostream>
-#include <GEPEngine/MyEngine.h>
+//#include <GEPEngine/MyEngine.h>
 #include "Curuthers.h"
 #include "evilBloke.h"
+#include <GEPEngine/Camera.h>
 
 #undef main
 
@@ -17,6 +18,11 @@ int main()
 
 	std::shared_ptr<Entity> entity = core->addEntity();
 	std::shared_ptr<Curuthers> cat = entity->addComponent<Curuthers>();
+	core->m_camera = entity->addComponent<Camera>();
+	core->m_camera->setProj(false);
+	//cat->m_renderer = entity->addComponent<GEPEngine::ModelRenderer>();
+	//cat->m_collider = entity->addComponent<GEPEngine::BoxCollider>();
+	//cat->m_rigibody = entity->addComponent<GEPEngine::Rigidbody>();
 
 
 	std::shared_ptr<Entity> entity2 = core->addEntity();

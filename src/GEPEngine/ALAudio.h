@@ -1,21 +1,23 @@
 #pragma once
-#include "Resource.h"
-#include <string>
-#include <memory>
-#include <vector>
+#include "Component.h"
+#include "ALSoundSrc.h"
 
 namespace GEPEngine
 {
-	struct ALAudio : Resource
+	struct ALAudio : Component
 	{
-		friend struct ALSoundSrc;
-		
-		ALCdevice* aDevice;
-		ALCcontext* aContext;
+		ALAudio();
+		~ALAudio();
 
+		void setSound(std::string _path);
+
+		void playSound();
+
+		std::shared_ptr<ALSoundSrc> getSource() { return m_source; }
+	
 	private:
+		std::shared_ptr<ALSoundSrc> m_source;
+		std::string soundPath;
 
-		//Audio sources has to be a vec of ALuints as theyre what determines the source
-		std::vector<ALuint> m_audioSources;
 	};
 }

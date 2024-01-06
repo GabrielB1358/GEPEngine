@@ -14,7 +14,6 @@ namespace GEPEngine
 
 
 		glm::mat4 getModel();
-		glm::mat4 getProjection();
 
 		void Move(glm::vec3 _pos);
 		void Rotate(glm::vec3 _rot);

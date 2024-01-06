@@ -1,16 +1,16 @@
 #pragma once
-#include <GEPEngine/MyEngine.h>
+#include <GEPEngine/Entity.h>
 
 
 namespace GEPEngine
 {
+	struct Entity;
 
-	//maybe make camera inherit from entity?
-	struct Camera // : Entity? : Component?
+	struct Camera : Component
 	{
 
 	public:
-		//COPYING MY 3DGP STUFF RN
+
 		inline glm::mat4 getViewMat() { return m_viewMatrix; }
 
 		inline glm::mat4 getProjMat() { return m_projectionMatrix; }
@@ -21,7 +21,16 @@ namespace GEPEngine
 
 		inline void setPos(glm::vec3 _pos) { m_cameraPos = _pos; }
 
-	private:
+		glm::vec2 getMouse();
+
+		void setProj(bool _isOrtho);
+
+
+		void onTick() override;
+
+		void initialise();
+
+		bool m_isOrtho;
 
 		glm::mat4 m_viewMatrix;
 		

@@ -37,18 +37,20 @@ add_library(GEPEngine
 	src/GEPEngine/ModelRenderer.h
 	src/GEPEngine/NativeWindow.cpp
 	src/GEPEngine/NativeWindow.h
-	src/GEPEngine/Core.h
-	src/GEPEngine/Component.h
-	src/GEPEngine/Environment.h
-	src/GEPEngine/Keyboard.h
-	src/GEPEngine/Entity.h
 	src/GEPEngine/Core.cpp
+	src/GEPEngine/Core.h
 	src/GEPEngine/Component.cpp
-	src/GEPEngine/Keyboard.cpp
+	src/GEPEngine/Component.h
 	src/GEPEngine/Environment.cpp
+	src/GEPEngine/Environment.h
+	src/GEPEngine/Keyboard.cpp
+	src/GEPEngine/Keyboard.h
+	src/GEPEngine/MouseInput.cpp
+	src/GEPEngine/MouseInput.h
 	src/GEPEngine/Entity.cpp
-	src/GEPEngine/Transform.h
+	src/GEPEngine/Entity.h
 	src/GEPEngine/Transform.cpp
+	src/GEPEngine/Transform.h
 	src/GEPEngine/Resource.h
 	src/GEPEngine/Resource.cpp
 	src/GEPEngine/Resources.h
@@ -85,8 +87,6 @@ add_executable(demo
 	src/demo/Curuthers.h
 	src/demo/evilBloke.cpp
 	src/demo/evilBloke.h
-	src/demo/hornSound.cpp
-	src/demo/hornSound.h
 )
 
 target_link_libraries(demo GEPEngine)
