@@ -51,7 +51,7 @@ namespace GEPEngine
 		
 		//Use the shader Render function to display
 		glm::mat4 modelMatrix = m_entity.lock()->getTransform()->getModel();
-		m_Shader->getShader()->Render(m_Model->getModel(), m_Texture->getTexture(), m_Camera, modelMatrix);
+		m_Shader->getShader()->Render(m_Model->getModel(), m_Texture->getTexture(), m_Camera, modelMatrix, getLight()->getPosition());
 	}
 
 	void ModelRenderer::setFragPath(std::string _path) { m_fragPath = _path; }

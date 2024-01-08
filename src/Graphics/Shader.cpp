@@ -49,7 +49,7 @@ namespace Graphics
 	}
 
 	//Render function for 3D models
-	void Shader::Render(std::shared_ptr<WavefrontMesh> _mesh, std::shared_ptr<Texture> _texture, std::shared_ptr<GEPEngine::Camera> _camera, glm::mat4 _modelMatrix)
+	void Shader::Render(std::shared_ptr<WavefrontMesh> _mesh, std::shared_ptr<Texture> _texture, std::shared_ptr<GEPEngine::Camera> _camera, glm::mat4 _modelMatrix, glm::vec3 _lightPos)
 	{
 		//Select program to use
 		glUseProgram(programId);
@@ -64,6 +64,7 @@ namespace Graphics
 		BindShader("u_Projection", _camera->getProjMat());
 		BindShader("u_Model", _modelMatrix);
 		BindShader("u_Viewing", _camera->getViewMat());
+		glProgramUniform3f(programId, glGetUniformLocation(programId, "u_LightPos"), _lightPos.x, _lightPos.y, _lightPos.z);
 
 		//Enable anything appropriate
 		glEnable(GL_DEPTH_TEST);

@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include <GEPEngine/MouseInput.h>
+#include <GEPEngine/Input.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -38,6 +38,7 @@ namespace GEPEngine
 	void Camera::onTick()
 	{
 		//These 2 lines enable the camera to be moved with the mouse input
+		// do the warpmouseinwindow for this ^^
 		//m_cameraAngleY -= getMouse().x * m_mouseSpeed;
 		//m_cameraAngleX -= getMouse().y * m_mouseSpeed;
 
@@ -59,7 +60,7 @@ namespace GEPEngine
 	
 	glm::vec2 Camera::getMouse()
 	{
-		return getMouseInput()->m_mouseMove;
+		return getInput()->getMouseMove();
 	}
 
 }

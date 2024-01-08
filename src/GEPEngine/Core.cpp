@@ -30,7 +30,7 @@ namespace GEPEngine
 		rtn->m_running = false;
 
 		//Initialise SDL
-		if (SDL_Init(SDL_INIT_VIDEO) < 0)
+		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0)
 		{
 			throw std::runtime_error("Failed to initialize SDL");
 		}
@@ -49,6 +49,7 @@ namespace GEPEngine
 			SDL_Quit();
 			throw std::runtime_error("Failed to create OpenGL context");
 		}
+
 
 		glewInit();
 
@@ -98,8 +99,7 @@ namespace GEPEngine
 		m_environment = std::make_shared<Environment>();
 		m_environment->Init();
 
-		m_keyboard = std::make_shared<Keyboard>();
-		m_mouseInput = std::make_shared<MouseInput>();
+		m_input = std::make_shared<Input>();
 
 
 		while (m_running)
@@ -121,8 +121,7 @@ namespace GEPEngine
 				{
 					m_running = false;
 				}
-				m_keyboard->processKeys(event);
-				m_mouseInput->processMouseInput(event, winSize);
+				m_input->processKeys(event, winSize);
 			}
 
 
@@ -136,8 +135,6 @@ namespace GEPEngine
 				m_entities[i]->display();
 			}
 
-			m_mouseInput->postMouseProcess();
-
 			//Kills any entities that are no longer alive
 			for (size_t ei = 0; ei < m_entities.size(); ++ei)
 			{
@@ -150,7 +147,7 @@ namespace GEPEngine
 
 
 			//tick keyboard, clearing the key vectors
-			m_keyboard->onTick();
+			m_input->onTick();
 			SDL_GL_SwapWindow(m_window->window);
 		}
 	}

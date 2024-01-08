@@ -1,4 +1,3 @@
-#include "Component.h"
 #include "Entity.h"
 #include "Core.h"
 
@@ -23,13 +22,13 @@ namespace GEPEngine
 	{
 		return m_entity.lock()->getCore();
 	}
-	std::shared_ptr<Keyboard> Component::getKeyboard()
+	std::shared_ptr<Input> Component::getInput()
 	{
-		return getCore()->m_keyboard;
+		return getCore()->m_input;
 	}
-	std::shared_ptr<MouseInput> Component::getMouseInput()
+	std::shared_ptr<Light> Component::getLight()
 	{
-		return getCore()->m_mouseInput;
+		return getCore()->m_pointLight;
 	}
 	std::shared_ptr<Environment> Component::getEnvironment()
 	{

@@ -4,7 +4,8 @@ uniform mat4 u_Viewing;
 		                             
 varying vec2 v_TexCoord;     
 varying vec3 v_Normal;		 
-varying vec3 v_FragPos;	  
+varying vec3 v_FragPos;
+uniform vec3 u_LightPos;	  
 		                             
 void main()                  
 {                            

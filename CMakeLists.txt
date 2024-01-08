@@ -43,12 +43,8 @@ add_library(GEPEngine
 	src/GEPEngine/Component.h
 	src/GEPEngine/Environment.cpp
 	src/GEPEngine/Environment.h
-	src/GEPEngine/Keyboard.cpp
-	src/GEPEngine/Keyboard.h
-	src/GEPEngine/MouseInput.cpp
-	src/GEPEngine/MouseInput.h
-	src/GEPEngine/GamepadInput.cpp
-	src/GEPEngine/GamepadInput.h
+	src/GEPEngine/Input.cpp
+	src/GEPEngine/Input.h
 	src/GEPEngine/Entity.cpp
 	src/GEPEngine/Entity.h
 	src/GEPEngine/Transform.cpp
@@ -73,6 +69,8 @@ add_library(GEPEngine
 	src/GEPEngine/ALAudio.h
 	src/GEPEngine/Camera.cpp
 	src/GEPEngine/Camera.h
+	src/GEPEngine/Light.cpp
+	src/GEPEngine/Light.h
 	src/GEPEngine/MyEngine.h
 	src/GEPEngine/stb_vorbis.c
 )

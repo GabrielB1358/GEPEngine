@@ -19,6 +19,12 @@ namespace GEPEngine
 				{
 					return std::dynamic_pointer_cast<T>(m_resources.at(i));
 				}
+				else
+				{
+					//this means the resource couldnt be loaded
+					//in this case you need to destroy the component it was attached to as not to crash the game
+					//maybe throw some witty exception here oooh that sounds cool
+				}
 			}
 
 			//OR

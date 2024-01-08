@@ -9,20 +9,19 @@ namespace GEPEngine
 {
 	struct Core;
 	struct Entity;
-	struct Keyboard;
+	struct Input;
+	struct Light;
 	struct MouseInput;
 	struct Environment;
 	struct Camera;
-	//audio source struct
 
 	struct Component
 	{
 		std::shared_ptr<Entity> getEntity();
 		std::shared_ptr<Core> getCore();
-		std::shared_ptr<Keyboard> getKeyboard();
-		std::shared_ptr<MouseInput> getMouseInput();
+		std::shared_ptr<Input> getInput();
+		std::shared_ptr<Light> getLight();
 		std::shared_ptr<Environment> getEnvironment();
-		//get audio source
 		double getDT();
 
 		void onInit();
@@ -30,7 +29,6 @@ namespace GEPEngine
 
 		virtual void onTick();
 		virtual void onDisplay();
-		//void kill();
 		virtual void initialise();
 
 

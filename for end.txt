@@ -1,0 +1,9 @@
+controller -> just for 1 controller	DONE
+audio -> directional is worth 5/10 marks of audio
+resource loading must destroy component if resource cant load (DEMONSTRATE THIS)
+Doxygen commenting format, at least for Component and Entity but maybe more x
+emscripten is very important!!!
+
+make light component	DONE
+^ update frag shader to include a point light (you have point light variable already)
+^^ need to make point light updated in real time (use shader bind function)

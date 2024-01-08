@@ -1,6 +1,6 @@
 #include "evilBloke.h"
 #include <GEPEngine/myEngine.h>
-#include <GEPEngine/Keyboard.h>
+#include <GEPEngine/Input.h>
 
 
 void evilBloke::initialise()

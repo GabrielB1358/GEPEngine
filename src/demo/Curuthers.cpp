@@ -1,6 +1,6 @@
 #include "Curuthers.h"
 #include <GEPEngine/myEngine.h>
-#include <GEPEngine/Keyboard.h>
+#include <GEPEngine/Input.h>
 
 Curuthers::Curuthers()
 {
@@ -9,7 +9,7 @@ Curuthers::Curuthers()
 
 Curuthers::Curuthers(bool greg)
 {
-	//yeah
+	
 }
 
 
@@ -41,33 +41,33 @@ void Curuthers::onTick()
 	angle = 180 * getCore()->m_environment->getDT();
 	float step = getCore()->m_environment->getDT() * 1;
 	//m_entity.lock()->getTransform()->Rotate(glm::vec3(0, angle, 0));
-	
-	if (getKeyboard()->isKey(GEPEngine::Keys::d) == true)
+
+
+	if (getInput()->isKey(GEPEngine::Keys::d) == true)
 	{
 		Move(glm::vec3(step, 0, 0));
-		//m_soundSource->playSound("../dixie_horn.ogg");
 	}
-	if (getKeyboard()->isKey(GEPEngine::Keys::a) == true)
+	if (getInput()->isKey(GEPEngine::Keys::a) == true)
 	{
 		Move(glm::vec3(-step, 0, 0));
 	}
-	if (getKeyboard()->isKey(GEPEngine::Keys::w) == true)
+	if (getInput()->isKey(GEPEngine::Keys::w) == true)
 	{
 		Move(glm::vec3(0, step, 0));
 	}
-	if (getKeyboard()->isKey(GEPEngine::Keys::s) == true)
+	if (getInput()->isKey(GEPEngine::Keys::s) == true)
 	{
 		Move(glm::vec3(0, -step, 0));
 	}
-	if (getKeyboard()->isKey(GEPEngine::Keys::space) == true)
+	if (getInput()->isKey(GEPEngine::Keys::space) == true)
 	{
 		Move(glm::vec3(0, 0, -step));
 	}
-	if (getKeyboard()->isKey(GEPEngine::Keys::lshift) == true)
+	if (getInput()->isKey(GEPEngine::Keys::lshift) == true)
 	{
 		Move(glm::vec3(0, 0, step));
 	}
-	if (getMouseInput()->getLM())
+	if (getInput()->isKey(GEPEngine::Keys::leftM) == true)
 	{
 		m_audioLoader->playSound();
 	}

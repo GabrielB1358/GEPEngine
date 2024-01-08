@@ -2,11 +2,11 @@
 #include <iostream>
 #include <GEPEngine/Resources.h>
 #include <GEPEngine/Environment.h>
-#include <GEPEngine/Keyboard.h>
-#include <GEPEngine/MouseInput.h>
+#include <GEPEngine/Input.h>
 #include <GEPEngine/BoxCollider.h>
 #include <GEPEngine/ALSoundSrc.h>
 #include <GEPEngine/Camera.h>
+#include <GEPEngine/Light.h>
 
 namespace GEPEngine
 {
@@ -60,8 +60,8 @@ namespace GEPEngine
 
 		std::shared_ptr<Camera> m_camera;
 		std::shared_ptr<Environment> m_environment;
-		std::shared_ptr<Keyboard> m_keyboard;
-		std::shared_ptr<MouseInput> m_mouseInput;
+		std::shared_ptr<Input> m_input;
+		std::shared_ptr<Light> m_pointLight;
 		glm::ivec2 winSize;
 
 
