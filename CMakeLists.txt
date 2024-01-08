@@ -47,6 +47,8 @@ add_library(GEPEngine
 	src/GEPEngine/Keyboard.h
 	src/GEPEngine/MouseInput.cpp
 	src/GEPEngine/MouseInput.h
+	src/GEPEngine/GamepadInput.cpp
+	src/GEPEngine/GamepadInput.h
 	src/GEPEngine/Entity.cpp
 	src/GEPEngine/Entity.h
 	src/GEPEngine/Transform.cpp

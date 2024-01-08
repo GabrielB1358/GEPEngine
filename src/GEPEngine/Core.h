@@ -62,6 +62,7 @@ namespace GEPEngine
 		std::shared_ptr<Environment> m_environment;
 		std::shared_ptr<Keyboard> m_keyboard;
 		std::shared_ptr<MouseInput> m_mouseInput;
+		glm::ivec2 winSize;
 
 
 	private:
@@ -72,7 +73,6 @@ namespace GEPEngine
 		std::shared_ptr<BoxCollider> m_boxColliders;
 		std::weak_ptr<Core> m_self;
 
-		//SDL_Window* m_nativeWindow;
 		bool m_running = false;
 	};
 }

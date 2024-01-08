@@ -67,10 +67,9 @@ void Curuthers::onTick()
 	{
 		Move(glm::vec3(0, 0, step));
 	}
-	if (getKeyboard()->isKey(GEPEngine::Keys::p) == true)
+	if (getMouseInput()->getLM())
 	{
 		m_audioLoader->playSound();
-		std::cout << "play sound";
 	}
 }
 

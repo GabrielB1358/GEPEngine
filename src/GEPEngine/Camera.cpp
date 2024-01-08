@@ -12,7 +12,7 @@ namespace GEPEngine
 		glm::vec3 initTarget = glm::vec3(-100.0f, 90.0f, 0.0f);
 
 		m_cameraAngleX = -0.4f;
-		m_cameraAngleY = 0.0005f;
+		m_cameraAngleY = -0.0005f;
 
 		m_speed = 0.1f;
 		m_mouseSpeed = 0.005f;
@@ -37,54 +37,9 @@ namespace GEPEngine
 
 	void Camera::onTick()
 	{
-		/*//Camera rotation is updated using the mouse movement from the input class
-		//Camera position is updated using the WASD Keys (player movement)
-
-		m_cameraAngleY -= getMouse().y * m_mouseSpeed;
-		m_cameraAngleX -= getMouse().x * m_mouseSpeed;
-
-		glm::mat4 m_direction(1.0f);
-		m_direction = glm::rotate(m_direction, m_cameraAngleY, glm::vec3(0, 1, 0));
-		m_direction = glm::rotate(m_direction, m_cameraAngleX, glm::vec3(1, 0, 0));
-
-		//Moving camera with WASD keys
-		if (isKey(Keys::w))
-		{
-			m_translation = (m_direction * glm::vec4(0, 0, -1, 1)) * m_speed;
-			m_cameraPos += m_translation;
-		}
-		else if (isKey(Keys::s))
-		{
-			m_translation = (m_direction * glm::vec4(0, 0, 1, 1)) * m_speed;
-			m_cameraPos += m_translation;
-		}
-		if (isKey(Keys::a))
-		{
-			m_translation = (m_direction * glm::vec4(-1, 0, 0, 1)) * m_speed;
-			m_cameraPos += m_translation;
-		}
-		else if (isKey(Keys::d))
-		{
-			m_translation = (m_direction * glm::vec4(1, 0, 0, 1)) * m_speed;
-			m_cameraPos += m_translation;
-		}
-
-		//View matrix is reset before rotation and position are applied and it is inversed to display things the right way around
-		m_viewMatrix = glm::mat4(1);
-		m_viewMatrix = glm::translate(m_viewMatrix, m_cameraPos);
-		m_viewMatrix = glm::rotate(m_viewMatrix, m_cameraAngleY, glm::vec3(0, 1, 0));
-		m_viewMatrix = glm::rotate(m_viewMatrix, m_cameraAngleX, glm::vec3(1, 0, 0));
-		m_viewMatrix = glm::inverse(m_viewMatrix);
-		*/
-
-		//Need to set the cameras transform with the overarching entitys transform
-		//update the viewing matrix as you would have before
-
-		//m_cameraAngleY = 0;
-		//m_cameraAngleX = 0;
-		//Camera Rotation updated using the mouse movement input
-		m_cameraAngleY -= getMouse().x * m_mouseSpeed;
-		m_cameraAngleX -= getMouse().y * m_mouseSpeed;
+		//These 2 lines enable the camera to be moved with the mouse input
+		//m_cameraAngleY -= getMouse().x * m_mouseSpeed;
+		//m_cameraAngleX -= getMouse().y * m_mouseSpeed;
 
 		glm::mat4 m_direction(1.0f);
 		m_direction = glm::rotate(m_direction, m_cameraAngleY, glm::vec3(0, 1, 0));

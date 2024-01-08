@@ -6,7 +6,6 @@ namespace GEPEngine
 {
 	Core::Core()
 	{
-
 	}
 
 	Core::~Core()
@@ -23,6 +22,7 @@ namespace GEPEngine
 		//Setting up core and the window
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
+		rtn->winSize = glm::ivec2(1280, 720);
 		rtn->m_window = std::make_shared<NativeWindow>();
 		rtn->m_resources = std::make_shared<Resources>();
 
@@ -36,7 +36,7 @@ namespace GEPEngine
 		}
 
 		//Create a window and assign to window variable
-		if (!(rtn->m_window->window = SDL_CreateWindow("SDL2 Platform", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)))
+		if (!(rtn->m_window->window = SDL_CreateWindow("SDL2 Platform", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, rtn->winSize.x, rtn->winSize.y, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)))
 		{
 			SDL_Quit();
 			throw std::runtime_error("Failed to create window");
@@ -104,6 +104,9 @@ namespace GEPEngine
 
 		while (m_running)
 		{
+			//Updates window size for mouse and consequently camera (ONLY FOR IF MOUSE IS CONTROLLING CAM)
+			//SDL_GetWindowSize(m_window->window, &winSize.x, &winSize.y);
+
 			//Tick Environment, updating deltatime
 			m_environment->Tick();
 
@@ -119,7 +122,7 @@ namespace GEPEngine
 					m_running = false;
 				}
 				m_keyboard->processKeys(event);
-				m_mouseInput->processMouseInput(event);
+				m_mouseInput->processMouseInput(event, winSize);
 			}
 
 
