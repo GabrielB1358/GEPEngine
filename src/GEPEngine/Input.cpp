@@ -72,16 +72,16 @@ namespace GEPEngine
 			if (_e.jaxis.which == 0)
 			{
 				if (_e.jaxis.axis == 0)
-					gpMoveJoystick.x = _e.jaxis.value;
+					gpLeftJoystick.x = _e.jaxis.value;
 				if (_e.jaxis.axis == 1)
-					gpMoveJoystick.y = _e.jaxis.value;
+					gpLeftJoystick.y = _e.jaxis.value;
 			}
 			if (_e.jaxis.which == 1)
 			{
 				if (_e.jaxis.axis == 0)
-					gpCamJoystick.x = _e.jaxis.value;
+					gpRightJoystick.x = _e.jaxis.value;
 				if (_e.jaxis.axis == 1)
-					gpCamJoystick.y = _e.jaxis.value;
+					gpRightJoystick.y = _e.jaxis.value;
 			}
 		}
 		if (_e.type == SDL_CONTROLLERBUTTONDOWN || _e.type == SDL_JOYBUTTONDOWN)
@@ -106,6 +106,16 @@ namespace GEPEngine
 				}
 			}
 		}
+	}
+
+	glm::vec2 Input::getLeftJStick()
+	{
+		return gpLeftJoystick;
+	}
+
+	glm::vec2 Input::getRightJStick()
+	{
+		return gpRightJoystick;
 	}
 
 	void Input::onTick()

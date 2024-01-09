@@ -89,6 +89,9 @@ namespace GEPEngine
 		bool isKeyDown(Keys keyCode);
 		bool isKeyUp(Keys keyCode);
 
+		glm::vec2 getLeftJStick();
+		glm::vec2 getRightJStick();
+
 		inline glm::vec2 getMouseMove() { return m_mouseMove; }
 
 	private:
@@ -101,7 +104,7 @@ namespace GEPEngine
 		glm::vec2 m_mouseCoords;
 		bool lMouse, rMouse, mMouse;
 
-		glm::vec2 gpMoveJoystick;
-		glm::vec2 gpCamJoystick;
+		glm::vec2 gpLeftJoystick;
+		glm::vec2 gpRightJoystick;
 	};
 }

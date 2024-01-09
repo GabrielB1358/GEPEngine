@@ -24,6 +24,7 @@ namespace GEPEngine
 					//this means the resource couldnt be loaded
 					//in this case you need to destroy the component it was attached to as not to crash the game
 					//maybe throw some witty exception here oooh that sounds cool
+					
 				}
 			}
 
@@ -32,6 +33,7 @@ namespace GEPEngine
 			//Create new instance, construct it and add to cache
 			std::shared_ptr<T> rtn = std::make_shared<T>();
 			rtn->m_path = _path;
+			rtn->lifeTime = 0.0f;
 			rtn->load();
 			m_resources.push_back(rtn);
 

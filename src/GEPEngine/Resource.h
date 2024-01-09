@@ -15,6 +15,8 @@ namespace GEPEngine
 		friend class Resources;
 		std::string m_path;
 
+		double lifeTime;
+
 		void load();
 	};
 }
