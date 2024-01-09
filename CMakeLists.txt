@@ -12,8 +12,6 @@ link_directories(
 )
 
 add_library(Graphics
-	src/Graphics/Camera.cpp
-	src/Graphics/Camera.h
 	src/Graphics/RenderTexture.cpp
 	src/Graphics/RenderTexture.h
 	src/Graphics/Shader.cpp
@@ -67,6 +65,10 @@ add_library(GEPEngine
 	src/GEPEngine/ALSoundSrc.h
 	src/GEPEngine/ALAudio.cpp
 	src/GEPEngine/ALAudio.h
+	src/GEPEngine/ALListener.h
+	src/GEPEngine/ALListener.cpp
+	src/GEPEngine/GUI.h
+	src/GEPEngine/GUI.cpp
 	src/GEPEngine/Camera.cpp
 	src/GEPEngine/Camera.h
 	src/GEPEngine/Light.cpp

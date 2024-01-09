@@ -9,19 +9,10 @@ namespace GEPEngine
 		ALAudio();
 		~ALAudio();
 
-		void setSound(std::string _path);
+		void onTick() override;
 
-		std::shared_ptr<ALSoundSrc> addSource(std::string _path);
-
-		void playSound();
-
-		std::shared_ptr<ALSoundSrc> getSource() { return m_source; }
+		void playSound(std::string _path);
 	
-	private:
-		std::shared_ptr<ALSoundSrc> m_source;
-		std::string soundPath;
-
-		std::vector <std::shared_ptr<ALSoundSrc> > m_sources;
 
 	};
 }

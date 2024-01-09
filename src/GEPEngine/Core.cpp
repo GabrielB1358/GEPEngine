@@ -22,7 +22,7 @@ namespace GEPEngine
 		//Setting up core and the window
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
-		rtn->winSize = glm::ivec2(1280, 720);
+		rtn->m_winSize = glm::ivec2(1280, 720);
 		rtn->m_window = std::make_shared<NativeWindow>();
 		rtn->m_resources = std::make_shared<Resources>();
 
@@ -36,7 +36,7 @@ namespace GEPEngine
 		}
 
 		//Create a window and assign to window variable
-		if (!(rtn->m_window->window = SDL_CreateWindow("SDL2 Platform", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, rtn->winSize.x, rtn->winSize.y, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)))
+		if (!(rtn->m_window->window = SDL_CreateWindow("SDL2 Platform", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, rtn->m_winSize.x, rtn->m_winSize.y, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)))
 		{
 			SDL_Quit();
 			throw std::runtime_error("Failed to create window");
@@ -80,7 +80,8 @@ namespace GEPEngine
 			throw std::runtime_error("Couldn't make context current");
 		}
 
-		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
+		rtn->setListenerPos(glm::vec3(0));
+		alListener3f(AL_POSITION, rtn->getListenerPos().x, rtn->getListenerPos().y, rtn->getListenerPos().z);
 
 		return rtn;
 	}
@@ -121,7 +122,7 @@ namespace GEPEngine
 				{
 					m_running = false;
 				}
-				m_input->processKeys(event, winSize);
+				m_input->processKeys(event, m_winSize);
 			}
 
 

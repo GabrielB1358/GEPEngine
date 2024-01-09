@@ -61,7 +61,7 @@ namespace Graphics
 		glBindTexture(GL_TEXTURE_2D, _texture->GetId());
 
 		//Bind to this shader
-		BindShader("u_Projection", _camera->getProjMat());
+		BindShader("u_Projection", _camera->getPerspProjMat());
 		BindShader("u_Model", _modelMatrix);
 		BindShader("u_Viewing", _camera->getViewMat());
 		glProgramUniform3f(programId, glGetUniformLocation(programId, "u_LightPos"), _lightPos.x, _lightPos.y, _lightPos.z);
@@ -94,7 +94,7 @@ namespace Graphics
 		glBindTexture(GL_TEXTURE_2D, _texture->GetId());
 
 		//Bind this shader
-		BindShader("u_Projection", _camera->getProjMat());
+		BindShader("u_Projection", _camera->getOrthoProjMat());
 		BindShader("u_Model", _modelMatrix);
 
 		//draw the 3 triangle vertices

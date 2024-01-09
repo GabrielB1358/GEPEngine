@@ -28,6 +28,10 @@ namespace GEPEngine
 		void load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq);
 
 		void playSound();
+
+		void updatePositions(glm::vec3 _lPos, glm::vec3 _sPos);
+
+		ALuint returnSourceId();
 	
 		ALuint sourceId = 0;
 		

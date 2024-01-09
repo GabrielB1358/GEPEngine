@@ -4,8 +4,8 @@
 #include "Entity.h"
 #include "stb_vorbis.c"
 
-#include <GEPEngine/Core.h>
-#include <GEPEngine/Entity.h>
+#include "Core.h"
+#include "Entity.h"
 
 namespace GEPEngine
 {
@@ -16,8 +16,18 @@ namespace GEPEngine
 
 	void ALSoundSrc::playSound()
 	{
-		//Play the sound
 		alSourcePlay(sourceId);
+	}
+
+	void ALSoundSrc::updatePositions(glm::vec3 _lPos, glm::vec3 _sPos)
+	{
+		alListener3f(AL_POSITION, _lPos.x, _lPos.y, _lPos.z);
+		alSource3f(sourceId, AL_POSITION, _sPos.x, _sPos.y, _sPos.z);
+	}
+
+	ALuint ALSoundSrc::returnSourceId()
+	{
+		return sourceId;
 	}
 
 	void ALSoundSrc::onLoad()

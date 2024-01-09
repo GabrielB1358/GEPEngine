@@ -20,20 +20,11 @@ namespace GEPEngine
 		//Projection matrix will be set in separate function as you cant pass bool parameters into the initialise function
 
 		m_viewMatrix = glm::lookAt(m_cameraPos, initTarget, m_up);
+
+		m_perspProjmat = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+		m_orthoProjmat = glm::ortho(0.0f, 1920.0f, 0.0f, 1080.0f, 0.0f, 1.0f);
 	}
 
-	void Camera::setProj(bool _isOrtho)
-	{
-		//Cant pass this bool into the initialise so for now, a separate function will sort the projection matrix
-		if (_isOrtho)
-		{
-			m_projectionMatrix = glm::ortho(0.0f, 1920.0f, 0.0f, 1080.0f, 0.0f, 1.0f);
-		}
-		else
-		{
-			m_projectionMatrix = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-		}
-	}
 
 	void Camera::onTick()
 	{

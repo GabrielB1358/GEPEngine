@@ -13,17 +13,19 @@ namespace GEPEngine
 
 		inline glm::mat4 getViewMat() { return m_viewMatrix; }
 
-		inline glm::mat4 getProjMat() { return m_projectionMatrix; }
+		inline glm::mat4 getOrthoProjMat() { return m_orthoProjmat; }
+
+		inline glm::mat4 getPerspProjMat() { return m_perspProjmat; }
 
 		void setViewMat(glm::mat4 _view) { m_viewMatrix = _view; }
 
-		void setProjMat(glm::mat4 _proj) { m_projectionMatrix = _proj; }
+		void setOrthoProjMat(glm::mat4 _proj) { m_orthoProjmat = _proj; }
+
+		void setPerspProjMat(glm::mat4 _proj) { m_perspProjmat = _proj; }
 
 		inline void setPos(glm::vec3 _pos) { m_cameraPos = _pos; }
 
 		glm::vec2 getMouse();
-
-		void setProj(bool _isOrtho);
 
 
 		void onTick() override;
@@ -34,7 +36,9 @@ namespace GEPEngine
 
 		glm::mat4 m_viewMatrix;
 		
-		glm::mat4 m_projectionMatrix;
+		glm::mat4 m_orthoProjmat;
+
+		glm::mat4 m_perspProjmat;
 
 		glm::vec3 m_cameraPos;
 

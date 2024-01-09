@@ -29,9 +29,6 @@ void Curuthers::initialise()
 
 
 	m_audioLoader = m_entity.lock()->addComponent<GEPEngine::ALAudio>();
-	//m_audioLoader->setSound("../dixie_horn.ogg");
-
-	std::shared_ptr<GEPEngine::ALSoundSrc> horn = m_audioLoader->addSource("..dixie_horn.ogg");
 
 
 	angle = 0;
@@ -49,10 +46,12 @@ void Curuthers::onTick()
 	if (getInput()->isKey(GEPEngine::Keys::d) == true)
 	{
 		Move(glm::vec3(step, 0, 0));
+		m_audioLoader->playSound("../PigeonCoo.ogg");
 	}
 	if (getInput()->isKey(GEPEngine::Keys::a) == true)
 	{
 		Move(glm::vec3(-step, 0, 0));
+		m_audioLoader->playSound("../dixie_horn.ogg");
 	}
 	if (getInput()->isKey(GEPEngine::Keys::w) == true)
 	{
@@ -72,8 +71,7 @@ void Curuthers::onTick()
 	}
 	if (getInput()->isKey(GEPEngine::Keys::leftM) == true)
 	{
-		//m_audioLoader->playSound();
-		horn->playSound();
+		//std::cout << "Play Sound" << std::endl;
 	}
 }
 

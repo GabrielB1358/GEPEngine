@@ -21,17 +21,15 @@ namespace GEPEngine
 
 		static std::shared_ptr<Core> initialize();
 
-		std::shared_ptr<Resources> getResources();
-
 		void start();
 
+		glm::vec3 getListenerPos() { return m_listenerPos; }
+		void setListenerPos(glm::vec3 _pos) { m_listenerPos = _pos; }
+
+
+		std::shared_ptr<Resources> getResources();
+
 		std::shared_ptr<Entity> addEntity();
-
-		template <typename T>
-		std::shared_ptr<T> addComponent()
-		{
-
-		}
 
 		template <typename T>
 		void findColliders(std::vector<std::shared_ptr<T> >& _out)
@@ -62,7 +60,7 @@ namespace GEPEngine
 		std::shared_ptr<Environment> m_environment;
 		std::shared_ptr<Input> m_input;
 		std::shared_ptr<Light> m_pointLight;
-		glm::ivec2 winSize;
+		glm::ivec2 m_winSize;
 
 
 	private:
@@ -72,6 +70,7 @@ namespace GEPEngine
 		std::shared_ptr<Resources> m_resources;
 		std::shared_ptr<BoxCollider> m_boxColliders;
 		std::weak_ptr<Core> m_self;
+		glm::vec3 m_listenerPos;
 
 		bool m_running = false;
 	};
