@@ -6,7 +6,6 @@
 #include <GEPEngine/ModelRenderer.h>
 #include <GEPEngine/ALAudio.h>
 
-
 struct Curuthers : GEPEngine::Component
 {
 	Curuthers();
@@ -25,6 +24,7 @@ struct Curuthers : GEPEngine::Component
 	std::shared_ptr<GEPEngine::Rigidbody> m_rigibody;
 
 	std::shared_ptr<GEPEngine::ALAudio> m_audioLoader;
+	std::shared_ptr<GEPEngine::ALSoundSrc> hornSound;
 
 	void onTick() override;
 };

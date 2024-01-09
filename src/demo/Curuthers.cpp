@@ -2,6 +2,7 @@
 #include <GEPEngine/myEngine.h>
 #include <GEPEngine/Input.h>
 
+
 Curuthers::Curuthers()
 {
 
@@ -28,7 +29,9 @@ void Curuthers::initialise()
 
 
 	m_audioLoader = m_entity.lock()->addComponent<GEPEngine::ALAudio>();
-	m_audioLoader->setSound("../dixie_horn.ogg");
+	//m_audioLoader->setSound("../dixie_horn.ogg");
+
+	std::shared_ptr<GEPEngine::ALSoundSrc> horn = m_audioLoader->addSource("..dixie_horn.ogg");
 
 
 	angle = 0;
@@ -69,7 +72,8 @@ void Curuthers::onTick()
 	}
 	if (getInput()->isKey(GEPEngine::Keys::leftM) == true)
 	{
-		m_audioLoader->playSound();
+		//m_audioLoader->playSound();
+		horn->playSound();
 	}
 }
 
