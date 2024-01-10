@@ -22,10 +22,9 @@ namespace GEPEngine
 		static std::shared_ptr<Core> initialize();
 		void start();
 
-		void setLightPos(glm::vec3 _pos);
-
 		std::shared_ptr<GUI> getGUI();
 		std::shared_ptr<Resources> getResources();
+		glm::vec3 getLightPos();
 		float getDT();
 
 		std::shared_ptr<Entity> addEntity();

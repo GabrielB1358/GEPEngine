@@ -6,6 +6,6 @@ namespace GEPEngine
 
 	struct Light : Component
 	{
-		void onTick() override;
+		glm::vec3 getPos();
 	};
 }

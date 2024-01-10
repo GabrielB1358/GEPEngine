@@ -183,4 +183,9 @@ namespace GEPEngine
 	{
 		return m_environment->getDT();
 	}
+
+	glm::vec3 Core::getLightPos()
+	{
+		return m_pointLight->getPos();
+	}
 }

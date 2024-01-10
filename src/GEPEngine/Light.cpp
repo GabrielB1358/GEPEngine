@@ -5,8 +5,8 @@
 
 namespace GEPEngine
 {
-	void Light::onTick()
+	glm::vec3 Light::getPos()
 	{
-		getCore()->setLightPos(getEntity()->getTransform()->Position);
+		return getEntity()->getTransform()->Position;
 	}
 }
