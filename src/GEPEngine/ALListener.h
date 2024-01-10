@@ -11,9 +11,8 @@ namespace GEPEngine
 
 		void onTick() override;
 
-		glm::vec3 getPos();
+		glm::vec3 getEntityPos();
 
-		glm::vec3 oldPos;
-		glm::vec3 newPos;
+		glm::vec3 Pos;
 	};
 }

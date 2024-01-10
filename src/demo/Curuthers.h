@@ -23,7 +23,10 @@ struct Curuthers : GEPEngine::Component
 	std::shared_ptr<GEPEngine::BoxCollider> m_collider;
 	std::shared_ptr<GEPEngine::Rigidbody> m_rigibody;
 
-	std::shared_ptr<GEPEngine::ALAudio> m_audioLoader;
+	std::shared_ptr<GEPEngine::ALAudio> hornSound;
+	std::shared_ptr<GEPEngine::ALAudio> pigeonSound;
 
 	void onTick() override;
+
+	void onGUI() override;
 };

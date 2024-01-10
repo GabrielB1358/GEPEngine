@@ -4,6 +4,7 @@ namespace GEPEngine
 {
 	Input::Input()
 	{
+		lMouse = false;
 	}
 
 	void Input::processKeys(SDL_Event _e, glm::ivec2 _wSize)
@@ -44,14 +45,12 @@ namespace GEPEngine
 		}
 		if (_e.type == SDL_MOUSEBUTTONDOWN)
 		{
-			for (int i = 0; i < keyCodes.size(); i++)
+			if (std::find(keyCodes.begin(), keyCodes.end(), _e.button.button) == keyCodes.end())
 			{
-				if (std::find(keyCodes.begin(), keyCodes.end(), _e.button.button) == keyCodes.end())
-				{
-					keyCodes.push_back(_e.button.button);
-					pressedKeys.push_back(_e.button.button);
-				}
+				keyCodes.push_back(_e.button.button);
+				pressedKeys.push_back(_e.button.button);
 			}
+			lMouse = true;
 		}
 		else if (_e.type == SDL_MOUSEBUTTONUP)
 		{
@@ -63,6 +62,7 @@ namespace GEPEngine
 					releasedKeys.push_back(_e.button.button);
 				}
 			}
+			lMouse = false;
 		}
 
 		//Gamepad input processing
@@ -120,6 +120,10 @@ namespace GEPEngine
 
 	void Input::onTick()
 	{
+		for (int i = 0; i < keyCodes.size(); i++)
+		{
+			std::cout << keyCodes[i] << std::endl;
+		}
 		pressedKeys.clear();
 		releasedKeys.clear();
 

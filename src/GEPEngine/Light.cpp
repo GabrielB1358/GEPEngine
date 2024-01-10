@@ -1,11 +1,12 @@
 #include "Light.h"
 #include "Entity.h"
 #include "Transform.h"
+#include "Core.h"
 
 namespace GEPEngine
 {
-	glm::vec3 Light::getPosition()
+	void Light::onTick()
 	{
-		return getEntity()->getTransform()->Position;
+		getCore()->setLightPos(getEntity()->getTransform()->Position);
 	}
 }

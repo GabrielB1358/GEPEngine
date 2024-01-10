@@ -22,6 +22,7 @@ namespace GEPEngine
 	struct ALSoundSrc : Resource
 	{
 		ALSoundSrc();
+		~ALSoundSrc();
 
 		void onLoad();
 
@@ -29,11 +30,10 @@ namespace GEPEngine
 
 		void playSound();
 
-		void updatePositions(glm::vec3 _lPos, glm::vec3 _sPos);
-
-		ALuint returnSourceId();
+		inline ALuint returnSourceId() { return sourceId; }
 	
-		ALuint sourceId = 0;
+		ALuint sourceId;
+		ALuint bufferId;
 		
 	};
 }

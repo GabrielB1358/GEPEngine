@@ -50,4 +50,12 @@ namespace GEPEngine
 	{
 		return m_core.lock();
 	}
+
+	void Entity::onGUI()
+	{
+		for (size_t i = 0; i < m_components.size(); i++)
+		{
+			m_components[i]->onGUI();
+		}
+	}
 }

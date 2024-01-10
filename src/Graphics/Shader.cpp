@@ -82,8 +82,9 @@ namespace Graphics
 	}
 
 	//Render function for 2D, orthographic things
-	void Shader::Render(std::shared_ptr<Vao> _Vao, std::shared_ptr<Texture> _texture, glm::mat4 _modelMatrix, std::shared_ptr<GEPEngine::Camera> _camera)
+	void Shader::RenderQuad(std::shared_ptr<Vao> _Vao, std::shared_ptr<Texture> _texture, glm::mat4 _modelMatrix, std::shared_ptr<GEPEngine::Camera> _camera)
 	{
+
 		//Select program to use
 		glUseProgram(programId);
 

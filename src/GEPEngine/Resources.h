@@ -6,8 +6,11 @@
 
 namespace GEPEngine
 {
+	struct Core;
 	struct Resources
 	{
+		void onTick();
+
 		template <typename T>
 		std::shared_ptr<T> load(const std::string& _path)
 		{
@@ -17,18 +20,24 @@ namespace GEPEngine
 				//return it if found
 				if (m_resources.at(i)->getPath() == _path)
 				{
+					m_resources.at(i)->setLifeTime(0.0f);
 					return std::dynamic_pointer_cast<T>(m_resources.at(i));
 				}
 				else
 				{
 					//this means the resource couldnt be loaded
-					//in this case you need to destroy the component it was attached to as not to crash the game
-					//maybe throw some witty exception here oooh that sounds cool
-					
+					//Wrap an exception thing around this
+
 				}
 			}
 
 			//OR
+			//try
+			//{
+			//}
+			//catch
+			//{
+			//}
 
 			//Create new instance, construct it and add to cache
 			std::shared_ptr<T> rtn = std::make_shared<T>();
@@ -40,7 +49,11 @@ namespace GEPEngine
 			return rtn;
 		}
 
+		void initialise(std::shared_ptr<Core> _core);
+
 	private:
 		std::vector<std::shared_ptr<Resource> > m_resources;
+		std::vector<std::string> m_dirtyFlags;
+		std::shared_ptr<Core> m_core;
 	};
 }

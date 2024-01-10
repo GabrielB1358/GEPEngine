@@ -1,6 +1,7 @@
 #include "Curuthers.h"
 #include <GEPEngine/myEngine.h>
 #include <GEPEngine/Input.h>
+#include <GEPEngine/GUI.h>
 
 
 Curuthers::Curuthers()
@@ -28,7 +29,8 @@ void Curuthers::initialise()
 	m_collider->m_offset = glm::vec3(0);
 
 
-	m_audioLoader = m_entity.lock()->addComponent<GEPEngine::ALAudio>();
+	hornSound = m_entity.lock()->addComponent<GEPEngine::ALAudio>("../dixie_horn.ogg");
+	pigeonSound = m_entity.lock()->addComponent<GEPEngine::ALAudio>("../PigeonCoo.ogg");
 
 
 	angle = 0;
@@ -40,18 +42,18 @@ void Curuthers::onTick()
 {
 	angle = 180 * getCore()->m_environment->getDT();
 	float step = getCore()->m_environment->getDT() * 1;
-	//m_entity.lock()->getTransform()->Rotate(glm::vec3(0, angle, 0));
 
+	if (getInput()->isKey(GEPEngine::Keys::leftM) == true)
+	{
 
+	}
 	if (getInput()->isKey(GEPEngine::Keys::d) == true)
 	{
 		Move(glm::vec3(step, 0, 0));
-		m_audioLoader->playSound("../PigeonCoo.ogg");
 	}
 	if (getInput()->isKey(GEPEngine::Keys::a) == true)
 	{
 		Move(glm::vec3(-step, 0, 0));
-		m_audioLoader->playSound("../dixie_horn.ogg");
 	}
 	if (getInput()->isKey(GEPEngine::Keys::w) == true)
 	{
@@ -69,10 +71,6 @@ void Curuthers::onTick()
 	{
 		Move(glm::vec3(0, 0, step));
 	}
-	if (getInput()->isKey(GEPEngine::Keys::leftM) == true)
-	{
-		//std::cout << "Play Sound" << std::endl;
-	}
 }
 
 void Curuthers::Move(glm::vec3 _move)
@@ -83,4 +81,12 @@ void Curuthers::Move(glm::vec3 _move)
 void Curuthers::Scale(glm::vec3 _scale)
 {
 	m_entity.lock()->getTransform()->Scale = _scale;
+}
+
+void Curuthers::onGUI()
+{
+	if (getCore()->getGUI()->Button("../Textures/Buttons/DownButton.png", "../Textures/Buttons/UpButton.png", glm::vec2(800,800), glm::vec2(200, 150)))
+	{
+		hornSound->playSound();
+	}
 }

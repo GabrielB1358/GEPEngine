@@ -10,6 +10,10 @@ namespace GEPEngine
 
 	}
 
+	void Component::onGUI()
+	{
+	}
+
 	void Component::onInit()
 	{
 	}

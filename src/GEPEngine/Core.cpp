@@ -1,6 +1,7 @@
 #include "Core.h"
 #include "Entity.h"
 #include "Transform.h"
+#include "GUI.h"
 
 namespace GEPEngine
 {
@@ -22,9 +23,10 @@ namespace GEPEngine
 		//Setting up core and the window
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
-		rtn->m_winSize = glm::ivec2(1280, 720);
+		rtn->m_winSize = glm::ivec2(1920, 1080);
 		rtn->m_window = std::make_shared<NativeWindow>();
 		rtn->m_resources = std::make_shared<Resources>();
+		rtn->m_GUI = std::make_shared<GUI>();
 
 		rtn->m_self = rtn;
 		rtn->m_running = false;
@@ -80,9 +82,8 @@ namespace GEPEngine
 			throw std::runtime_error("Couldn't make context current");
 		}
 
-		rtn->setListenerPos(glm::vec3(0));
-		alListener3f(AL_POSITION, rtn->getListenerPos().x, rtn->getListenerPos().y, rtn->getListenerPos().z);
-
+		rtn->m_GUI->initialise(rtn);
+		rtn->m_resources->initialise(rtn);
 		return rtn;
 	}
 
@@ -135,6 +136,10 @@ namespace GEPEngine
 			{
 				m_entities[i]->display();
 			}
+			for (size_t i = 0; i < m_entities.size(); i++)
+			{
+				m_entities[i]->onGUI();
+			}
 
 			//Kills any entities that are no longer alive
 			for (size_t ei = 0; ei < m_entities.size(); ++ei)
@@ -146,6 +151,8 @@ namespace GEPEngine
 				}
 			}
 
+			//Ticks resources to increase their timer
+			m_resources->onTick();
 
 			//tick keyboard, clearing the key vectors
 			m_input->onTick();
@@ -165,5 +172,15 @@ namespace GEPEngine
 		m_entities.push_back(rtn);
 
 		return rtn;
+	}
+
+	std::shared_ptr<GUI> Core::getGUI()
+	{
+		return m_GUI;
+	}
+
+	float Core::getDT()
+	{
+		return m_environment->getDT();
 	}
 }

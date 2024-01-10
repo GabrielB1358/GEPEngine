@@ -92,7 +92,10 @@ namespace GEPEngine
 		glm::vec2 getLeftJStick();
 		glm::vec2 getRightJStick();
 
+		bool getLMouse() { return lMouse; }
+
 		inline glm::vec2 getMouseMove() { return m_mouseMove; }
+		inline glm::vec2 getMouseCoords() { return m_mouseCoords; }
 
 	private:
 
@@ -102,7 +105,7 @@ namespace GEPEngine
 
 		glm::vec2 m_mouseMove;
 		glm::vec2 m_mouseCoords;
-		bool lMouse, rMouse, mMouse;
+		bool lMouse;
 
 		glm::vec2 gpLeftJoystick;
 		glm::vec2 gpRightJoystick;

@@ -2,6 +2,7 @@
 #include <GEPEngine/Input.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "Core.h"
 
 namespace GEPEngine
 {
@@ -22,7 +23,7 @@ namespace GEPEngine
 		m_viewMatrix = glm::lookAt(m_cameraPos, initTarget, m_up);
 
 		m_perspProjmat = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-		m_orthoProjmat = glm::ortho(0.0f, 1920.0f, 0.0f, 1080.0f, 0.0f, 1.0f);
+		m_orthoProjmat = glm::ortho(0.0f, (float)getCore()->m_winSize.x, (float)getCore()->m_winSize.y, 0.0f, 0.0f, 1.0f);
 	}
 
 

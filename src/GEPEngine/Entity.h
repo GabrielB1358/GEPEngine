@@ -27,6 +27,19 @@ namespace GEPEngine
 			return rtn;
 		}
 
+		template <typename T, typename U>
+		std::shared_ptr<T> addComponent(U _u)
+		{
+			std::shared_ptr<T> rtn = std::make_shared<T>();
+
+			rtn->m_entity = m_self;
+
+			rtn->initialise(_u);
+			m_components.push_back(rtn);
+
+			return rtn;
+		}
+
 		template <typename T>
 		std::shared_ptr<T> getComponent()
 		{
@@ -47,10 +60,11 @@ namespace GEPEngine
 		}
 
 		std::shared_ptr<Transform> getTransform();
-
 		std::shared_ptr<Core> getCore();
-		void kill();
 		bool getAlive();
+
+		void kill();
+		void onGUI();
 
 		std::weak_ptr<Core> m_core;
 		std::vector<std::shared_ptr<Component> > m_components;

@@ -39,7 +39,7 @@ namespace Graphics
 		return m_Id;
 	}
 
-	void Vao::AddVbo(std::shared_ptr<Vbo> targetVbo)
+	void Vao::AddVbo(std::shared_ptr<Graphics::Vbo> targetVbo)
 	{
 		Vbos.push_back(targetVbo);
 

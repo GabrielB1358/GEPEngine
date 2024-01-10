@@ -14,20 +14,16 @@ namespace GEPEngine
 
 	}
 
+	ALSoundSrc::~ALSoundSrc()
+	{
+		alDeleteSources(1, &sourceId);
+		alDeleteBuffers(1, &bufferId);
+	}
+
 	void ALSoundSrc::playSound()
 	{
 		alSourcePlay(sourceId);
-	}
-
-	void ALSoundSrc::updatePositions(glm::vec3 _lPos, glm::vec3 _sPos)
-	{
-		alListener3f(AL_POSITION, _lPos.x, _lPos.y, _lPos.z);
-		alSource3f(sourceId, AL_POSITION, _sPos.x, _sPos.y, _sPos.z);
-	}
-
-	ALuint ALSoundSrc::returnSourceId()
-	{
-		return sourceId;
+		std::cout << getLifeTime() << std::endl;
 	}
 
 	void ALSoundSrc::onLoad()
@@ -38,23 +34,17 @@ namespace GEPEngine
 		std::vector<unsigned char> bufferData;
 		load_ogg(getPath(), bufferData, format, freq);
 
-		ALuint bufferId = 0;
+		bufferId = 0;
 		alGenBuffers(1, &bufferId);
 
 		alBufferData(bufferId, format, &bufferData.at(0),
 			static_cast<ALsizei>(bufferData.size()), freq);
 
-		
 		//Prepare Sound Source
-
 		sourceId = 0;
 		alGenSources(1, &sourceId);
 
 		alSourcei(sourceId, AL_BUFFER, bufferId);
-
-		//alSource3f(sourceId, AL_POSITION, 0.0f, 0.0f, 0.0f);
-		//alSourcef(sourceId, AL_PITCH, 10);
-		//alSourcef(sourceId, AL_GAIN, vol);
 	}
 
 	void ALSoundSrc::load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq)
@@ -92,5 +82,4 @@ namespace GEPEngine
 		free(output);
 	}
 	
-
 }

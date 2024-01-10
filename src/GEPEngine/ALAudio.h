@@ -9,10 +9,18 @@ namespace GEPEngine
 		ALAudio();
 		~ALAudio();
 
+
+		void initialise(std::string _path);
+
 		void onTick() override;
 
-		void playSound(std::string _path);
-	
+		void playSound();
 
+		void playMusic(std::string _path);
+
+
+		std::shared_ptr<ALSoundSrc> m_source;
+		std::string m_path;
+		glm::vec3 m_Pos;
 	};
 }

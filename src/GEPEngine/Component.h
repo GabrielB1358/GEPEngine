@@ -30,6 +30,7 @@ namespace GEPEngine
 		virtual void onTick();
 		virtual void onDisplay();
 		virtual void initialise();
+		virtual void onGUI();
 
 
 		std::weak_ptr<Entity> m_entity;

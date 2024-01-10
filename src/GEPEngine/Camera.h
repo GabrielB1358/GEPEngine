@@ -27,7 +27,6 @@ namespace GEPEngine
 
 		glm::vec2 getMouse();
 
-
 		void onTick() override;
 
 		void initialise();

@@ -11,13 +11,12 @@ void main()
 {                            
 	u_ViewPos = inverse(u_Viewing) * vec4(0,0,0,1);
 		                             
-	vec3 lightPos = vec3(10,10,10);
 	vec3 diffuseColor = vec3(1,1,1);
 	vec3 ambientColor = vec3(1,0,0);
 	vec3 specularColor = vec3(1,1,1);
 		                             
 	vec3 N = normalize(v_Normal);
-	vec3 lightDir = normalize(lightPos - v_FragPos);
+	vec3 lightDir = normalize(u_LightPos - v_FragPos);
 	vec3 viewDir = normalize(u_ViewPos - v_FragPos);
 	vec3 reflectDir = reflect(-lightDir, N);
 		                             

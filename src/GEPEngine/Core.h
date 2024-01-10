@@ -12,7 +12,7 @@ namespace GEPEngine
 {
 	struct Entity;
 	struct Component;
-
+	struct GUI;
 
 	struct Core
 	{
@@ -20,14 +20,13 @@ namespace GEPEngine
 		~Core();
 
 		static std::shared_ptr<Core> initialize();
-
 		void start();
 
-		glm::vec3 getListenerPos() { return m_listenerPos; }
-		void setListenerPos(glm::vec3 _pos) { m_listenerPos = _pos; }
+		void setLightPos(glm::vec3 _pos);
 
-
+		std::shared_ptr<GUI> getGUI();
 		std::shared_ptr<Resources> getResources();
+		float getDT();
 
 		std::shared_ptr<Entity> addEntity();
 
@@ -69,8 +68,8 @@ namespace GEPEngine
 		std::vector<std::shared_ptr<Entity> > m_entities;
 		std::shared_ptr<Resources> m_resources;
 		std::shared_ptr<BoxCollider> m_boxColliders;
+		std::shared_ptr<GUI> m_GUI;
 		std::weak_ptr<Core> m_self;
-		glm::vec3 m_listenerPos;
 
 		bool m_running = false;
 	};
