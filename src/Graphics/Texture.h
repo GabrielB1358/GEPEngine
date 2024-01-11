@@ -20,7 +20,6 @@ namespace Graphics
 
 	private:
 		std::shared_ptr<Texture> m_texture;
-
 		std::vector<float> m_pixels;
 		glm::ivec2 m_size;
 		GLuint m_Id;

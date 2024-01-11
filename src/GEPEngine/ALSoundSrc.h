@@ -25,15 +25,14 @@ namespace GEPEngine
 		~ALSoundSrc();
 
 		void onLoad();
-
 		void load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq);
-
 		void playSound();
 
-		inline ALuint returnSourceId() { return sourceId; }
+		ALuint getSourceId();
 	
-		ALuint sourceId;
-		ALuint bufferId;
+	private:
+		ALuint m_sourceId;
+		ALuint m_bufferId;
 		
 	};
 }

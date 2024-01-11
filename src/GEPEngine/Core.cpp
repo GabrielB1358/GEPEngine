@@ -11,8 +11,8 @@ namespace GEPEngine
 
 	Core::~Core()
 	{
-		SDL_GL_DeleteContext(m_window->context);
-		SDL_DestroyWindow(m_window->window);
+		SDL_GL_DeleteContext(m_window->getContext());
+		SDL_DestroyWindow(m_window->getWindow());
 		SDL_Quit();
 	}
 
@@ -32,22 +32,22 @@ namespace GEPEngine
 		rtn->m_running = false;
 
 		//Initialise SDL
-		if (SDL_Init(SDL_INIT_VIDEO || SDL_INIT_GAMECONTROLLER) < 0)
+		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0)
 		{
 			throw std::runtime_error("Failed to initialize SDL");
 		}
 
 		//Create a window and assign to window variable
-		if (!(rtn->m_window->window = SDL_CreateWindow("SDL2 Platform", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, rtn->m_winSize.x, rtn->m_winSize.y, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)))
+		if (!rtn->m_window->setWindow(SDL_CreateWindow("SDL2 Platform", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, rtn->m_winSize.x, rtn->m_winSize.y, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)))
 		{
 			SDL_Quit();
 			throw std::runtime_error("Failed to create window");
 		}
 
 		//Create GL context for the window
-		if (!(rtn->m_window->context = SDL_GL_CreateContext(rtn->m_window->window)))
+		if (!rtn->m_window->setContext(SDL_GL_CreateContext(rtn->m_window->getWindow())))
 		{
-			SDL_DestroyWindow(rtn->m_window->window);
+			SDL_DestroyWindow(rtn->m_window->getWindow());
 			SDL_Quit();
 			throw std::runtime_error("Failed to create OpenGL context");
 		}
@@ -125,7 +125,14 @@ namespace GEPEngine
 			//Tick and display all entities
 			for (int i = 0; i < m_entities.size();i++)
 			{
-				m_entities[i]->tick();
+				try
+				{
+					m_entities[i]->tick();
+				}
+				catch(std::exception &m_e)
+				{
+					m_entities[i]->kill();
+				}
 			}
 			for (int i = 0; i < m_entities.size(); i++)
 			{
@@ -151,7 +158,7 @@ namespace GEPEngine
 
 			//tick keyboard, clearing the key vectors
 			m_input->onTick();
-			SDL_GL_SwapWindow(m_window->window);
+			SDL_GL_SwapWindow(m_window->getWindow());
 		}
 	}
 

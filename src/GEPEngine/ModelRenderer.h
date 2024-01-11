@@ -1,11 +1,10 @@
 #pragma once
 #include <Graphics/Rend.h>
+#include "Component.h"
+#include "Model.h"
 #include "Shader.h"
 #include "Texture.h"
-#include "Model.h"
 #include "Transform.h"
-
-#include "Component.h"
 
 
 namespace GEPEngine
@@ -15,37 +14,30 @@ namespace GEPEngine
 	{
 		ModelRenderer();
 		void onInitialise();
+		void onDisplay() override;
+		void onTick() override;
 
-		std::shared_ptr<Graphics::Vao> vao;
-		std::shared_ptr<Graphics::Shader> myShader;
-		std::shared_ptr<Graphics::Texture> mytex;
-
-
-		//Model Loader stuff
 		void setFragPath(std::string _path);
-		std::string getFragPath();
-
 		void setVertPath(std::string _path);
+		
 		std::string getVertPath();
+		std::string getFragPath();
 
 		void setModel(std::string _p);
 		void setTexture(std::string _p);
 		void setShader(std::string _p);
 
 	private:
-		void onDisplay() override;
-		void onTick() override;
-
-		//model loader stuff
 		std::shared_ptr<Camera> m_Camera;
-
-		std::string m_fragPath;
-		std::string m_vertPath;
 
 		std::shared_ptr<GEPEngine::Shader> m_Shader;
 		std::shared_ptr<GEPEngine::Texture> m_Texture;
 		std::shared_ptr<GEPEngine::Model> m_Model;
+		
+		std::shared_ptr<Graphics::Vao> m_vao;
 
+		std::string m_fragPath;
+		std::string m_vertPath;
 		std::string m_modPath;
 		std::string m_texPath;
 		std::string m_shaderPath;

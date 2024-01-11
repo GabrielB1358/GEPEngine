@@ -20,8 +20,8 @@ namespace GEPEngine
 
 	void ALAudio::onTick()
 	{
-		m_Pos = getEntity()->getTransform()->Position;
-		alSource3f(m_source->returnSourceId(), AL_POSITION, m_Pos.x, m_Pos.y, m_Pos.z);
+		m_Pos = getEntity()->getTransform()->getPosition();
+		alSource3f(m_source->getSourceId(), AL_POSITION, m_Pos.x, m_Pos.y, m_Pos.z);
 	}
 
 	void ALAudio::playSound()

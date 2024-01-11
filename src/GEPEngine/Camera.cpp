@@ -39,7 +39,7 @@ namespace GEPEngine
 		m_direction = glm::rotate(m_direction, m_cameraAngleX, glm::vec3(1, 0, 0));
 
 		//Camera transform updated with parent entity's transform
-		m_cameraPos = getEntity()->getTransform()->Position;
+		m_cameraPos = getEntity()->getTransform()->getPosition();
 		//Camera moved slightly up so youre not seeing inside the model
 		m_cameraPos += glm::vec3(0, 1, 0);
 

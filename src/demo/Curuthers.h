@@ -13,20 +13,21 @@ struct Curuthers : GEPEngine::Component
 
 	void initialise();
 
-	void Move(glm::vec3 _move);
+	void Move(float _x, float _y, float _z);
 
-	void Scale(glm::vec3 _scale);
+	void Scale(float _x, float _y, float _z);
 
-	float angle;
+	void onTick() override;
+	void onGUI() override;
+	void onKill() override;
+
+private:
+	float m_angle;
 
 	std::shared_ptr<GEPEngine::ModelRenderer> m_renderer;
 	std::shared_ptr<GEPEngine::BoxCollider> m_collider;
 	std::shared_ptr<GEPEngine::Rigidbody> m_rigibody;
 
-	std::shared_ptr<GEPEngine::ALAudio> hornSound;
-	std::shared_ptr<GEPEngine::ALAudio> pigeonSound;
-
-	void onTick() override;
-
-	void onGUI() override;
+	std::shared_ptr<GEPEngine::ALAudio> m_hornSound;
+	std::shared_ptr<GEPEngine::ALAudio> m_pigeonSound;
 };

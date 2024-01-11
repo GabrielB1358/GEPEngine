@@ -7,6 +7,6 @@ namespace GEPEngine
 {
 	glm::vec3 Light::getPos()
 	{
-		return getEntity()->getTransform()->Position;
+		return getEntity()->getTransform()->getPosition();
 	}
 }

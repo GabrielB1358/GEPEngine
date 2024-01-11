@@ -15,6 +15,9 @@ namespace GEPEngine
 	struct Component;
 	struct GUI;
 
+	/***
+	* Provides the main route of the engine
+	*/
 	struct Core
 	{
 		Core();
@@ -65,7 +68,7 @@ namespace GEPEngine
 
 	private:
 		friend struct entity;
-		std::vector<std::shared_ptr<Entity> > m_entities;
+		std::vector<std::shared_ptr<Entity> > m_entities; ///! 
 		std::shared_ptr<NativeWindow> m_window;
 		std::shared_ptr<Resources> m_resources;
 		std::shared_ptr<BoxCollider> m_boxColliders;

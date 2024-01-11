@@ -29,64 +29,69 @@ void Curuthers::initialise()
 	m_collider->setOffset(glm::vec3(0));
 
 
-	hornSound = getEntity()->addComponent<GEPEngine::ALAudio>("../dixie_horn.ogg");
-	pigeonSound = getEntity()->addComponent<GEPEngine::ALAudio>("../PigeonCoo.ogg");
+	m_hornSound = getEntity()->addComponent<GEPEngine::ALAudio>("../dixie_horn.ogg");
+	m_pigeonSound = getEntity()->addComponent<GEPEngine::ALAudio>("../PigeonCoo.ogg");
 
 
-	angle = 0;
-	Move(glm::vec3(0, -0.5, -8));
-	Scale(glm::vec3(0.25, 0.25, 0.25));
+	m_angle = 0;
+	Move(0, -0.5, -8);
+	Scale(0.25, 0.25, 0.25);
 }
 
 void Curuthers::onTick()
 {
-	angle = 180 * getCore()->getDT();
+	m_angle = 180 * getCore()->getDT();
 	float step = getCore()->getDT() * 1;
 
-	if (getInput()->isKey(GEPEngine::Keys::leftM) == true)
+	if (getInput()->getLeftJStick().x  > 0.5f)
 	{
-
+		Move(step, 0, 0);
 	}
 	if (getInput()->isKey(GEPEngine::Keys::d) == true)
 	{
-		Move(glm::vec3(step, 0, 0));
+		Move(step, 0, 0);
 	}
 	if (getInput()->isKey(GEPEngine::Keys::a) == true)
 	{
-		Move(glm::vec3(-step, 0, 0));
+		Move(-step, 0, 0);
 	}
 	if (getInput()->isKey(GEPEngine::Keys::w) == true)
 	{
-		Move(glm::vec3(0, step, 0));
+		Move(0, step, 0);
 	}
 	if (getInput()->isKey(GEPEngine::Keys::s) == true)
 	{
-		Move(glm::vec3(0, -step, 0));
+		Move(0, -step, 0);
 	}
 	if (getInput()->isKey(GEPEngine::Keys::space) == true)
 	{
-		Move(glm::vec3(0, 0, -step));
+		Move(0, 0, -step);
 	}
 	if (getInput()->isKey(GEPEngine::Keys::lshift) == true)
 	{
-		Move(glm::vec3(0, 0, step));
+		Move(0, 0, step);
 	}
 }
 
-void Curuthers::Move(glm::vec3 _move)
+void Curuthers::Move(float _x, float _y, float _z)
 {
-	getEntity()->getTransform()->Move(_move);
+	getEntity()->getTransform()->Move(glm::vec3(_x, _y, _z));
 }
 
-void Curuthers::Scale(glm::vec3 _scale)
+void Curuthers::Scale(float _x, float _y, float _z)
 {
-	getEntity()->getTransform()->Scale = _scale;
+	getEntity()->getTransform()->setScale(glm::vec3(_x, _y, _z));
 }
 
 void Curuthers::onGUI()
 {
 	if (getCore()->getGUI()->Button("../Textures/Buttons/DownButton.png", "../Textures/Buttons/UpButton.png", glm::vec2(800,800), glm::vec2(200, 150)))
 	{
-		hornSound->playSound();
+		m_hornSound->playSound();
 	}
+}
+
+void Curuthers::onKill()
+{
+
 }

@@ -13,7 +13,7 @@ namespace GEPEngine
 		glm::vec3 getEntityPos();
 
 	private:
-		glm::vec3 newPos;
-		glm::vec3 oldPos;
+		glm::vec3 m_newPos;
+		glm::vec3 m_oldPos;
 	};
 }

@@ -7,7 +7,7 @@ namespace GEPEngine
 	void Environment::Init()
 	{
 #ifdef _WIN32
-		last = GetTickCount();
+		m_last = GetTickCount();
 #else
 		struct timeval tv = { 0 };
 		gettimeofday(&tv, NULL);
@@ -25,13 +25,13 @@ namespace GEPEngine
 		gettimeofday(&tv, NULL);
 		double curr = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000;
 #endif
-		double diff = curr - last;
-		deltaTime = diff / 1000.0f;
-		last = curr;
+		double diff = curr - m_last;
+		m_deltaTime = diff / 1000.0f;
+		m_last = curr;
 	}
 
 	double Environment::getDT()
 	{
-		return deltaTime;
+		return m_deltaTime;
 	}
 }

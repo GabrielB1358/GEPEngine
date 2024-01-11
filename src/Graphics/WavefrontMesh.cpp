@@ -2,11 +2,11 @@
 
 namespace Graphics
 {
-	WavefrontMesh::WavefrontMesh(const std::string _path) : vertCount(0)
+	WavefrontMesh::WavefrontMesh(const std::string _path) : m_vertCount(0)
 	{
 		m_path = _path;
 		//vertCount = _vertices;
-		m_Id = buLoadModel(_path.c_str(), vertCount);
+		m_Id = buLoadModel(_path.c_str(), m_vertCount);
 	}
 
 	GLuint WavefrontMesh::GetId()
@@ -16,6 +16,6 @@ namespace Graphics
 
 	size_t WavefrontMesh::GetVertCount()
 	{
-		return vertCount;
+		return m_vertCount;
 	}
 }

@@ -8,10 +8,16 @@ namespace GEPEngine
 {
 	struct NativeWindow
 	{
-
-		SDL_Window* window;
-		SDL_GLContext context;
-
 		~NativeWindow();
+
+		SDL_Window* getWindow();
+		SDL_GLContext getContext();
+
+		bool setWindow(SDL_Window* _win);
+		bool setContext(SDL_GLContext _con);
+
+	private:
+		SDL_Window* m_window;
+		SDL_GLContext m_context;
 	};
 }

@@ -55,12 +55,15 @@ namespace GEPEngine
 	}
 	void Component::kill()
 	{
-		
+		onKill();
 	}
 	void Component::onTick()
 	{
 	}
 	void Component::onDisplay()
+	{
+	}
+	void Component::onKill()
 	{
 	}
 }

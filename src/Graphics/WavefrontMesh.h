@@ -15,7 +15,7 @@ namespace Graphics
 	private:
 		GLuint m_Id;
 		std::string m_path;
-		size_t vertCount;
+		size_t m_vertCount;
 		bool m_dirty;
 	};
 }

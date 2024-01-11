@@ -6,25 +6,16 @@
 
 namespace GEPEngine
 {
-	enum mouseState
-	{
-		Down,
-		Held,
-		Up
-	};
-
 	struct Core;
 	struct GUI
 	{
 		void initialise(std::shared_ptr<Core> _core);
-
 		void draw(glm::vec2 _pos, glm::vec2 _size, std::string _path);
 
 		bool Button(std::string _downPath, std::string _upPath, glm::vec2 _pos, glm::vec2 _size);
+		bool doesMouseOverlap(glm::vec2 _pos, glm::vec2 _size);
 
 		float mapping(float _inputPixel, float _winStart, float _winEnd, float _rangeStart, float _rangeEnd);
-
-		bool doesMouseOverlap(glm::vec2 _pos, glm::vec2 _size);
 
 	private:
 		std::shared_ptr<Core> m_core;
@@ -35,9 +26,9 @@ namespace GEPEngine
 
 		glm::vec2 m_screenSpace;
 		glm::vec2 m_screenSize;
-		glm::mat4 _modelMatrix;
+		glm::mat4 m_modelMatrix;
 
-		bool buttonUp;
-		bool buttonDown;
+		bool m_buttonUp;
+		bool m_buttonDown;
 	};
 }

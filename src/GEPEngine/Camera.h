@@ -41,9 +41,5 @@ namespace GEPEngine
 		float m_cameraAngleY;
 		float m_speed;
 		float m_mouseSpeed;
-
-		int posX, posY;
-
-
 	};
 }

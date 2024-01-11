@@ -6,8 +6,8 @@ namespace GEPEngine
 {
 	bool BoxCollider::colliding(std::shared_ptr<BoxCollider> _other)
 	{
-		glm::vec3 a = getEntity()->getTransform()->Position;
-		glm::vec3 b = _other->getEntity()->getTransform()->Position;
+		glm::vec3 a = getEntity()->getTransform()->getPosition();
+		glm::vec3 b = _other->getEntity()->getTransform()->getPosition();
 		glm::vec3 ahs = m_size / 2.0f;
 		glm::vec3 bhs = _other->m_size / 2.0f;
 
@@ -16,7 +16,7 @@ namespace GEPEngine
 
 	bool BoxCollider::colliding(glm::vec3 _pos, glm::vec3 _size)
 	{
-		glm::vec3 a = getEntity()->getTransform()->Position;
+		glm::vec3 a = getEntity()->getTransform()->getPosition();
 		glm::vec3 b = _pos;
 		glm::vec3 ahs = m_size / 2.0f;
 		glm::vec3 bhs = _size / 2.0f;
@@ -127,7 +127,7 @@ namespace GEPEngine
 
 	glm::vec3 BoxCollider::getPos()
 	{
-		return getEntity()->getTransform()->Position;
+		return getEntity()->getTransform()->getPosition();
 	}
 }
 

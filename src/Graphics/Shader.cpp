@@ -8,27 +8,27 @@
 
 namespace Graphics
 {
-	Shader::Shader(std::string _fragPath, std::string _vertPath) : programId(glCreateProgram())
+	Shader::Shader(std::string _fragPath, std::string _vertPath) : m_programId(glCreateProgram())
 	{
-		fragmentShader = CreateShader(_fragPath, GL_FRAGMENT_SHADER);
-		vertexShader = CreateShader(_vertPath, GL_VERTEX_SHADER);
+		m_fragmentShader = CreateShader(_fragPath, GL_FRAGMENT_SHADER);
+		m_vertexShader = CreateShader(_vertPath, GL_VERTEX_SHADER);
 		Link();
 	}
 
 	Shader::~Shader()
 	{
-		glDetachShader(fragmentShader, programId);
-		glDetachShader(vertexShader, programId);
-		glDeleteShader(fragmentShader);
-		glDeleteShader(vertexShader);
+		glDetachShader(m_fragmentShader, m_programId);
+		glDetachShader(m_vertexShader, m_programId);
+		glDeleteShader(m_fragmentShader);
+		glDeleteShader(m_vertexShader);
 	}
 
 
 	GLuint Shader::CreateShader(std::string _shaderPath, GLuint _type)
 	{
 		//Creates shader and attaches to program or throws an accurate error on why it couldn't
-		fileString = ReadFile(_shaderPath);
-		const GLchar* shader = fileString.c_str();
+		m_fileString = ReadFile(_shaderPath);
+		const GLchar* shader = m_fileString.c_str();
 
 		GLint success = 0;
 		GLuint temp = glCreateShader(_type);
@@ -44,7 +44,7 @@ namespace Graphics
 			std::cout << &errorLog.at(0) << std::endl;
 			throw std::exception();
 		}
-		glAttachShader(programId, temp);
+		glAttachShader(m_programId, temp);
 		return temp;
 	}
 
@@ -52,7 +52,7 @@ namespace Graphics
 	void Shader::Render(std::shared_ptr<WavefrontMesh> _mesh, std::shared_ptr<Texture> _texture, std::shared_ptr<GEPEngine::Camera> _camera, glm::mat4 _modelMatrix, glm::vec3 _lightPos)
 	{
 		//Select program to use
-		glUseProgram(programId);
+		glUseProgram(m_programId);
 
 		//Bind Mesh to the vertex array
 		glBindVertexArray(_mesh->GetId());
@@ -64,7 +64,7 @@ namespace Graphics
 		BindShader("u_Projection", _camera->getPerspProjMat());
 		BindShader("u_Model", _modelMatrix);
 		BindShader("u_Viewing", _camera->getViewMat());
-		glProgramUniform3f(programId, glGetUniformLocation(programId, "u_LightPos"), _lightPos.x, _lightPos.y, _lightPos.z);
+		glProgramUniform3f(m_programId, glGetUniformLocation(m_programId, "u_LightPos"), _lightPos.x, _lightPos.y, _lightPos.z);
 
 		//Enable anything appropriate
 		glEnable(GL_DEPTH_TEST);
@@ -86,7 +86,7 @@ namespace Graphics
 	{
 
 		//Select program to use
-		glUseProgram(programId);
+		glUseProgram(m_programId);
 
 		//Bind Mesh to the vertex array
 		glBindVertexArray(_Vao->GetId());
@@ -111,24 +111,24 @@ namespace Graphics
 
 	GLuint Shader::GetProgramId()
 	{
-		return programId;
+		return m_programId;
 	}
 
 	//Link the program
 	void Shader::Link()
 	{
-		glBindAttribLocation(programId, 0, "a_Position");
-		glBindAttribLocation(programId, 1, "a_TexCoord");
+		glBindAttribLocation(m_programId, 0, "a_Position");
+		glBindAttribLocation(m_programId, 1, "a_TexCoord");
 		GLint success = 1;
-		glLinkProgram(programId);
-		glGetProgramiv(programId, GL_LINK_STATUS, &success);
+		glLinkProgram(m_programId);
+		glGetProgramiv(m_programId, GL_LINK_STATUS, &success);
 	}
 
 
 	//dynamic shader + matrix binding
 	void Shader::BindShader(const char* _name, glm::mat4 _matrix)
 	{
-		glProgramUniformMatrix4fv(programId, glGetUniformLocation(programId, _name), 1, GL_FALSE, glm::value_ptr(_matrix));
+		glProgramUniformMatrix4fv(m_programId, glGetUniformLocation(m_programId, _name), 1, GL_FALSE, glm::value_ptr(_matrix));
 	}
 
 	std::string Shader::ReadFile(std::string _path)

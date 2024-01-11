@@ -21,11 +21,11 @@ namespace Graphics
 			glBindVertexArray(m_Id);
 
 			//bind the position VBO
-			for (int i = 0; i < Vbos.size(); i++)
+			for (int i = 0; i < m_Vbos.size(); i++)
 			{
-				glBindBuffer(GL_ARRAY_BUFFER, Vbos[i]->GetId());
+				glBindBuffer(GL_ARRAY_BUFFER, m_Vbos[i]->GetId());
 
-				glVertexAttribPointer(i, Vbos[i]->GetComponents(), GL_FLOAT, GL_FALSE, 0, (void*)0);
+				glVertexAttribPointer(i, m_Vbos[i]->GetComponents(), GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 				glEnableVertexAttribArray(i);
 			}
@@ -41,7 +41,7 @@ namespace Graphics
 
 	void Vao::AddVbo(std::shared_ptr<Graphics::Vbo> targetVbo)
 	{
-		Vbos.push_back(targetVbo);
+		m_Vbos.push_back(targetVbo);
 
 		m_dirty = true;
 	}

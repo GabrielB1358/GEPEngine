@@ -26,10 +26,10 @@ namespace GEPEngine
 		coords->Add(glm::vec2(1.0f, 1.0f));
 		coords->Add(glm::vec2(0.0f, 1.0f));
 
-		vao = std::make_shared <Graphics::Vao> ();
+		m_vao = std::make_shared <Graphics::Vao> ();
 
-		vao->AddVbo(pos);
-		vao->AddVbo(coords);
+		m_vao->AddVbo(pos);
+		m_vao->AddVbo(coords);
 
 	}
 

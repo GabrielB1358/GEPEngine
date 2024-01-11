@@ -29,10 +29,10 @@ namespace Graphics
 
 	private:
 		std::shared_ptr<Shader> m_shader;
-		std::string fileString;
-		GLuint fragmentShader;
-		GLuint vertexShader;
-		GLuint programId;
-		const GLchar* src;
+		std::string m_fileString;
+		GLuint m_fragmentShader;
+		GLuint m_vertexShader;
+		GLuint m_programId;
+		const GLchar* m_src;
 	};
 }

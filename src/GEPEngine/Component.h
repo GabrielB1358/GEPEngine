@@ -32,6 +32,7 @@ namespace GEPEngine
 		virtual void onDisplay();
 		virtual void initialise();
 		virtual void onGUI();
+		virtual void onKill();
 
 	private:
 		friend struct Entity;

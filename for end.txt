@@ -1,7 +1,7 @@
 - Single Controller input	DONE
 - Directional Audio is worth 50% of audio marks (and multiple sources per entity)	DONE
 - Demonstrate resource loading that doesnt crash if you cant load a resource and also
-  deletes the entity that couldnt load it	70% DONE
+  deletes the entity that couldnt load it	DONE
 - Doxygen commenting format on Component, Entity and Core mostly but maybe more x
 - Emscripten cmake shit
 - Collision Responses	KINDA DONE

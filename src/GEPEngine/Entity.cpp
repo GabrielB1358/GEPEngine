@@ -18,9 +18,12 @@ namespace GEPEngine
 
 	void Entity::display()
 	{
-		for (size_t ci = 0; ci < m_components.size(); ci++)
+		if(m_alive)
 		{
-			m_components.at(ci)->display();
+			for (size_t ci = 0; ci < m_components.size(); ci++)
+			{
+				m_components.at(ci)->display();
+			}
 		}
 	}
 
@@ -32,7 +35,7 @@ namespace GEPEngine
 
 		for (size_t ci = 0; ci < m_components.size(); ci++)
 		{
-			//m_components.at(ci)->kill();
+			m_components.at(ci)->kill();
 		}
 	}
 
@@ -53,9 +56,23 @@ namespace GEPEngine
 
 	void Entity::onGUI()
 	{
-		for (size_t i = 0; i < m_components.size(); i++)
+		if(m_alive)
 		{
-			m_components[i]->onGUI();
+			for (size_t i = 0; i < m_components.size(); i++)
+			{
+				m_components[i]->onGUI();
+			}
 		}
+	}
+
+	void Entity::Move(glm::vec3 _pos)
+	{
+		getTransform()->Move(_pos);
+	}
+
+	void Entity::SetPosition(glm::vec3 _pos)
+	{
+		getTransform()->setPosition(_pos);
+		
 	}
 }

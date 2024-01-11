@@ -80,9 +80,9 @@ namespace GEPEngine
 	{
 
 		Input();
+		~Input();
 
 		void onTick();
-
 		void processKeys(SDL_Event _e, glm::ivec2 _wSize);
 
 		bool isKey(Keys keyCode);
@@ -92,22 +92,19 @@ namespace GEPEngine
 		glm::vec2 getLeftJStick();
 		glm::vec2 getRightJStick();
 
-		bool getLMouse() { return lMouse; }
-
-		inline glm::vec2 getMouseMove() { return m_mouseMove; }
-		inline glm::vec2 getMouseCoords() { return m_mouseCoords; }
+		glm::vec2 getMouseMove();
+		glm::vec2 getMouseCoords();
 
 	private:
 
-		std::vector<int> keyCodes;
-		std::vector<int> pressedKeys;
-		std::vector<int> releasedKeys;
+		std::vector<int> m_keyCodes;
+		std::vector<int> m_pressedKeys;
+		std::vector<int> m_releasedKeys;
 
 		glm::vec2 m_mouseMove;
 		glm::vec2 m_mouseCoords;
-		bool lMouse;
 
-		glm::vec2 gpLeftJoystick;
-		glm::vec2 gpRightJoystick;
+		glm::vec2 m_gpLeftJoystick;
+		glm::vec2 m_gpRightJoystick;
 	};
 }

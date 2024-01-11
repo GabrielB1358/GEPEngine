@@ -1,10 +1,46 @@
 #include "Input.h"
+#define MAX_CONTROLLERS 1
+SDL_GameController* ControllerHandles[MAX_CONTROLLERS];
+
 
 namespace GEPEngine
 {
 	Input::Input()
 	{
-		lMouse = false;
+		int JStickNum = SDL_NumJoysticks();
+		int controllerIndex = 0;
+		for (size_t ji = 0; ji < JStickNum; ++ji)
+		{
+			if (!SDL_IsGameController(ji))
+			{
+				continue;
+			}
+			if (controllerIndex >= MAX_CONTROLLERS)
+			{
+				break;
+			}
+			ControllerHandles[controllerIndex] = SDL_GameControllerOpen(ji);
+			controllerIndex++;
+		}
+	}
+
+	Input::~Input()
+	{
+		for (int ji = 0; ji < MAX_CONTROLLERS; ++ji)
+		{
+			if (ControllerHandles[ji])
+			{
+				SDL_GameControllerClose(ControllerHandles[ji]);
+			}
+		}
+	}
+
+	void Input::onTick()
+	{
+		m_pressedKeys.clear();
+		m_releasedKeys.clear();
+
+		m_mouseMove = glm::vec2(0);
 	}
 
 	void Input::processKeys(SDL_Event _e, glm::ivec2 _wSize)
@@ -12,20 +48,20 @@ namespace GEPEngine
 		//Keyboard input processing
 		if (_e.type == SDL_KEYDOWN)
 		{
-			if (std::find(keyCodes.begin(), keyCodes.end(), _e.key.keysym.sym) == keyCodes.end())
+			if (std::find(m_keyCodes.begin(), m_keyCodes.end(), _e.key.keysym.sym) == m_keyCodes.end())
 			{
-				keyCodes.push_back(_e.key.keysym.sym);
-				pressedKeys.push_back(_e.key.keysym.sym);
+				m_keyCodes.push_back(_e.key.keysym.sym);
+				m_pressedKeys.push_back(_e.key.keysym.sym);
 			}
 		}
 		else if (_e.type == SDL_KEYUP)
 		{
-			for (int i = 0; i < keyCodes.size(); i++)
+			for (int i = 0; i < m_keyCodes.size(); i++)
 			{
-				if (keyCodes[i] == _e.key.keysym.sym)
+				if (m_keyCodes[i] == _e.key.keysym.sym)
 				{
-					keyCodes.erase(keyCodes.begin() + i);
-					releasedKeys.push_back(_e.key.keysym.sym);
+					m_keyCodes.erase(m_keyCodes.begin() + i);
+					m_releasedKeys.push_back(_e.key.keysym.sym);
 				}
 			}
 		}
@@ -40,69 +76,97 @@ namespace GEPEngine
 			m_mouseMove.x += m_mouseCoords.x - (_wSize.x / 2);
 			m_mouseMove.y += m_mouseCoords.y - (_wSize.y / 2);
 
-			//This line is for if you have the camera controlled by mouse enabled
-			//SDL_WarpMouseInWindow(NULL, (_wSize.x / 2), (_wSize.y / 2));
 		}
 		if (_e.type == SDL_MOUSEBUTTONDOWN)
 		{
-			if (std::find(keyCodes.begin(), keyCodes.end(), _e.button.button) == keyCodes.end())
+			if (std::find(m_keyCodes.begin(), m_keyCodes.end(), _e.button.button) == m_keyCodes.end())
 			{
-				keyCodes.push_back(_e.button.button);
-				pressedKeys.push_back(_e.button.button);
+				m_keyCodes.push_back(_e.button.button);
+				m_pressedKeys.push_back(_e.button.button);
 			}
-			lMouse = true;
 		}
 		else if (_e.type == SDL_MOUSEBUTTONUP)
 		{
-			for (int i = 0; i < keyCodes.size(); i++)
+			for (int i = 0; i < m_keyCodes.size(); i++)
 			{
-				if (keyCodes[i] == _e.button.button)
+				if (m_keyCodes[i] == _e.button.button)
 				{
-					keyCodes.erase(keyCodes.begin() + i);
-					releasedKeys.push_back(_e.button.button);
+					m_keyCodes.erase(m_keyCodes.begin() + i);
+					m_releasedKeys.push_back(_e.button.button);
 				}
 			}
-			lMouse = false;
 		}
 
 		//Gamepad input processing
-		//button, joystick
 		if (_e.type == SDL_JOYAXISMOTION)
 		{
 			if (_e.jaxis.which == 0)
 			{
 				if (_e.jaxis.axis == 0)
-					gpLeftJoystick.x = _e.jaxis.value;
+				{
+					if (_e.jaxis.value > 3000 || _e.jaxis.value < -3000)
+					{
+						m_gpLeftJoystick.x = ((float)_e.jaxis.value / 32767.0f);
+					}
+					else
+					{
+						m_gpLeftJoystick.x = 0.0f;
+					}
+				}
 				if (_e.jaxis.axis == 1)
-					gpLeftJoystick.y = _e.jaxis.value;
+				{
+					if (_e.jaxis.value > 3000 || _e.jaxis.value < -3000)
+					{
+						m_gpLeftJoystick.y = ((float)_e.jaxis.value / 32767.0f);
+					}
+					else
+					{
+						m_gpLeftJoystick.y = 0.0f;
+					}
+				}
 			}
 			if (_e.jaxis.which == 1)
 			{
 				if (_e.jaxis.axis == 0)
-					gpRightJoystick.x = _e.jaxis.value;
+				{
+					if (_e.jaxis.value > 3000 || _e.jaxis.value < -3000)
+					{
+						m_gpRightJoystick.x = ((float)_e.jaxis.value / 32767.0f);
+					}
+					else
+					{
+						m_gpRightJoystick.x = 0.0f;
+					}
+				}
 				if (_e.jaxis.axis == 1)
-					gpRightJoystick.y = _e.jaxis.value;
+				{
+					if (_e.jaxis.value > 3000 || _e.jaxis.value < -3000)
+					{
+						m_gpRightJoystick.y = ((float)_e.jaxis.value / 32767.0f);
+					}
+					else
+					{
+						m_gpRightJoystick.y = 0.0f;
+					}
+				}
 			}
 		}
 		if (_e.type == SDL_CONTROLLERBUTTONDOWN || _e.type == SDL_JOYBUTTONDOWN)
 		{
-			for (int i = 0; i < keyCodes.size(); i++)
+			if (std::find(m_keyCodes.begin(), m_keyCodes.end(), _e.button.button) == m_keyCodes.end())
 			{
-				if (std::find(keyCodes.begin(), keyCodes.end(), _e.button.button) == keyCodes.end())
-				{
-					keyCodes.push_back(_e.button.button);
-					pressedKeys.push_back(_e.button.button);
-				}
+				m_keyCodes.push_back(_e.button.button);
+				m_pressedKeys.push_back(_e.button.button);
 			}
 		}
 		else if (_e.type == SDL_CONTROLLERBUTTONUP || _e.type == SDL_JOYBUTTONUP)
 		{
-			for (int i = 0; i < keyCodes.size(); i++)
+			for (int i = 0; i < m_keyCodes.size(); i++)
 			{
-				if (keyCodes[i] == _e.button.button)
+				if (m_keyCodes[i] == _e.button.button)
 				{
-					keyCodes.erase(keyCodes.begin() + i);
-					releasedKeys.push_back(_e.button.button);
+					m_keyCodes.erase(m_keyCodes.begin() + i);
+					m_releasedKeys.push_back(_e.button.button);
 				}
 			}
 		}
@@ -110,29 +174,27 @@ namespace GEPEngine
 
 	glm::vec2 Input::getLeftJStick()
 	{
-		return gpLeftJoystick;
+		return m_gpLeftJoystick;
 	}
 
 	glm::vec2 Input::getRightJStick()
 	{
-		return gpRightJoystick;
+		return m_gpRightJoystick;
 	}
 
-	void Input::onTick()
+	glm::vec2 Input::getMouseMove()
 	{
-		for (int i = 0; i < keyCodes.size(); i++)
-		{
-			std::cout << keyCodes[i] << std::endl;
-		}
-		pressedKeys.clear();
-		releasedKeys.clear();
+		return m_mouseMove;
+	}
 
-		m_mouseMove = glm::vec2(0);
+	glm::vec2 Input::getMouseCoords()
+	{
+		return m_mouseCoords;
 	}
 
 	bool Input::isKey(Keys keyCode)
 	{
-		if (std::find(keyCodes.begin(), keyCodes.end(), keyCode) != keyCodes.end())
+		if (std::find(m_keyCodes.begin(), m_keyCodes.end(), keyCode) != m_keyCodes.end())
 		{
 			return true;
 		}
@@ -142,7 +204,7 @@ namespace GEPEngine
 
 	bool Input::isKeyDown(Keys keyCode)
 	{
-		if (std::find(pressedKeys.begin(), pressedKeys.end(), keyCode) != pressedKeys.end())
+		if (std::find(m_pressedKeys.begin(), m_pressedKeys.end(), keyCode) != m_pressedKeys.end())
 		{
 			return true;
 		}
@@ -152,7 +214,7 @@ namespace GEPEngine
 
 	bool Input::isKeyUp(Keys keyCode)
 	{
-		if (std::find(releasedKeys.begin(), releasedKeys.end(), keyCode) != releasedKeys.end())
+		if (std::find(m_releasedKeys.begin(), m_releasedKeys.end(), keyCode) != m_releasedKeys.end())
 		{
 			return true;
 		}

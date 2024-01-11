@@ -18,7 +18,7 @@ void evilBloke::initialise()
 
 	angle = 0;
 	Move(glm::vec3(0, -0.5, -5));
-	getEntity()->getTransform()->Scale = glm::vec3(1.0f, 3.0f, 1.0f);
+	getEntity()->getTransform()->setScale(glm::vec3(1.0f, 3.0f, 1.0f));
 }
 
 void evilBloke::Move(glm::vec3 _move)

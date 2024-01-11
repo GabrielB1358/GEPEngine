@@ -16,10 +16,9 @@ namespace Graphics
 		GLuint GetId();
 		void AddVbo(std::shared_ptr<Vbo> _targetVbo);
 
-
 	private:
 		GLuint m_Id;
 		bool m_dirty;
-		std::vector<std::shared_ptr<Vbo>> Vbos{};
+		std::vector<std::shared_ptr<Vbo>> m_Vbos{};
 	};
 }

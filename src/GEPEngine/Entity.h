@@ -59,6 +59,9 @@ namespace GEPEngine
 			} 
 		}
 
+		void Move(glm::vec3 _pos);
+		void SetPosition(glm::vec3 _pos);
+
 		std::shared_ptr<Transform> getTransform();
 		std::shared_ptr<Core> getCore();
 		bool getAlive();
@@ -70,11 +73,10 @@ namespace GEPEngine
 
 	private:
 		friend struct Core;
-
-		bool m_alive;
+		std::weak_ptr<Core> m_core;
 		std::weak_ptr<Entity> m_self;
 		std::weak_ptr<Transform> m_transform;
-		std::weak_ptr<Core> m_core;
 		std::vector<std::shared_ptr<Component> > m_components;
+		bool m_alive;
 	};
 }

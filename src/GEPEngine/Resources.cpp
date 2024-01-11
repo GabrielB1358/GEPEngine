@@ -37,9 +37,6 @@ namespace GEPEngine
 				
 			}
 		}
-
-		std::cout << m_resources.size() << std::endl;
-
 	}
 
 }
