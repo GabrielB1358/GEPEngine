@@ -1,12 +1,13 @@
 #pragma once
-#include <iostream>
-#include <GEPEngine/Resources.h>
+#include <GEPEngine/ALSoundSrc.h>
+#include <GEPEngine/BoxCollider.h>
+#include <GEPEngine/Camera.h>
 #include <GEPEngine/Environment.h>
 #include <GEPEngine/Input.h>
-#include <GEPEngine/BoxCollider.h>
-#include <GEPEngine/ALSoundSrc.h>
-#include <GEPEngine/Camera.h>
 #include <GEPEngine/Light.h>
+#include <GEPEngine/Resources.h>
+#include <iostream>
+
 
 namespace GEPEngine
 {
@@ -21,13 +22,21 @@ namespace GEPEngine
 
 		static std::shared_ptr<Core> initialize();
 		void start();
+		std::shared_ptr<Entity> addEntity();
+
+		void setCamera(std::shared_ptr<Camera> _cam);
+		void setPointLight(std::shared_ptr<Light> _light);
+		void setWinSize(glm::ivec2 _size);
 
 		std::shared_ptr<GUI> getGUI();
+		std::shared_ptr<Camera> getCamera();
+		std::shared_ptr<Input> getInput();
 		std::shared_ptr<Resources> getResources();
+		std::shared_ptr<Environment> getEnvironment();
+		std::shared_ptr<Light> getPointLight();
 		glm::vec3 getLightPos();
+		glm::ivec2 getWinSize();
 		float getDT();
-
-		std::shared_ptr<Entity> addEntity();
 
 		template <typename T>
 		void findColliders(std::vector<std::shared_ptr<T> >& _out)
@@ -54,21 +63,21 @@ namespace GEPEngine
 			}
 		}
 
-		std::shared_ptr<Camera> m_camera;
-		std::shared_ptr<Environment> m_environment;
-		std::shared_ptr<Input> m_input;
-		std::shared_ptr<Light> m_pointLight;
-		glm::ivec2 m_winSize;
-
-
 	private:
-		std::shared_ptr<NativeWindow> m_window;
 		friend struct entity;
 		std::vector<std::shared_ptr<Entity> > m_entities;
+		std::shared_ptr<NativeWindow> m_window;
 		std::shared_ptr<Resources> m_resources;
 		std::shared_ptr<BoxCollider> m_boxColliders;
 		std::shared_ptr<GUI> m_GUI;
+		std::shared_ptr<Camera> m_camera;
+		std::shared_ptr<Input> m_input;
+		std::shared_ptr<Environment> m_environment;
+		std::shared_ptr<Light> m_pointLight;
+
 		std::weak_ptr<Core> m_self;
+
+		glm::ivec2 m_winSize;
 
 		bool m_running = false;
 	};

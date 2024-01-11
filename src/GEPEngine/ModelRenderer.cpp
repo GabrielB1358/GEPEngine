@@ -47,10 +47,10 @@ namespace GEPEngine
 		m_Model = getCore()->getResources()->load<GEPEngine::Model>(m_modPath);
 		m_Texture = getCore()->getResources()->load<GEPEngine::Texture>(m_texPath);
 		m_Shader = getCore()->getResources()->load<GEPEngine::Shader>(m_shaderPath);
-		m_Camera = getCore()->m_camera;
+		m_Camera = getCore()->getCamera();
 		
 		//Use the shader Render function to display
-		glm::mat4 modelMatrix = m_entity.lock()->getTransform()->getModel();
+		glm::mat4 modelMatrix = getEntity()->getTransform()->getModel();
 		m_Shader->getShader()->Render(m_Model->getModel(), m_Texture->getTexture(), m_Camera, modelMatrix, getCore()->getLightPos());
 	}
 

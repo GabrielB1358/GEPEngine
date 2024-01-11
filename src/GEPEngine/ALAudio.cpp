@@ -37,4 +37,34 @@ namespace GEPEngine
 		rtn->playSound();
 	}
 
+	std::shared_ptr<ALSoundSrc> ALAudio::getSource()
+	{
+		return m_source;
+	}
+
+	std::string ALAudio::getPath()
+	{
+		return m_path;
+	}
+
+	glm::vec3 ALAudio::getSoundPos()
+	{
+		return m_Pos;
+	}
+
+	void ALAudio::setSource(std::shared_ptr<ALSoundSrc> _source)
+	{
+		m_source = _source;
+	}
+
+	void ALAudio::setPath(std::string _string)
+	{
+		m_path = _string;
+	}
+
+	void ALAudio::setSoundPos(glm::vec3 _pos)
+	{
+		m_Pos = _pos;
+	}
+
 }

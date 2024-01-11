@@ -87,11 +87,6 @@ namespace GEPEngine
 		return rtn;
 	}
 
-	std::shared_ptr<Resources> Core::getResources()
-	{
-		return m_resources;
-	}
-
 	void Core::start()
 	{
 		m_running = true;
@@ -174,6 +169,11 @@ namespace GEPEngine
 		return rtn;
 	}
 
+	std::shared_ptr<Resources> Core::getResources()
+	{
+		return m_resources;
+	}
+
 	std::shared_ptr<GUI> Core::getGUI()
 	{
 		return m_GUI;
@@ -187,5 +187,45 @@ namespace GEPEngine
 	glm::vec3 Core::getLightPos()
 	{
 		return m_pointLight->getPos();
+	}
+
+	std::shared_ptr<Camera> Core::getCamera()
+	{
+		return m_camera;
+	}
+
+	void Core::setCamera(std::shared_ptr<Camera> _cam)
+	{
+		m_camera = _cam;
+	}
+
+	std::shared_ptr<Input> Core::getInput()
+	{
+		return m_input;
+	}
+
+	std::shared_ptr<Environment> Core::getEnvironment()
+	{
+		return m_environment;
+	}
+
+	std::shared_ptr<Light> Core::getPointLight()
+	{
+		return m_pointLight;
+	}
+
+	void Core::setPointLight(std::shared_ptr<Light> _light)
+	{
+		m_pointLight = _light;
+	}
+
+	void Core::setWinSize(glm::ivec2 _size)
+	{
+		m_winSize = _size;
+	}
+
+	glm::ivec2 Core::getWinSize()
+	{
+		return m_winSize;
 	}
 }

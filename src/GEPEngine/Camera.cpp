@@ -23,7 +23,7 @@ namespace GEPEngine
 		m_viewMatrix = glm::lookAt(m_cameraPos, initTarget, m_up);
 
 		m_perspProjmat = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-		m_orthoProjmat = glm::ortho(0.0f, (float)getCore()->m_winSize.x, (float)getCore()->m_winSize.y, 0.0f, 0.0f, 1.0f);
+		m_orthoProjmat = glm::ortho(0.0f, (float)getCore()->getWinSize().x, (float)getCore()->getWinSize().y, 0.0f, 0.0f, 1.0f);
 	}
 
 
@@ -39,7 +39,7 @@ namespace GEPEngine
 		m_direction = glm::rotate(m_direction, m_cameraAngleX, glm::vec3(1, 0, 0));
 
 		//Camera transform updated with parent entity's transform
-		m_cameraPos = m_entity.lock()->getTransform()->Position;
+		m_cameraPos = getEntity()->getTransform()->Position;
 		//Camera moved slightly up so youre not seeing inside the model
 		m_cameraPos += glm::vec3(0, 1, 0);
 
@@ -50,9 +50,43 @@ namespace GEPEngine
 		m_viewMatrix = glm::inverse(m_viewMatrix);
 	}
 	
+	glm::mat4 Camera::getViewMat()
+	{
+		return m_viewMatrix;
+	}
+
+	glm::mat4 Camera::getOrthoProjMat()
+	{
+		return m_orthoProjmat;
+	}
+
+	glm::mat4 Camera::getPerspProjMat()
+	{
+		return m_perspProjmat;
+	}
+
 	glm::vec2 Camera::getMouse()
 	{
 		return getInput()->getMouseMove();
 	}
 
+	void Camera::setViewMat(glm::mat4 _view)
+	{
+		m_viewMatrix = _view;
+	}
+
+	void Camera::setOrthoProjMat(glm::mat4 _ortho)
+	{
+		m_orthoProjmat = _ortho;
+	}
+
+	void Camera::setPerspProjMat(glm::mat4 _persp)
+	{
+		m_perspProjmat = _persp;
+	}
+
+	void Camera::setPos(glm::vec3 _pos)
+	{
+		m_cameraPos = _pos;
+	}
 }

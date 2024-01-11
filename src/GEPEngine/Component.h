@@ -3,17 +3,15 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
-
-
 namespace GEPEngine
 {
 	struct Core;
+	struct Camera;
 	struct Entity;
+	struct Environment;
 	struct Input;
 	struct Light;
 	struct MouseInput;
-	struct Environment;
-	struct Camera;
 
 	struct Component
 	{
@@ -24,22 +22,19 @@ namespace GEPEngine
 		std::shared_ptr<Environment> getEnvironment();
 		double getDT();
 
+		void tick();
+		void display();
 		void onInit();
 		void onBegin();
+		void kill();
 
 		virtual void onTick();
 		virtual void onDisplay();
 		virtual void initialise();
 		virtual void onGUI();
 
-
-		std::weak_ptr<Entity> m_entity;
-
 	private:
-		void tick();
-		void display();
-
 		friend struct Entity;
-
+		std::weak_ptr<Entity> m_entity;
 	};
 }

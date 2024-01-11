@@ -33,7 +33,7 @@ namespace GEPEngine
 
 	void GUI::draw(glm::vec2 _pos, glm::vec2 _size, std::string _path)
 	{
-		m_screenSize = m_core->m_winSize;
+		m_screenSize = m_core->getWinSize();
 		m_screenSpace.x = (mapping(_pos.x, 0, m_screenSize.x, 0, 1) * m_screenSize.x);
 		m_screenSpace.y = (mapping(_pos.y, 0, m_screenSize.y, 0, 1) * m_screenSize.y);
 
@@ -41,14 +41,14 @@ namespace GEPEngine
 
 		m_texture = m_core->getResources()->load<Texture>(_path);
 		m_shader = m_core->getResources()->load<Shader>("../Shaders/GUI");
-		m_shader->getShader()->RenderQuad(m_vao, m_texture->getTexture(), _modelMatrix, m_core->m_camera);
+		m_shader->getShader()->RenderQuad(m_vao, m_texture->getTexture(), _modelMatrix, m_core->getCamera());
 	}
 
 	bool GUI::Button(std::string _downPath, std::string _upPath, glm::vec2 _pos, glm::vec2 _size)
 	{
 		if (doesMouseOverlap(_pos, _size))
 		{
-			if (m_core->m_input->isKey(Keys::leftM))
+			if (m_core->getInput()->isKey(Keys::leftM))
 			{
 				draw(_pos, _size, _downPath);
 				return true;
@@ -68,7 +68,7 @@ namespace GEPEngine
 
 	bool GUI::doesMouseOverlap(glm::vec2 _pos, glm::vec2 _size)
 	{
-		glm::vec2 msTmp = m_core->m_input->getMouseCoords();
+		glm::vec2 msTmp = m_core->getInput()->getMouseCoords();
 		_size = _size / 2.0f;
 		if (msTmp.x < (_pos.x - _size.x))
 			return false;

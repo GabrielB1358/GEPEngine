@@ -28,11 +28,11 @@ namespace GEPEngine
 	}
 	std::shared_ptr<Input> Component::getInput()
 	{
-		return getCore()->m_input;
+		return getCore()->getInput();
 	}
 	std::shared_ptr<Light> Component::getLight()
 	{
-		return getCore()->m_pointLight;
+		return getCore()->getPointLight();
 	}
 	std::shared_ptr<Environment> Component::getEnvironment()
 	{
@@ -52,6 +52,10 @@ namespace GEPEngine
 	void Component::display()
 	{
 		onDisplay();
+	}
+	void Component::kill()
+	{
+		
 	}
 	void Component::onTick()
 	{

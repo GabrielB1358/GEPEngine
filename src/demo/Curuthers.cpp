@@ -17,20 +17,20 @@ Curuthers::Curuthers(bool greg)
 
 void Curuthers::initialise()
 {
-	m_renderer = m_entity.lock()->addComponent<GEPEngine::ModelRenderer>();
-	m_collider = m_entity.lock()->addComponent<GEPEngine::BoxCollider>();
-	m_rigibody = m_entity.lock()->addComponent<GEPEngine::Rigidbody>();
+	m_renderer = getEntity()->addComponent<GEPEngine::ModelRenderer>();
+	m_collider = getEntity()->addComponent<GEPEngine::BoxCollider>();
+	m_rigibody = getEntity()->addComponent<GEPEngine::Rigidbody>();
 
 	m_renderer->setModel("../Models/curuthers/curuthers.obj");
 	m_renderer->setTexture("../Models/curuthers/Whiskers_diffuse.png");
 	m_renderer->setShader("../Shaders/notGUI");
 
-	m_collider->m_size = glm::vec3(0.5f, 0.5f, 0.5f);
-	m_collider->m_offset = glm::vec3(0);
+	m_collider->setSize(glm::vec3(0.5f, 0.5f, 0.5f));
+	m_collider->setOffset(glm::vec3(0));
 
 
-	hornSound = m_entity.lock()->addComponent<GEPEngine::ALAudio>("../dixie_horn.ogg");
-	pigeonSound = m_entity.lock()->addComponent<GEPEngine::ALAudio>("../PigeonCoo.ogg");
+	hornSound = getEntity()->addComponent<GEPEngine::ALAudio>("../dixie_horn.ogg");
+	pigeonSound = getEntity()->addComponent<GEPEngine::ALAudio>("../PigeonCoo.ogg");
 
 
 	angle = 0;
@@ -40,8 +40,8 @@ void Curuthers::initialise()
 
 void Curuthers::onTick()
 {
-	angle = 180 * getCore()->m_environment->getDT();
-	float step = getCore()->m_environment->getDT() * 1;
+	angle = 180 * getCore()->getDT();
+	float step = getCore()->getDT() * 1;
 
 	if (getInput()->isKey(GEPEngine::Keys::leftM) == true)
 	{
@@ -75,12 +75,12 @@ void Curuthers::onTick()
 
 void Curuthers::Move(glm::vec3 _move)
 {
-	m_entity.lock()->getTransform()->Move(_move);
+	getEntity()->getTransform()->Move(_move);
 }
 
 void Curuthers::Scale(glm::vec3 _scale)
 {
-	m_entity.lock()->getTransform()->Scale = _scale;
+	getEntity()->getTransform()->Scale = _scale;
 }
 
 void Curuthers::onGUI()

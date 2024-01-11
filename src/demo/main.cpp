@@ -16,15 +16,15 @@ int main()
 	std::shared_ptr<Core> core = Core::initialize();
 
 	std::shared_ptr<Entity> CuruthersEntity = core->addEntity();
-	core->m_camera = CuruthersEntity->addComponent<Camera>();
+	core->setCamera(CuruthersEntity->addComponent<Camera>());
 	std::shared_ptr<Curuthers> cat = CuruthersEntity->addComponent<Curuthers>();
 	
 
 	std::shared_ptr<Entity> entity2 = core->addEntity();
 	std::shared_ptr<evilBloke> naughty = entity2->addComponent<evilBloke>();
-	core->m_pointLight = entity2->addComponent<Light>();
+	core->setPointLight(entity2->addComponent<Light>());
 
-	cat->m_entity.lock()->getTransform()->Position = glm::vec3(-0.5, 0, -4);
+	cat->getEntity()->getTransform()->Position = glm::vec3(-0.5, 0, -4);
 
 	entity2->getTransform()->Move(glm::vec3(0, 0, -10));
 

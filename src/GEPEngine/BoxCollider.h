@@ -15,8 +15,12 @@ namespace GEPEngine
 		void setSize(glm::vec3 _size);
 		void setOffset(glm::vec3 _offset);
 
-		glm::vec3 getPosition();
+		glm::vec3 getSize();
+		glm::vec3 getOffset();
+		glm::vec3 getPos();
 
+
+	private:
 		glm::vec3 m_size;
 		glm::vec3 m_offset;
 	};

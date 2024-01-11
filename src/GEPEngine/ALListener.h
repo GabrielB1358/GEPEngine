@@ -8,11 +8,12 @@ namespace GEPEngine
 	struct ALListener : Component
 	{
 		void initialise() override;
-
 		void onTick() override;
 
 		glm::vec3 getEntityPos();
 
-		glm::vec3 Pos;
+	private:
+		glm::vec3 newPos;
+		glm::vec3 oldPos;
 	};
 }

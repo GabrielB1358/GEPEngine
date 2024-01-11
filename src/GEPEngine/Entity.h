@@ -1,7 +1,7 @@
 #pragma once
+#include <GEPEngine/Transform.h>
 #include <memory>
 #include <vector>
-#include <GEPEngine/Transform.h>
 
 namespace GEPEngine
 {
@@ -63,20 +63,18 @@ namespace GEPEngine
 		std::shared_ptr<Core> getCore();
 		bool getAlive();
 
+		void tick();
+		void display();
 		void kill();
 		void onGUI();
-
-		std::weak_ptr<Core> m_core;
-		std::vector<std::shared_ptr<Component> > m_components;
 
 	private:
 		friend struct Core;
 
-		void tick();
-		void display();
-
 		bool m_alive;
 		std::weak_ptr<Entity> m_self;
 		std::weak_ptr<Transform> m_transform;
+		std::weak_ptr<Core> m_core;
+		std::vector<std::shared_ptr<Component> > m_components;
 	};
 }

@@ -23,8 +23,8 @@ namespace GEPEngine
 				bool hit = collider->colliding(m_colliders.at(i));
 				if (hit)
 				{
-					glm::vec3 displacement = m_colliders.at(i)->getCollisionResponse(m_colliders.at(i)->getPosition() + m_colliders.at(i)->m_offset, m_colliders.at(i)->m_size);
-					m_colliders.at(i)->getEntity()->getTransform()->Move(displacement - m_colliders.at(i)->getPosition() - m_colliders.at(i)->m_offset);
+					glm::vec3 displacement = m_colliders.at(i)->getCollisionResponse(m_colliders.at(i)->getPos() + m_colliders.at(i)->getOffset(), m_colliders.at(i)->getSize());
+					m_colliders.at(i)->getEntity()->getTransform()->Move(displacement - m_colliders.at(i)->getPos() - m_colliders.at(i)->getOffset());
 				}
 			}
 

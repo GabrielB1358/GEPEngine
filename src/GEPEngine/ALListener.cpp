@@ -6,17 +6,16 @@ namespace GEPEngine
 
 	void ALListener::initialise()
 	{
-		Pos = glm::vec3(0);
-		
+		oldPos = glm::vec3(0);
 	}
 
 	void ALListener::onTick()
 	{
-		if (Pos != getEntityPos())
+		newPos = getEntityPos();
+		if (oldPos != newPos)
 		{
-			Pos = getEntityPos();
-
-			alListener3f(AL_POSITION, Pos.x, Pos.y, Pos.z);
+			oldPos = newPos;
+			alListener3f(AL_POSITION, newPos.x, newPos.y, newPos.z);
 		}
 	}
 
