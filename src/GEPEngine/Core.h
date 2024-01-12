@@ -47,20 +47,6 @@ namespace GEPEngine
 		***********************************************************/
 		std::shared_ptr<Entity> addEntity();
 
-		void setCamera(std::shared_ptr<Camera> _cam);//! Sets the camera variable
-		void setPointLight(std::shared_ptr<Light> _light);//! sets the point light variable
-		void setWinSize(glm::ivec2 _size);//! Sets the window size
-
-		std::shared_ptr<GUI> getGUI();//! returns the GUI reference
-		std::shared_ptr<Camera> getCamera();//! returns the camera reference
-		std::shared_ptr<Input> getInput();//! returns the input reference
-		std::shared_ptr<Resources> getResources();//! returns the resources reference
-		std::shared_ptr<Environment> getEnvironment();//! returns the environment reference
-		std::shared_ptr<Light> getPointLight();//! returns the point light reference
-		glm::vec3 getLightPos();//! returns the light position vector
-		glm::ivec2 getWinSize();//! returns the window size
-		float getDT();//! returns delta time
-
 		/*****************************************************************************//**
 		* This function returns a vector of all present collider components
 		* 
@@ -94,6 +80,20 @@ namespace GEPEngine
 				}
 			}
 		}
+
+		void setCamera(std::shared_ptr<Camera> _cam);//! Sets the camera variable
+		void setPointLight(std::shared_ptr<Light> _light);//! sets the point light variable
+		void setWinSize(glm::ivec2 _size);//! Sets the window size
+
+		std::shared_ptr<GUI> getGUI();//! returns the GUI reference
+		std::shared_ptr<Camera> getCamera();//! returns the camera reference
+		std::shared_ptr<Input> getInput();//! returns the input reference
+		std::shared_ptr<Resources> getResources();//! returns the resources reference
+		std::shared_ptr<Environment> getEnvironment();//! returns the environment reference
+		std::shared_ptr<Light> getPointLight();//! returns the point light reference
+		glm::vec3 getLightPos();//! returns the light position vector
+		glm::ivec2 getWinSize();//! returns the window size
+		float getDT();//! returns delta time
 
 	private:
 		friend struct entity;

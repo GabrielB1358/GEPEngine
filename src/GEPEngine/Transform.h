@@ -11,6 +11,7 @@ namespace GEPEngine
 
 		void onTick() override;
 
+		//Alters the position and rotation respectively
 		void Move(glm::vec3 _pos);
 		void Rotate(glm::vec3 _rot);
 
@@ -38,6 +39,5 @@ namespace GEPEngine
 		glm::vec3 m_lastTickPosition;
 
 		int m_angle;
-		float m_gravityForce;
 	};
 }
