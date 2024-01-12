@@ -9,19 +9,18 @@ namespace GEPEngine
 
 	void Camera::initialise()
 	{
-		m_cameraPos = glm::vec3(0.0f, 8.0f, 17.0f);
-		glm::vec3 initTarget = glm::vec3(-100.0f, 90.0f, 0.0f);
+		m_cameraPos = getEntityPosition();
+		glm::vec3 initTarget = glm::vec3(0.0f, 0.0f, 0.0f);
 
 		m_cameraAngleX = -0.4f;
 		m_cameraAngleY = -0.0005f;
 
 		m_speed = 0.1f;
-		m_mouseSpeed = 0.005f;
-
-		//Projection matrix will be set in separate function as you cant pass bool parameters into the initialise function
+		m_mouseSpeed = 0.0005f;
 
 		m_viewMatrix = glm::lookAt(m_cameraPos, initTarget, m_up);
 
+		//Separate ortho and persp matrices exist simultaenously as both are needed
 		m_perspProjmat = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
 		m_orthoProjmat = glm::ortho(0.0f, (float)getCore()->getWinSize().x, (float)getCore()->getWinSize().y, 0.0f, 0.0f, 1.0f);
 	}
@@ -38,11 +37,10 @@ namespace GEPEngine
 		m_direction = glm::rotate(m_direction, m_cameraAngleY, glm::vec3(0, 1, 0));
 		m_direction = glm::rotate(m_direction, m_cameraAngleX, glm::vec3(1, 0, 0));
 
-		//Camera transform updated with parent entity's transform
-		m_cameraPos = getEntity()->getTransform()->getPosition();
-		//Camera moved slightly up so youre not seeing inside the model
-		m_cameraPos += glm::vec3(0, 1, 0);
+		//Cam position updated with parent entity position + offset
+		m_cameraPos = getEntityPosition() + m_offset;
 
+		//Prepare view matrix every tick
 		m_viewMatrix = glm::mat4(1);
 		m_viewMatrix = glm::translate(m_viewMatrix, m_cameraPos);
 		m_viewMatrix = glm::rotate(m_viewMatrix, m_cameraAngleY, glm::vec3(0, 1, 0));
@@ -70,6 +68,11 @@ namespace GEPEngine
 		return getInput()->getMouseMove();
 	}
 
+	glm::vec3 Camera::getOffset()
+	{
+		return m_offset;
+	}
+
 	void Camera::setViewMat(glm::mat4 _view)
 	{
 		m_viewMatrix = _view;
@@ -88,5 +91,10 @@ namespace GEPEngine
 	void Camera::setPos(glm::vec3 _pos)
 	{
 		m_cameraPos = _pos;
+	}
+
+	void Camera::setOffset(glm::vec3 _ofs)
+	{
+		m_offset = _ofs;
 	}
 }

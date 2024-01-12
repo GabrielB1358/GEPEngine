@@ -4,6 +4,7 @@ namespace GEPEngine
 {
 	NativeWindow::~NativeWindow()
 	{
+		//SDL clean up
 		SDL_GL_DeleteContext(m_context);
 		SDL_DestroyWindow(m_window);
 		SDL_Quit();
@@ -21,6 +22,7 @@ namespace GEPEngine
 
 	bool NativeWindow::setWindow(SDL_Window* _win)
 	{
+		//If the window given isnt null then set it
 		if (_win == NULL)
 		{
 			return false;
@@ -34,6 +36,7 @@ namespace GEPEngine
 
 	bool NativeWindow::setContext(SDL_GLContext _con)
 	{
+		//If the context given isnt null then set it
 		if (_con == NULL)
 		{
 			return false;

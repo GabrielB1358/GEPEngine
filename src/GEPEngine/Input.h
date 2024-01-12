@@ -6,6 +6,7 @@
 
 namespace GEPEngine
 {
+	//Enumarator for all the different types of inputs
 	enum Keys {
 		leftM = SDL_BUTTON_LEFT,
 		rightM = SDL_BUTTON_RIGHT,
@@ -78,6 +79,7 @@ namespace GEPEngine
 	struct Core;
 	struct Input
 	{
+		//Input class processes all different inputs (keyboard, mouse, gamepad) and provides variables to access this information
 
 		Input();
 		~Input();
@@ -97,13 +99,16 @@ namespace GEPEngine
 
 	private:
 
+		//Keyboard keys and controller button vectors
 		std::vector<int> m_keyCodes;
 		std::vector<int> m_pressedKeys;
 		std::vector<int> m_releasedKeys;
 
+		//Mouse vectors
 		glm::vec2 m_mouseMove;
 		glm::vec2 m_mouseCoords;
 
+		//Controller joystick vectors
 		glm::vec2 m_gpLeftJoystick;
 		glm::vec2 m_gpRightJoystick;
 	};

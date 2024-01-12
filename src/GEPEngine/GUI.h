@@ -9,6 +9,8 @@ namespace GEPEngine
 	struct Core;
 	struct GUI
 	{
+		//GUI struct controls rendering GUI elements such as buttons or informative pieces like a health bar
+
 		void initialise(std::shared_ptr<Core> _core);
 		void draw(glm::vec2 _pos, glm::vec2 _size, std::string _path);
 

@@ -35,6 +35,8 @@ add_library(GEPEngine
 	src/GEPEngine/ModelRenderer.h
 	src/GEPEngine/NativeWindow.cpp
 	src/GEPEngine/NativeWindow.h
+	src/GEPEngine/QuadRenderer.cpp
+	src/GEPEngine/QuadRenderer.h
 	src/GEPEngine/Core.cpp
 	src/GEPEngine/Core.h
 	src/GEPEngine/Component.cpp
@@ -89,6 +91,8 @@ add_executable(demo
 	src/demo/Curuthers.h
 	src/demo/evilBloke.cpp
 	src/demo/evilBloke.h
+	src/demo/billboard.cpp
+	src/demo/billboard.h
 )
 
 target_link_libraries(demo GEPEngine)

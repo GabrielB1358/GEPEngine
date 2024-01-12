@@ -38,6 +38,10 @@ namespace GEPEngine
 	{
 		return std::shared_ptr<Environment>();
 	}
+	glm::vec3 Component::getEntityPosition()
+	{
+		return getEntity()->getPosition();
+	}
 	double Component::getDT()
 	{
 		return 0.0;

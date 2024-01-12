@@ -7,6 +7,8 @@ namespace GEPEngine
 
 	struct ALListener : Component
 	{
+		//Listener component is used to update the listener position for sound to achieve directional audio
+
 		void initialise() override;
 		void onTick() override;
 

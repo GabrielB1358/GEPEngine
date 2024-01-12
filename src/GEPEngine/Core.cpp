@@ -131,6 +131,7 @@ namespace GEPEngine
 				}
 				catch(std::exception &m_e)
 				{
+					std::cout << "Failed to tick entity, entity destroyed.	Reason: " << m_e.what() << std::endl;
 					m_entities[i]->kill();
 				}
 			}
@@ -159,6 +160,11 @@ namespace GEPEngine
 			//tick keyboard, clearing the key vectors
 			m_input->onTick();
 			SDL_GL_SwapWindow(m_window->getWindow());
+
+			for (int i = 0; i < m_entities.size(); i++)
+			{
+				m_entities[i]->endFrame();
+			}
 		}
 	}
 

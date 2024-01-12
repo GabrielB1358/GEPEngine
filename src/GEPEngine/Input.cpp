@@ -7,6 +7,7 @@ namespace GEPEngine
 {
 	Input::Input()
 	{
+		//Cycles through any connected controllers and opens them for input polling
 		int JStickNum = SDL_NumJoysticks();
 		int controllerIndex = 0;
 		for (size_t ji = 0; ji < JStickNum; ++ji)
@@ -26,6 +27,7 @@ namespace GEPEngine
 
 	Input::~Input()
 	{
+		//Closes any opened controllers
 		for (int ji = 0; ji < MAX_CONTROLLERS; ++ji)
 		{
 			if (ControllerHandles[ji])
@@ -37,6 +39,7 @@ namespace GEPEngine
 
 	void Input::onTick()
 	{
+		//Reset the key vectors and mouse move vector every tick
 		m_pressedKeys.clear();
 		m_releasedKeys.clear();
 
@@ -66,9 +69,10 @@ namespace GEPEngine
 			}
 		}
 
-		//Mouse input controlling
+		//Mouse input processing
 		if (_e.type == SDL_MOUSEMOTION)
 		{
+			//Mouse motion processing
 			m_mouseCoords.x = _e.motion.x;
 			m_mouseCoords.y = _e.motion.y;
 
@@ -76,9 +80,11 @@ namespace GEPEngine
 			m_mouseMove.x += m_mouseCoords.x - (_wSize.x / 2);
 			m_mouseMove.y += m_mouseCoords.y - (_wSize.y / 2);
 
+			//SDL_WarpMouseInWindow(NULL, (float)_wSize.x / 2, (float)_wSize.y / 2);
 		}
 		if (_e.type == SDL_MOUSEBUTTONDOWN)
 		{
+			//Mouse buttons processing
 			if (std::find(m_keyCodes.begin(), m_keyCodes.end(), _e.button.button) == m_keyCodes.end())
 			{
 				m_keyCodes.push_back(_e.button.button);
@@ -100,6 +106,7 @@ namespace GEPEngine
 		//Gamepad input processing
 		if (_e.type == SDL_JOYAXISMOTION)
 		{
+			//Gamepad joystick motion processing
 			if (_e.jaxis.which == 0)
 			{
 				if (_e.jaxis.axis == 0)
@@ -153,6 +160,7 @@ namespace GEPEngine
 		}
 		if (_e.type == SDL_CONTROLLERBUTTONDOWN || _e.type == SDL_JOYBUTTONDOWN)
 		{
+			//Gamepad buttons processing
 			if (std::find(m_keyCodes.begin(), m_keyCodes.end(), _e.button.button) == m_keyCodes.end())
 			{
 				m_keyCodes.push_back(_e.button.button);
@@ -170,26 +178,6 @@ namespace GEPEngine
 				}
 			}
 		}
-	}
-
-	glm::vec2 Input::getLeftJStick()
-	{
-		return m_gpLeftJoystick;
-	}
-
-	glm::vec2 Input::getRightJStick()
-	{
-		return m_gpRightJoystick;
-	}
-
-	glm::vec2 Input::getMouseMove()
-	{
-		return m_mouseMove;
-	}
-
-	glm::vec2 Input::getMouseCoords()
-	{
-		return m_mouseCoords;
 	}
 
 	bool Input::isKey(Keys keyCode)
@@ -220,5 +208,25 @@ namespace GEPEngine
 		}
 		else
 			return false;
+	}
+
+	glm::vec2 Input::getLeftJStick()
+	{
+		return m_gpLeftJoystick;
+	}
+
+	glm::vec2 Input::getRightJStick()
+	{
+		return m_gpRightJoystick;
+	}
+
+	glm::vec2 Input::getMouseMove()
+	{
+		return m_mouseMove;
+	}
+
+	glm::vec2 Input::getMouseCoords()
+	{
+		return m_mouseCoords;
 	}
 }

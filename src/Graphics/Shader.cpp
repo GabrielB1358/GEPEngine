@@ -81,6 +81,38 @@ namespace Graphics
 
 	}
 
+	void Shader::RenderPerspQuad(std::shared_ptr<Vao> _vao, std::shared_ptr<Texture> _texture, std::shared_ptr<GEPEngine::Camera> _camera, glm::mat4 _modelMatrix, glm::vec3 _lightPos)
+	{
+		//Select program to use
+		glUseProgram(m_programId);
+
+		//Bind Mesh to the vertex array
+		glBindVertexArray(_vao->GetId());
+
+		//Bind texture
+		glBindTexture(GL_TEXTURE_2D, _texture->GetId());
+
+		//Bind to this shader
+		BindShader("u_Projection", _camera->getPerspProjMat());
+		BindShader("u_Model", _modelMatrix);
+		BindShader("u_Viewing", _camera->getViewMat());
+		glProgramUniform3f(m_programId, glGetUniformLocation(m_programId, "u_LightPos"), _lightPos.x, _lightPos.y, _lightPos.z);
+
+		//Enable anything appropriate
+		//glEnable(GL_DEPTH_TEST);
+
+		//draw the 3 triangle vertices
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		//reset the state
+		glBindVertexArray(0);
+		glUseProgram(0);
+		//glDisable(GL_DEPTH_TEST);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+	}
+
 	//Render function for 2D, orthographic things
 	void Shader::RenderQuad(std::shared_ptr<Vao> _Vao, std::shared_ptr<Texture> _texture, glm::mat4 _modelMatrix, std::shared_ptr<GEPEngine::Camera> _camera)
 	{

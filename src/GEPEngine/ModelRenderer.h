@@ -12,6 +12,8 @@ namespace GEPEngine
 
 	struct ModelRenderer : Component
 	{
+		//Modelrenderer component stores and controls variables allowing for rendering a 3D model into the world
+
 		ModelRenderer();
 		void onInitialise();
 		void onDisplay() override;
@@ -33,8 +35,6 @@ namespace GEPEngine
 		std::shared_ptr<GEPEngine::Shader> m_Shader;
 		std::shared_ptr<GEPEngine::Texture> m_Texture;
 		std::shared_ptr<GEPEngine::Model> m_Model;
-		
-		std::shared_ptr<Graphics::Vao> m_vao;
 
 		std::string m_fragPath;
 		std::string m_vertPath;

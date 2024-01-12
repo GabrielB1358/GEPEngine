@@ -7,6 +7,8 @@ namespace GEPEngine
 {
 	struct Resource
 	{
+		//Resource is a parent class holding the lifetime and string path of any child resource variables
+
 		virtual void onLoad();
 		void load();
 
@@ -20,6 +22,6 @@ namespace GEPEngine
 
 		std::string m_path;
 
-		float lifeTime;
+		float m_lifeTime;
 	};
 }

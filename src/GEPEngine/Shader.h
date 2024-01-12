@@ -7,6 +7,9 @@ namespace GEPEngine
 {
 	struct Shader : Resource
 	{
+		//GEPEngine shader just creates a Graphics library shader
+
+		//onload function acts as a constructor
 		void onLoad() override;
 
 		std::shared_ptr<Graphics::Shader> getShader();

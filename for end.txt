@@ -3,8 +3,7 @@
 - Demonstrate resource loading that doesnt crash if you cant load a resource and also
   deletes the entity that couldnt load it	DONE
 - Doxygen commenting format on Component, Entity and Core mostly but maybe more x
-- Emscripten cmake shit
 - Collision Responses	KINDA DONE
-- Billboard thing
+- Billboard thing	DONE
 - Point Light	DONE
 

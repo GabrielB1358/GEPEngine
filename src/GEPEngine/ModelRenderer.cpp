@@ -7,30 +7,6 @@ namespace GEPEngine
 {
 	ModelRenderer::ModelRenderer()
 	{
-
-
-		//VBO stuff here for reference for when making orthographic renderer and that x
-		std::shared_ptr<Graphics::Vbo> pos = std::make_shared<Graphics::Vbo>();
-		pos->Add(glm::vec3(-0.5f, 0.5f, 0.0f));
-		pos->Add(glm::vec3(-0.5f, -0.5f, 0.0f));
-		pos->Add(glm::vec3(0.5f, -0.5f, 0.0f));
-		pos->Add(glm::vec3(0.5f, -0.5f, 0.0f));
-		pos->Add(glm::vec3(0.5f, 0.5f, 0.0f));
-		pos->Add(glm::vec3(-0.5f, 0.5f, 0.0f));
-
-		std::shared_ptr<Graphics::Vbo> coords = std::make_shared<Graphics::Vbo>();
-		coords->Add(glm::vec2(0.0f, 1.0f));
-		coords->Add(glm::vec2(0.0f, 0.0f));
-		coords->Add(glm::vec2(1.0f, 0.0f));
-		coords->Add(glm::vec2(1.0f, 0.0f));
-		coords->Add(glm::vec2(1.0f, 1.0f));
-		coords->Add(glm::vec2(0.0f, 1.0f));
-
-		m_vao = std::make_shared <Graphics::Vao> ();
-
-		m_vao->AddVbo(pos);
-		m_vao->AddVbo(coords);
-
 	}
 
 	void ModelRenderer::onInitialise()
@@ -49,7 +25,7 @@ namespace GEPEngine
 		m_Shader = getCore()->getResources()->load<GEPEngine::Shader>(m_shaderPath);
 		m_Camera = getCore()->getCamera();
 		
-		//Use the shader Render function to display
+		//Tell shader to render
 		glm::mat4 modelMatrix = getEntity()->getTransform()->getModel();
 		m_Shader->getShader()->Render(m_Model->getModel(), m_Texture->getTexture(), m_Camera, modelMatrix, getCore()->getLightPos());
 	}

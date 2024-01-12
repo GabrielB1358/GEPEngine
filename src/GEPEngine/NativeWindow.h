@@ -8,6 +8,7 @@ namespace GEPEngine
 {
 	struct NativeWindow
 	{
+		//Native window class contains and controls SDL window variables for making the screen appear at all
 		~NativeWindow();
 
 		SDL_Window* getWindow();

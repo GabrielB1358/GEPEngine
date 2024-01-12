@@ -27,6 +27,8 @@ namespace GEPEngine
 
 	void ALSoundSrc::onLoad()
 	{
+		//When source is created, use the path to create the audio buffer for this source
+
 		//Prepare Buffer
 		ALenum format = 0;
 		ALsizei freq = 0;
@@ -48,6 +50,7 @@ namespace GEPEngine
 
 	void ALSoundSrc::load_ogg(const std::string& _path, std::vector<unsigned char>& _buffer, ALenum& _format, ALsizei& _freq)
 	{
+		// Creates the buffer
 		int channels = 0;
 		int sampleRate = 0;
 		short* output = NULL;

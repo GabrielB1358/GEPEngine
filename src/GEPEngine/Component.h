@@ -20,6 +20,7 @@ namespace GEPEngine
 		std::shared_ptr<Input> getInput();
 		std::shared_ptr<Light> getLight();
 		std::shared_ptr<Environment> getEnvironment();
+		glm::vec3 getEntityPosition();
 		double getDT();
 
 		void tick();

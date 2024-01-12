@@ -1,28 +1,21 @@
-Core.h
-Entity.h -> Check kill function
-Component.h
-ALAudio.h
-ALListener.h
-ALSoundSrc.h
-BoxCollider.h
-Camera.h
-Environment.h
-GUI.h
-Input.h
-Light.h
-Model.h
-ModelRenderer.h
-NativeWindow.h
-Resource.h
-Resources.h
-Rigidbody.h
-Shader.h
-Texture.h
-Transform.h
+Commented classes
 
-RenderTexture.h
-Shader.h
-Texture.h
-Vao.h
-Vbo.h
-WaveFrontMesh.h
+ALAudio.h .cpp
+ALListener.h .cpp
+ALSoundSrc.h .cpp
+BoxCollider.h .cpp
+Camera.h .cpp
+Environment.h .cpp
+GUI.h .cpp
+Input.h .cpp
+Light.h .cpp
+Model.h .cpp
+ModelRenderer.h .cpp
+NativeWindow.h .cpp
+QuadRenderer.h .cpp
+Resource.h .cpp
+Resources.h .cpp
+Rigidbody.h .cpp
+Shader.h .cpp
+Texture.h .cpp
+Transform.h .cpp

@@ -6,6 +6,7 @@ namespace GEPEngine
 {
 	void Environment::Init()
 	{
+		//Initialises and sets start time
 #ifdef _WIN32
 		m_last = GetTickCount();
 #else
@@ -18,6 +19,7 @@ namespace GEPEngine
 
 	void Environment::Tick()
 	{
+		//Every tick, the new time is taken and used to calculate the delta time (change in time)
 #ifdef _WIN32
 		DWORD curr = GetTickCount();
 #else

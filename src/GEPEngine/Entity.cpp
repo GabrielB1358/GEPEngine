@@ -39,6 +39,11 @@ namespace GEPEngine
 		}
 	}
 
+	void Entity::endFrame()
+	{
+		getComponent<Transform>()->endFrame();
+	}
+
 	bool Entity::getAlive()
 	{
 		return m_alive;
@@ -52,6 +57,11 @@ namespace GEPEngine
 	std::shared_ptr<Core> Entity::getCore()
 	{
 		return m_core.lock();
+	}
+
+	glm::vec3 Entity::getPosition()
+	{
+		return getTransform()->getPosition();
 	}
 
 	void Entity::onGUI()

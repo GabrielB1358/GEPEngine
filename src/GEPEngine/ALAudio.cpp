@@ -20,18 +20,21 @@ namespace GEPEngine
 
 	void ALAudio::onTick()
 	{
+		//Every tick update source position with this entity's position
 		m_Pos = getEntity()->getTransform()->getPosition();
 		alSource3f(m_source->getSourceId(), AL_POSITION, m_Pos.x, m_Pos.y, m_Pos.z);
 	}
 
 	void ALAudio::playSound()
 	{
+		//Uses m_source to play a sound potentially on repeat with the load function
 		m_source = getCore()->getResources()->load<ALSoundSrc>(m_path);
 		m_source->playSound();
 	}
 
 	void ALAudio::playMusic(std::string _path)
 	{
+		//Makes a seperate, lower scope source for playing extended audio tracks without concern for position
 		std::shared_ptr<ALSoundSrc> rtn = getCore()->getResources()->load<ALSoundSrc>(_path);
 
 		rtn->playSound();

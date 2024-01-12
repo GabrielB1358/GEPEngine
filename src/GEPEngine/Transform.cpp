@@ -1,18 +1,21 @@
 #include "Transform.h"
-
+#include <iostream>
 namespace GEPEngine
 {
     Transform::Transform()
     {
+        //Default values for fundamental variables
         m_scale = glm::vec3(1);
         m_position = glm::vec3(0);
         m_rotation = glm::vec3(0);
+        m_lastTickPosition = glm::vec3(0);
         
         m_angle = 10;
     }
 
     glm::mat4 Transform::getModel()
     {
+        //this function creates and returns a model matrix using the position, rotation & scale
         glm::mat4 rtn = glm::translate(glm::mat4(1), m_position);
 
         rtn = glm::rotate(rtn, glm::radians(m_rotation.x), glm::vec3(1, 0, 0));
@@ -24,6 +27,11 @@ namespace GEPEngine
         return rtn;
     }
 
+    void Transform::endFrame()
+    {
+        //Updates last tick position for use in collision testing
+        m_lastTickPosition = m_position;
+    }
 
     void Transform::Move(glm::vec3 _pos)
     {
@@ -50,6 +58,11 @@ namespace GEPEngine
         return m_rotation;
     }
 
+    glm::vec3 Transform::getLastTickPos()
+    {
+        return m_lastTickPosition;
+    }
+
     int Transform::getAngle()
     {
         return m_angle;
@@ -58,6 +71,11 @@ namespace GEPEngine
     void Transform::setPosition(glm::vec3 _pos)
     {
         m_position = _pos;
+    }
+
+    void Transform::setLastTickPos(glm::vec3 _pos)
+    {
+        m_lastTickPosition = _pos;
     }
 
     void Transform::setScale(glm::vec3 _scale)

@@ -10,6 +10,9 @@ namespace GEPEngine
 {
 	struct Rigidbody : Component
 	{
+		//Rigidbody component handles all the higher level parts of collisions
+		//Holds all the colliders and acts on them
+
 		void onTick();
 
 	private:

@@ -10,18 +10,20 @@ namespace GEPEngine
 
 	void Resources::onTick()
 	{
+		//Cycle through resources and for resources exceeding the max life time, flag them for death
 		for (size_t ri = 0; ri < m_resources.size(); ri++)
 		{
-			if (m_resources.at(ri)->getLifeTime() > 3.0f)
+			if (m_resources.at(ri)->getLifeTime() > 60.0f)
 			{
 				m_dirtyFlags.push_back(m_resources.at(ri)->m_path);
 			}
 			else
 			{
-				m_resources.at(ri)->lifeTime += m_core->getDT();
+				m_resources.at(ri)->m_lifeTime += m_core->getDT();
 			}
 		}
 
+		//Go through list of dirty flags and delete their corresponding resource
 		while (m_dirtyFlags.size() > 0)
 		{
 			std::string path = m_dirtyFlags[0];

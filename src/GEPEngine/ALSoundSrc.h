@@ -21,6 +21,7 @@ namespace GEPEngine
 
 	struct ALSoundSrc : Resource
 	{
+		//ALSoundSrc is a resource that is controlled in order to load and play SFX or music
 		ALSoundSrc();
 		~ALSoundSrc();
 
@@ -31,6 +32,7 @@ namespace GEPEngine
 		ALuint getSourceId();
 	
 	private:
+		//Source and buffer
 		ALuint m_sourceId;
 		ALuint m_bufferId;
 		

@@ -6,6 +6,9 @@ namespace GEPEngine
 {
 	struct ALAudio : Component
 	{
+		//ALAudio component holds and controls a source for playing SFX or music
+		//Currently it is 1 sound per one of these components
+
 		ALAudio();
 		~ALAudio();
 
@@ -24,8 +27,8 @@ namespace GEPEngine
 		void setSoundPos(glm::vec3 _pos);
 
 	private:
-		std::shared_ptr<ALSoundSrc> m_source;
-		std::string m_path;
-		glm::vec3 m_Pos;
+		std::shared_ptr<ALSoundSrc> m_source; // actual audio source
+		std::string m_path; //file path for audio
+		glm::vec3 m_Pos; // position stored for directional audio
 	};
 }

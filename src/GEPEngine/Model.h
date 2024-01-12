@@ -6,6 +6,9 @@ namespace GEPEngine
 {
 	struct Model : Resource
 	{
+		//GEPEngine model resource just creates a Graphics model
+
+		//Inherited onLoad function acts like a constructor
 		void onLoad();
 
 		std::shared_ptr<Graphics::WavefrontMesh> getModel();

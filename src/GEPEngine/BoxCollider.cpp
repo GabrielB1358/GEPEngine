@@ -1,13 +1,20 @@
 #include "BoxCollider.h"
 #include "Entity.h"
 #include "Transform.h"
+#include <iostream>
 
 namespace GEPEngine
 {
+	void BoxCollider::initialise()
+	{
+		m_oldPos = getEntityPosition();
+	}
+
 	bool BoxCollider::colliding(std::shared_ptr<BoxCollider> _other)
 	{
-		glm::vec3 a = getEntity()->getTransform()->getPosition();
-		glm::vec3 b = _other->getEntity()->getTransform()->getPosition();
+		//prepares variables for collision check using a box collider
+		glm::vec3 a = getPos();
+		glm::vec3 b = _other->getPos();
 		glm::vec3 ahs = m_size / 2.0f;
 		glm::vec3 bhs = _other->m_size / 2.0f;
 
@@ -16,7 +23,8 @@ namespace GEPEngine
 
 	bool BoxCollider::colliding(glm::vec3 _pos, glm::vec3 _size)
 	{
-		glm::vec3 a = getEntity()->getTransform()->getPosition();
+		//prepares variables for collision check using the 2 vectors
+		glm::vec3 a = getEntity()->getPosition();
 		glm::vec3 b = _pos;
 		glm::vec3 ahs = m_size / 2.0f;
 		glm::vec3 bhs = _size / 2.0f;
@@ -26,6 +34,7 @@ namespace GEPEngine
 	
 	bool BoxCollider::checkCollision(glm::vec3 a, glm::vec3 b, glm::vec3 ahs, glm::vec3 bhs)
 	{
+		//checks for collision between 2 entities
 		if (a.x > b.x)
 		{
 			if (b.x + bhs.x < a.x - ahs.x)
@@ -62,10 +71,11 @@ namespace GEPEngine
 
 	glm::vec3 BoxCollider::getCollisionResponse(glm::vec3 _pos, glm::vec3 _size)
 	{
-		//This is effectively the cludge method
+		//Responds to the collision using the cludge method
 		float amount = 0.01f;
 		float step =   0.01f;
 
+		//Moves the entity in every direction
 		while(true)
 		{
  			if (!colliding(_pos, _size))
@@ -105,6 +115,14 @@ namespace GEPEngine
 		return _pos;
 	}
 
+	void BoxCollider::getCollisionResponse(std::shared_ptr<Entity> _ent1, std::shared_ptr<Entity> _ent2)
+	{
+		std::cout << "LAST POS: X:" << _ent1->getTransform()->getLastTickPos().x << "  Y:" << _ent1->getTransform()->getLastTickPos().y <<
+			"           CURRENT POS: X:" << _ent1->getPosition().x << "  Y:" << _ent1->getPosition().y << std::endl;
+		_ent1->getTransform()->setPosition(_ent1->getTransform()->getLastTickPos());
+		_ent2->getTransform()->setPosition(_ent2->getTransform()->getLastTickPos());
+	}
+
 	void BoxCollider::setOffset(glm::vec3 _offset)
 	{
 		m_offset = _offset;
@@ -127,7 +145,7 @@ namespace GEPEngine
 
 	glm::vec3 BoxCollider::getPos()
 	{
-		return getEntity()->getTransform()->getPosition();
+		return getEntity()->getPosition();
 	}
 }
 

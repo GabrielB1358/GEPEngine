@@ -6,6 +6,7 @@ namespace GEPEngine
 
 	struct Environment
 	{
+		//Environment class controls the passage of time through the game loop, holding the delta time value between frames
 		void Init();
 		void Tick();
 

@@ -9,38 +9,23 @@ Curuthers::Curuthers()
 
 }
 
-Curuthers::Curuthers(bool greg)
-{
-	
-}
-
 
 void Curuthers::initialise()
 {
 	m_renderer = getEntity()->addComponent<GEPEngine::ModelRenderer>();
-	m_collider = getEntity()->addComponent<GEPEngine::BoxCollider>();
-	m_rigibody = getEntity()->addComponent<GEPEngine::Rigidbody>();
 
 	m_renderer->setModel("../Models/curuthers/curuthers.obj");
 	m_renderer->setTexture("../Models/curuthers/Whiskers_diffuse.png");
 	m_renderer->setShader("../Shaders/notGUI");
 
-	m_collider->setSize(glm::vec3(0.5f, 0.5f, 0.5f));
-	m_collider->setOffset(glm::vec3(0));
-
-
 	m_hornSound = getEntity()->addComponent<GEPEngine::ALAudio>("../dixie_horn.ogg");
 	m_pigeonSound = getEntity()->addComponent<GEPEngine::ALAudio>("../PigeonCoo.ogg");
 
-
-	m_angle = 0;
-	Move(0, -0.5, -8);
 	Scale(0.25, 0.25, 0.25);
 }
 
 void Curuthers::onTick()
 {
-	m_angle = 180 * getCore()->getDT();
 	float step = getCore()->getDT() * 1;
 
 	if (getInput()->getLeftJStick().x  > 0.5f)

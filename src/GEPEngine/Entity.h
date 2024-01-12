@@ -64,12 +64,15 @@ namespace GEPEngine
 
 		std::shared_ptr<Transform> getTransform();
 		std::shared_ptr<Core> getCore();
+		glm::vec3 getPosition();
 		bool getAlive();
 
 		void tick();
 		void display();
 		void kill();
 		void onGUI();
+
+		void endFrame();
 
 	private:
 		friend struct Core;
