@@ -46,9 +46,6 @@ namespace GEPEngine
 	{
 		return getCore()->getDT();
 	}
-	void Component::onBegin()
-	{
-	}
 	void Component::tick()
 	{
 		onTick();

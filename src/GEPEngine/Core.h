@@ -51,12 +51,12 @@ namespace GEPEngine
 		void setPointLight(std::shared_ptr<Light> _light);//! sets the point light variable
 		void setWinSize(glm::ivec2 _size);//! Sets the window size
 
-		std::shared_ptr<GUI> getGUI();//! returns the GUI variable
-		std::shared_ptr<Camera> getCamera();//! returns the camera variable
-		std::shared_ptr<Input> getInput();//! returns the input variable
-		std::shared_ptr<Resources> getResources();//! returns the resources variable
-		std::shared_ptr<Environment> getEnvironment();//! returns the environment variable
-		std::shared_ptr<Light> getPointLight();//! returns the point light variable
+		std::shared_ptr<GUI> getGUI();//! returns the GUI reference
+		std::shared_ptr<Camera> getCamera();//! returns the camera reference
+		std::shared_ptr<Input> getInput();//! returns the input reference
+		std::shared_ptr<Resources> getResources();//! returns the resources reference
+		std::shared_ptr<Environment> getEnvironment();//! returns the environment reference
+		std::shared_ptr<Light> getPointLight();//! returns the point light reference
 		glm::vec3 getLightPos();//! returns the light position vector
 		glm::ivec2 getWinSize();//! returns the window size
 		float getDT();//! returns delta time

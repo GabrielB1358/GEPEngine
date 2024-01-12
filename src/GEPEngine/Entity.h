@@ -14,6 +14,13 @@ namespace GEPEngine
 	{
 		Entity();
 
+		/*******************************************************//**
+		* Function for attaching components to an entity
+		*
+		* Creates a component that could be of multiple types
+		* sets the entity reference on it to self, calls initialise
+		* on it and then returns it
+		***********************************************************/
 		template <typename T>
 		std::shared_ptr<T> addComponent()
 		{
@@ -28,6 +35,15 @@ namespace GEPEngine
 			return rtn;
 		}
 
+		/******************************************************************************//**
+		* Overloaded function for adding a component
+		*
+		* This function also creates a component that could be of 
+		* many different types, sets entity reference and calls
+		* initialise but passing it a parameter this time
+		*
+		* @param _u This is the multi-type input parameter used in the initialise function
+		**********************************************************************************/
 		template <typename T, typename U>
 		std::shared_ptr<T> addComponent(U _u)
 		{
@@ -41,6 +57,13 @@ namespace GEPEngine
 			return rtn;
 		}
 
+		/*******************************************************//**
+		* A function for returning a specific component
+		*
+		* loops through all components and compares their type to
+		* the given, desired type and returns a shared pointer
+		* of that component if found
+		***********************************************************/
 		template <typename T>
 		std::shared_ptr<T> getComponent()
 		{
@@ -60,28 +83,28 @@ namespace GEPEngine
 			} 
 		}
 
-		void Move(glm::vec3 _pos);
-		void SetPosition(glm::vec3 _pos);
+		void Move(glm::vec3 _pos); //! Increments position by amount in parameter
+		void SetPosition(glm::vec3 _pos); //! Sets position to value in parameter
 
-		std::shared_ptr<Transform> getTransform();
-		std::shared_ptr<Core> getCore();
-		glm::vec3 getPosition();
-		bool getAlive();
-		float getDT();
+		std::shared_ptr<Transform> getTransform(); //! Returns reference to transform component
+		std::shared_ptr<Core> getCore(); //! Returns reference to core
+		glm::vec3 getPosition(); //! Returns position through transform
+		bool getAlive(); //! Returns alive bool
+		float getDT(); //! returns delta time through Core->Environment
 
-		void tick();
-		void display();
-		void kill();
-		void onGUI();
+		void tick(); //! Called every tick but just calls tick for all attached components
+		void display(); //! Called every tick and calls display for all attached components
+		void kill(); //! Sets alive flag to false and calls kill on all attached components
+		void onGUI(); //! Called every tick and calls onGUI for all attached components
 
-		void endFrame();
+		void endFrame(); //! Called every tick but only calls it for transform component
 
 	private:
 		friend struct Core;
-		std::weak_ptr<Core> m_core;
-		std::weak_ptr<Entity> m_self;
-		std::weak_ptr<Transform> m_transform;
-		std::vector<std::shared_ptr<Component> > m_components;
-		bool m_alive;
+		std::weak_ptr<Core> m_core; //! reference to core
+		std::weak_ptr<Entity> m_self; //! reference to self for child classes
+		std::weak_ptr<Transform> m_transform; //! transform component for controlling movememnt
+		std::vector<std::shared_ptr<Component> > m_components; //! vector for storing all components on this entity
+		bool m_alive; //! alive flag is used to control the continuity of this entity
 	};
 }
