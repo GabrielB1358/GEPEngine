@@ -1,5 +1,6 @@
 #include "GameLoop.h"
 #include "billboard.h"
+#include "Enemy.h"
 
 namespace GEPEngine
 {
@@ -21,34 +22,39 @@ namespace GEPEngine
 
 		m_floor->addComponent<Floor>();
 		m_floor->addComponent<BoxCollider>();
-		m_floor->getComponent<BoxCollider>()->setSize(glm::vec3(20, 1, 20));
+		m_floor->getComponent<BoxCollider>()->setSize(glm::vec3(20, 1.0, 20));
 		m_floor->SetPosition(glm::vec3(0, -2, -10));
 		m_floor->getTransform()->setScale(glm::vec3(0.02, 0.02, 0.02));
 		m_floor->getTransform()->setRotation(glm::vec3(-90.0f, 0.0f, 0.0f));
 
 		m_billboard->addComponent<billboard>();
-		m_billboard->SetPosition(glm::vec3(3.0f, 0, -6));
+		m_billboard->SetPosition(glm::vec3(0.0f, 0, -12));
+		m_billboard->getTransform()->setRotation(glm::vec3(135.0f, 0, 0));
 
 		m_core->setPointLight(m_pointLight->addComponent<Light>());
+		m_pointLight->SetPosition(glm::vec3(0, 5, -10));
 
 		m_core->setCamera(m_camera->addComponent<Camera>());
-		m_camera->SetPosition(glm::vec3(0.0f, 0, -4));
+		m_camera->SetPosition(glm::vec3(0.0f, 2, -4));
 
 		m_entityTime = 0.0f;
-		m_firstZSpawn = -7.0f;
+		m_firstZSpawn = -8.0f;
+
+		enemyDeathNum = 0;
+
+		angle = 0;
 	}
 
 	void GameLoop::onTick()
 	{
-		m_entityTime += getCore()->getDT();
-		if (m_entityTime >= 4.0f)
-		{
+		m_entityTime += getDT();
+		if (m_entityTime >= 2.0f)
+		{	
 			std::shared_ptr<Entity> tmp = m_core->addEntity();
-			tmp->addComponent<Enemy>();
+			tmp->addComponent<Enemy>(getEntity()->getComponent<GameLoop>());
 			tmp->addComponent<BoxCollider>();
-			//std::cout << "spawned" << std::endl;
-			//tmp->SetPosition(glm::vec3(2.8f, 1.0f, m_firstZSpawn));
-			tmp->SetPosition(m_player->getPosition());
+
+			tmp->SetPosition(glm::vec3(2.8,-1.5,m_firstZSpawn));
 			tmp->getTransform()->setRotation(glm::vec3(0, -90.0f, 0));
 			m_entityTime = 0.0f;
 

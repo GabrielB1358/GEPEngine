@@ -1,17 +1,17 @@
 #pragma once
 #include <GEPEngine/Core.h>
 #include <GEPEngine/Component.h>
-#include <GEPEngine/Texture.h>
-#include <GEPEngine/Model.h>
-#include <GEPEngine/Shader.h>
 #include <GEPEngine/ModelRenderer.h>
-#include <GEPEngine/Rigidbody.h>
+#include "GameLoop.h"
+
 
 struct Enemy : GEPEngine::Component
 {
-	void initialise();
+	void initialise(std::shared_ptr<GEPEngine::GameLoop> _gl);
 
 	void Move(glm::vec3 _move);
+
+	std::shared_ptr<GEPEngine::GameLoop> m_gameLoop;
 
 private:
 	std::shared_ptr<GEPEngine::ModelRenderer> m_renderer;

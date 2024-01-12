@@ -1,6 +1,6 @@
+#pragma once
 #include <iostream>
 #include "Player.h"
-#include "Enemy.h"
 #include "Floor.h"
 
 #include <GEPEngine/Rigidbody.h>
@@ -32,6 +32,9 @@ namespace GEPEngine
 
 		float m_entityTime;
 		float m_firstZSpawn;
+
+		float angle;
+		int enemyDeathNum;
 	};
 }
 

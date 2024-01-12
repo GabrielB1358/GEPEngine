@@ -22,6 +22,7 @@ namespace GEPEngine
 
 
 		float m_speed;
+		float m_gain;
 
 		std::shared_ptr<ModelRenderer> m_renderer;
 

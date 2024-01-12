@@ -23,6 +23,9 @@ namespace GEPEngine
 			ControllerHandles[controllerIndex] = SDL_GameControllerOpen(ji);
 			controllerIndex++;
 		}
+
+		m_gpLeftJoystick = glm::vec2(0);
+		m_gpRightJoystick = glm::vec2(0);
 	}
 
 	Input::~Input()

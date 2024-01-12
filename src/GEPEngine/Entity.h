@@ -17,6 +17,7 @@ namespace GEPEngine
 		template <typename T>
 		std::shared_ptr<T> addComponent()
 		{
+			
 			std::shared_ptr<T> rtn = std::make_shared<T>();
 
 			rtn->m_entity = m_self;
@@ -66,6 +67,7 @@ namespace GEPEngine
 		std::shared_ptr<Core> getCore();
 		glm::vec3 getPosition();
 		bool getAlive();
+		float getDT();
 
 		void tick();
 		void display();

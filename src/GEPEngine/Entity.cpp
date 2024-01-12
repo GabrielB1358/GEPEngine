@@ -64,6 +64,11 @@ namespace GEPEngine
 		return getTransform()->getPosition();
 	}
 
+	float Entity::getDT()
+	{
+		return getCore()->getDT();
+	}
+
 	void Entity::onGUI()
 	{
 		if(m_alive)

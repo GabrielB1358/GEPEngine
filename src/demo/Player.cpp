@@ -24,6 +24,7 @@ namespace GEPEngine
 		m_pigeonSound = getEntity()->addComponent<GEPEngine::ALAudio>("../PigeonCoo.ogg");
 
 		m_speed = -0.5;
+		m_gain = 1.0f;
 
 		Scale(0.25, 0.25, 0.25);
 		getEntity()->getTransform()->setRotation(glm::vec3(0, 90.0f, 0));
@@ -41,7 +42,7 @@ namespace GEPEngine
 		else
 		{
 			getEntity()->Move(glm::vec3(0, (m_speed * getEntity()->getCore()->getDT()), 0));
-			if (m_speed > -50)
+			if (m_speed > -15)
 			{
 				m_speed -= 3.5 * getCore()->getDT();
 			}
@@ -50,14 +51,14 @@ namespace GEPEngine
 		float step = getCore()->getDT() * 2;
 		if (getEntity()->getPosition().z > -12.827f)
 		{
-			if (getInput()->isKey(d))
+			if (getInput()->isKey(d) || getInput()->getLeftJStick().x < -0.4f)
 			{
 				Move(0, 0, -step);
 			}
 		}
 		if (getEntity()->getPosition().z < -7.205f)
 		{
-			if (getInput()->isKey(a))
+			if (getInput()->isKey(a) || getInput()->getLeftJStick().x > 0.4f)
 			{
 				Move(0, 0, step);
 			}
@@ -66,9 +67,26 @@ namespace GEPEngine
 
 	void Player::onGUI()
 	{
-		if (getCore()->getGUI()->Button("../Textures/Buttons/DownButton.png", "../Textures/Buttons/UpButton.png", glm::vec2(800, 800), glm::vec2(200, 150)))
+		if (getCore()->getGUI()->Button("../Textures/Buttons/HornDownButton.png", "../Textures/Buttons/HornUpButton.png", glm::vec2(300, 970), glm::vec2(200, 150)))
 		{
 			m_hornSound->playSound();
+		}
+
+		if (getCore()->getGUI()->Button("../Textures/Buttons/VolDownButtonDOWN.png", "../Textures/Buttons/VolDownButtonUP.png", glm::vec2(900, 970), glm::vec2(200, 150)))
+		{
+			if (m_gain > 0.0f)
+				m_gain -= 0.1f;
+			m_hornSound->setGain(m_gain);
+			m_pigeonSound->setGain(m_gain);
+		}
+		if (getCore()->getGUI()->Button("../Textures/Buttons/VolUpButtonDOWN.png", "../Textures/Buttons/VolUpButtonUP.png", glm::vec2(600, 970), glm::vec2(200, 150)))
+		{
+			if (m_gain < 1.0f)
+			{
+				m_gain += 1.0f;
+			}
+			m_hornSound->setGain(m_gain);
+			m_pigeonSound->setGain(m_gain);
 		}
 	}
 

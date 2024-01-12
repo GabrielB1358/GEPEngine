@@ -44,7 +44,7 @@ namespace GEPEngine
 	}
 	double Component::getDT()
 	{
-		return 0.0;
+		return getCore()->getDT();
 	}
 	void Component::onBegin()
 	{
