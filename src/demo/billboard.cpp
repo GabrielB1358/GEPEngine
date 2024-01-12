@@ -1,4 +1,5 @@
 #include "billboard.h"
+#include <GEPEngine/QuadRenderer.h>
 
 namespace GEPEngine
 {

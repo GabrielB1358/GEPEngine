@@ -6,6 +6,7 @@ namespace GEPEngine
 {
 	void Rigidbody::onTick()
 	{
+		m_hit = false;
 		//Get core reference and fill collider vector
 		m_core = getCore();
 		m_core->findColliders(m_colliders);
@@ -28,7 +29,7 @@ namespace GEPEngine
 			
 				if (hit)
 				{
-					std::cout << hit << std::endl;
+					m_hit = true;
 					collider->getCollisionResponse(collider->getEntity(), m_colliders.at(i)->getEntity());
 
 					//OLD - USING KLUDGE METHOD
@@ -40,5 +41,10 @@ namespace GEPEngine
 
 		//Empty colliders each tick
 		m_colliders.clear();
+	}
+
+	bool Rigidbody::getColliding()
+	{
+		return m_hit;
 	}
 }

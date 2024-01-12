@@ -7,7 +7,7 @@
 #include <GEPEngine/ModelRenderer.h>
 #include <GEPEngine/Rigidbody.h>
 
-struct evilBloke : GEPEngine::Component
+struct Enemy : GEPEngine::Component
 {
 	void initialise();
 

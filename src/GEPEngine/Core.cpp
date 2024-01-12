@@ -121,6 +121,10 @@ namespace GEPEngine
 				m_input->processKeys(event, m_winSize);
 			}
 
+			if (m_entities.size() > 6)
+			{
+				//std::cout << std::endl;
+			}
 
 			//Tick and display all entities
 			for (int i = 0; i < m_entities.size();i++)

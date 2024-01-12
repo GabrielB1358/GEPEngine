@@ -87,12 +87,16 @@ target_link_libraries(GEPEngine
 
 add_executable(demo
 	src/demo/main.cpp
-	src/demo/Curuthers.cpp
-	src/demo/Curuthers.h
-	src/demo/evilBloke.cpp
-	src/demo/evilBloke.h
+	src/demo/Player.cpp
+	src/demo/Player.h
+	src/demo/Enemy.cpp
+	src/demo/Enemy.h
 	src/demo/billboard.cpp
 	src/demo/billboard.h
+	src/demo/Floor.h
+	src/demo/Floor.cpp
+	src/demo/GameLoop.cpp
+	src/demo/GameLoop.h
 )
 
 target_link_libraries(demo GEPEngine)

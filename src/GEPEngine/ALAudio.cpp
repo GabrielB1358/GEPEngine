@@ -23,6 +23,7 @@ namespace GEPEngine
 		//Every tick update source position with this entity's position
 		m_Pos = getEntity()->getTransform()->getPosition();
 		alSource3f(m_source->getSourceId(), AL_POSITION, m_Pos.x, m_Pos.y, m_Pos.z);
+		alSourcef(m_source->getSourceId(), AL_GAIN, m_gain);
 	}
 
 	void ALAudio::playSound()
@@ -68,6 +69,16 @@ namespace GEPEngine
 	void ALAudio::setSoundPos(glm::vec3 _pos)
 	{
 		m_Pos = _pos;
+	}
+
+	float ALAudio::getGain()
+	{
+		return m_gain;
+	}
+
+	void ALAudio::setGain(float _gain)
+	{
+		m_gain = _gain;
 	}
 
 }

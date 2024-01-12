@@ -117,8 +117,6 @@ namespace GEPEngine
 
 	void BoxCollider::getCollisionResponse(std::shared_ptr<Entity> _ent1, std::shared_ptr<Entity> _ent2)
 	{
-		std::cout << "LAST POS: X:" << _ent1->getTransform()->getLastTickPos().x << "  Y:" << _ent1->getTransform()->getLastTickPos().y <<
-			"           CURRENT POS: X:" << _ent1->getPosition().x << "  Y:" << _ent1->getPosition().y << std::endl;
 		_ent1->getTransform()->setPosition(_ent1->getTransform()->getLastTickPos());
 		_ent2->getTransform()->setPosition(_ent2->getTransform()->getLastTickPos());
 	}

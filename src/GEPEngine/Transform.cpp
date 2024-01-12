@@ -8,7 +8,8 @@ namespace GEPEngine
         m_scale = glm::vec3(1);
         m_position = glm::vec3(0);
         m_rotation = glm::vec3(0);
-        m_lastTickPosition = glm::vec3(0);
+        m_velocity = glm::vec3(0);
+        m_lastTickPosition = glm::vec3(0,10,0);
         
         m_angle = 10;
     }
@@ -25,6 +26,11 @@ namespace GEPEngine
         rtn = glm::scale(rtn, m_scale);
 
         return rtn;
+    }
+
+    void Transform::onTick()
+    {
+
     }
 
     void Transform::endFrame()
@@ -58,6 +64,11 @@ namespace GEPEngine
         return m_rotation;
     }
 
+    glm::vec3 Transform::getVelocity()
+    {
+        return m_velocity;
+    }
+
     glm::vec3 Transform::getLastTickPos()
     {
         return m_lastTickPosition;
@@ -76,6 +87,11 @@ namespace GEPEngine
     void Transform::setLastTickPos(glm::vec3 _pos)
     {
         m_lastTickPosition = _pos;
+    }
+
+    void Transform::setVelocity(glm::vec3 _vel)
+    {
+        m_velocity = _vel;
     }
 
     void Transform::setScale(glm::vec3 _scale)

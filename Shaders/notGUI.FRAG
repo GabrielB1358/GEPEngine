@@ -30,5 +30,6 @@ void main()
 	vec4 tex = texture2D(u_Texture, v_TexCoord); 
 		                             
 	vec3 lighting = max(vec3(0,0,0), min(diffuse + ambient + specular, vec3(1,1,1)));
-	gl_FragColor = vec4(lighting, 1)*tex; 
+	//gl_FragColor = vec4(lighting, 1)*tex; 
+	gl_FragColor = tex;
 }    

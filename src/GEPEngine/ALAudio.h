@@ -21,14 +21,17 @@ namespace GEPEngine
 		std::shared_ptr<ALSoundSrc> getSource();
 		std::string getPath();
 		glm::vec3 getSoundPos();
+		float getGain();
 
 		void setSource(std::shared_ptr<ALSoundSrc> _source);
 		void setPath(std::string _string);
 		void setSoundPos(glm::vec3 _pos);
+		void setGain(float _gain);
 
 	private:
 		std::shared_ptr<ALSoundSrc> m_source; // actual audio source
 		std::string m_path; //file path for audio
 		glm::vec3 m_Pos; // position stored for directional audio
+		float m_gain;
 	};
 }

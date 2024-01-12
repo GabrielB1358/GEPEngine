@@ -15,8 +15,11 @@ namespace GEPEngine
 
 		void onTick();
 
+		bool getColliding();
+
 	private:
 		int m_selfIndex;
+		bool m_hit;
 		std::vector<std::shared_ptr<BoxCollider> > m_colliders;
 		std::shared_ptr<Core> m_core;
 	};

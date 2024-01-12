@@ -1,9 +1,8 @@
-#include <GEPEngine/Component.h>
-#include <GEPEngine/QuadRenderer.h>
 
+#include <GEPEngine/Component.h>
 namespace GEPEngine
 {
-
+	struct QuadRenderer;
 	struct billboard : Component
 	{
 
