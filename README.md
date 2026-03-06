@@ -6,11 +6,12 @@ Homemade Game Engine capable of:
 - Handles both Keyboard, Mouse **and** Controller input
 - Allows users to create basic games with ease
 
-# Controls for default example
-**A** & **D**  or  for Left/Right
-**Space** for Jump
-
 # Specifics
 - Written in Visual Studio using C++
 - OpenGL used for all graphical rendering and visuals
 - OpenAL used to handle all audio usage
+
+# Controls for default example
+**A** & **D**  or  for Left/Right
+**Space** for Jump
+
